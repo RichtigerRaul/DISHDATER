@@ -3,36 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine erste Telegram Mini App</title>
+    <title>Test Telegram Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f2f5;
-        }
-        .welcome-message {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-    </style>
 </head>
 <body>
-    <div class="welcome-message">
-        <h1>Willkommen!</h1>
-        <p>Dies ist Ihre erste Telegram Mini App.</p>
-    </div>
+    <h1>Wenn Sie das sehen können, funktioniert die App!</h1>
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.ready();
+        console.log("Seite geladen");
+        if (window.Telegram && window.Telegram.WebApp) {
+            console.log("Telegram WebApp verfügbar");
+            window.Telegram.WebApp.ready();
+        } else {
+            console.log("Telegram WebApp nicht verfügbar");
+        }
     </script>
 </body>
 </html>
