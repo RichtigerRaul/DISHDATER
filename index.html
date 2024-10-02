@@ -3,19 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Telegram Mini App</title>
+    <title>Dish Dater App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: var(--tg-theme-bg-color, #f0f2f5);
+            color: var(--tg-theme-text-color, #000000);
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--tg-theme-secondary-bg-color, white);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: var(--tg-theme-button-color, #3390ec);
+            color: var(--tg-theme-button-text-color, white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Wenn Sie das sehen können, funktioniert die App!</h1>
+    <div class="container">
+        <h1>Willkommen bei Dish Dater!</h1>
+        <p>Ihre kulinarische Reise beginnt hier.</p>
+        <button onclick="sendMessage()">Start</button>
+    </div>
+
     <script>
-        console.log("Seite geladen");
-        if (window.Telegram && window.Telegram.WebApp) {
-            console.log("Telegram WebApp verfügbar");
-            window.Telegram.WebApp.ready();
-        } else {
-            console.log("Telegram WebApp nicht verfügbar");
+        let tg = window.Telegram.WebApp;
+        
+        tg.expand();
+        tg.ready();
+
+        function sendMessage() {
+            tg.sendData("Start wurde geklickt!");
+            tg.MainButton.setText("Hauptmenü");
+            tg.MainButton.show();
         }
+
+        Telegram.WebApp.onEvent('mainButtonClicked', function() {
+            tg.showAlert('Sie haben das Hauptmenü geöffnet!');
+        });
+
+        // Debug-Informationen
+        console.log("Telegram WebApp object:", tg);
+        console.log("Telegram WebApp version:", tg.version);
+        console.log("Platform:", tg.platform);
     </script>
 </body>
 </html>
