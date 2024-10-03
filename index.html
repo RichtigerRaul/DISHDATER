@@ -27,6 +27,8 @@
             max-width: 300px;
             width: 100%;
             text-align: center;
+            opacity: 0; /* Start mit unsichtbar */
+            transition: opacity 1s ease; /* Smooth Übergang */
         }
 
         h1 {
@@ -192,9 +194,14 @@
         }
 
         function showNextScreen() {
-            document.getElementById('welcome-container').style.display = 'none';
-            document.getElementById('buttons-container').style.display = 'flex';
-            tg.sendData("Start wurde geklickt!");
+            playSound(); // Sound beim Klicken abspielen
+            document.getElementById('welcome-container').style.opacity = 0; // Ausblenden der Willkommensnachricht
+
+            setTimeout(() => {
+                document.getElementById('welcome-container').style.display = 'none'; // Element nach der Animation ausblenden
+                document.getElementById('buttons-container').style.display = 'flex'; // Buttons einblenden
+                document.getElementById('buttons-container').style.opacity = 1; // Sichtbarkeit wieder herstellen
+            }, 1000); // Wartezeit für das Ausblenden
         }
 
         function showSettings() {
@@ -215,6 +222,12 @@
         console.log("Telegram WebApp object:", tg);
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
+
+        // Initialisieren des Willkommenscontainers
+        window.onload = function() {
+            const welcomeContainer = document.getElementById('welcome-container');
+            welcomeContainer.style.opacity = 1; // Willkommensnachricht einblenden
+        };
     </script>
 </body>
 </html>
