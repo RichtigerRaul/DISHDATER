@@ -194,15 +194,25 @@
         }
 
         function showNextScreen() {
-            playSound(); // Sound beim Klicken abspielen
-            document.getElementById('welcome-container').style.opacity = 0; // Ausblenden der Willkommensnachricht
+            // Sound beim Klicken abspielen
+            playSound(); 
+            // Willkommenscontainer ausblenden
+            const welcomeContainer = document.getElementById('welcome-container');
+            welcomeContainer.style.opacity = 0; 
 
             setTimeout(() => {
-                document.getElementById('welcome-container').style.display = 'none'; // Element nach der Animation ausblenden
+                welcomeContainer.style.display = 'none'; // Element nach der Animation ausblenden
                 document.getElementById('buttons-container').style.display = 'flex'; // Buttons einblenden
                 document.getElementById('buttons-container').style.opacity = 1; // Sichtbarkeit wieder herstellen
+                document.getElementById('buttons-container').style.transition = 'opacity 1s ease'; // Animation für Einblenden
             }, 1000); // Wartezeit für das Ausblenden
         }
+
+        // Initialisieren des Willkommenscontainers
+        window.onload = function() {
+            const welcomeContainer = document.getElementById('welcome-container');
+            welcomeContainer.style.opacity = 1; // Willkommensnachricht einblenden
+        };
 
         function showSettings() {
             document.getElementById('buttons-container').style.display = 'none';
@@ -222,12 +232,6 @@
         console.log("Telegram WebApp object:", tg);
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
-
-        // Initialisieren des Willkommenscontainers
-        window.onload = function() {
-            const welcomeContainer = document.getElementById('welcome-container');
-            welcomeContainer.style.opacity = 1; // Willkommensnachricht einblenden
-        };
     </script>
 </body>
 </html>
