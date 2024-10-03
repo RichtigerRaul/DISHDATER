@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dish Dater</title> <!-- Der Titel im Browser-Tab -->
+    <title>Dish Dater</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -215,19 +215,16 @@
 
     <script>
         let tg = window.Telegram.WebApp;
-        
+
+        // Telegram WebApp Einstellungen
         tg.expand();
         tg.ready();
-
-        function sendMessage(message) {
-            tg.sendData(message);
-        }
 
         // Funktion, um zum nächsten Bildschirm mit den 5 Buttons zu wechseln
         function showNextScreen() {
             document.getElementById('welcome-container').style.display = 'none';
             document.getElementById('buttons-container').style.display = 'flex';
-            sendMessage("Start wurde geklickt!");
+            tg.sendData("Start wurde geklickt!");
         }
 
         // Funktion, um die Einstellungen anzuzeigen
@@ -242,7 +239,7 @@
             switchButton.classList.toggle('active');
         }
 
-        // Debug-Informationen
+        // Debug-Informationen für Telegram WebApp
         console.log("Telegram WebApp object:", tg);
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
