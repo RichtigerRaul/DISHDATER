@@ -19,7 +19,7 @@
             color: var(--tg-theme-text-color, #000000);
         }
 
-        .container, .button-container {
+        .container, .button-container, .settings-container {
             background-color: var(--tg-theme-secondary-bg-color, white);
             padding: 20px;
             border-radius: 16px;
@@ -97,7 +97,6 @@
             }
         }
 
-        /* Menü-Layout: Buttons untereinander anordnen, Einstellungen getrennt */
         .button-container {
             display: flex;
             flex-direction: column;
@@ -108,6 +107,66 @@
             margin-top: 20px;
         }
 
+        /* Einstellungen-Stil */
+        .settings-container {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .switch-wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--tg-theme-bg-color, #f0f2f5);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .switch-label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .switch-button {
+            width: 50px;
+            height: 25px;
+            position: relative;
+            background-color: red;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .switch-button.active {
+            background-color: green;
+        }
+
+        .switch-circle {
+            position: absolute;
+            width: 23px;
+            height: 23px;
+            top: 1px;
+            left: 1px;
+            background-color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .switch-button.active .switch-circle {
+            left: calc(100% - 24px);
+        }
+
+        .description {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -125,7 +184,33 @@
         <button>🍲 Abendessen</button>
         <button>🍪 Snacks</button>
         <!-- Getrennt platzierter Button für Einstellungen -->
-        <button class="einstellungen-button">🔧 Einstellungen</button>
+        <button class="einstellungen-button" onclick="showSettings()">🔧 Einstellungen</button>
+    </div>
+
+    <!-- Einstellungen Ansicht -->
+    <div class="settings-container" id="settings-container">
+        <h1>Einstellungen</h1>
+        
+        <!-- Switch für Tierisch -->
+        <div class="switch-wrapper">
+            <span class="switch-label">Tierisch</span>
+            <div class="switch-button" id="switch-animal" onclick="toggleSwitch('switch-animal')">
+                <div class="switch-circle"></div>
+            </div>
+        </div>
+
+        <!-- Switch für Milch -->
+        <div class="switch-wrapper">
+            <span class="switch-label">Milch</span>
+            <div class="switch-button" id="switch-milk" onclick="toggleSwitch('switch-milk')">
+                <div class="switch-circle"></div>
+            </div>
+        </div>
+
+        <!-- Beschreibung -->
+        <p class="description">
+            Die Telegram-App befindet sich noch im Aufbau und weniger als 5% der Hauptapp sind entwickelt. Die Pläne sind vorhanden, aber es mangelt an Zeit, Ressourcen und Fähigkeiten. Wir bitten um Geduld und danken für die Teilnahme!
+        </p>
     </div>
 
     <script>
@@ -143,6 +228,18 @@
             document.getElementById('welcome-container').style.display = 'none';
             document.getElementById('buttons-container').style.display = 'flex';
             sendMessage("Start wurde geklickt!");
+        }
+
+        // Funktion, um die Einstellungen anzuzeigen
+        function showSettings() {
+            document.getElementById('buttons-container').style.display = 'none';
+            document.getElementById('settings-container').style.display = 'flex';
+        }
+
+        // Funktion zum Umschalten der Switches
+        function toggleSwitch(id) {
+            const switchButton = document.getElementById(id);
+            switchButton.classList.toggle('active');
         }
 
         // Debug-Informationen
