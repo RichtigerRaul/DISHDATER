@@ -16,6 +16,13 @@
             --switch-bg: #f0f2f5;
         }
 
+        body.dark-mode {
+            --bg-color: linear-gradient(120deg, #2c3e50 0%, #4ca1af 100%);
+            --text-color: #ffffff;
+            --container-bg: rgba(0, 0, 0, 0.7);
+            --switch-bg: #2c3e50;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             display: flex;
@@ -26,6 +33,7 @@
             margin: 0;
             background: var(--bg-color);
             color: var(--text-color);
+            transition: all 0.3s ease;
         }
 
         .container, .button-container, .settings-container {
@@ -36,6 +44,7 @@
             max-width: 300px;
             width: 100%;
             text-align: center;
+            transition: all 0.3s ease;
         }
 
         #loading-screen {
@@ -196,9 +205,21 @@
             margin-top: 20px;
             background-color: #ff4b5c;
         }
+
+        .darkmode-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+    <!-- Darkmode Toggle -->
+    <div class="darkmode-toggle" onclick="toggleDarkMode()">🌓</div>
+
     <!-- Ladebildschirm -->
     <div id="loading-screen">
         <img id="logo" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddlogo.jpg" alt="Dish Dater Logo">
@@ -264,13 +285,21 @@
         tg.expand();
         tg.ready();
 
-        // Funktion zum Erzwingen des Farbschemas
-        function forceColorScheme() {
-            document.body.style.background = 'var(--bg-color)';
-            document.body.style.color = 'var(--text-color)';
-            document.querySelectorAll('.container, .button-container, .settings-container').forEach(el => {
-                el.style.backgroundColor = 'var(--container-bg)';
-            });
+        // Funktion zum Umschalten des Darkmode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            playSound();
+            updateDarkmodeToggle();
+        }
+
+        // Funktion zum Aktualisieren des Darkmode-Toggle-Emojis
+        function updateDarkmodeToggle() {
+            const darkmodeToggle = document.querySelector('.darkmode-toggle');
+            if (document.body.classList.contains('dark-mode')) {
+                darkmodeToggle.textContent = '🌞';
+            } else {
+                darkmodeToggle.textContent = '🌓';
+            }
         }
 
         // Funktion zum Simulieren des Ladevorgangs
@@ -337,14 +366,11 @@
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
 
-        // Starten Sie den Ladevorgang und passen Sie die Farben an, wenn die Seite geladen ist
+        // Starten Sie den Ladevorgang, wenn die Seite geladen ist
         window.addEventListener('load', function() {
-            forceColorScheme();
             simulateLoading();
+            updateDarkmodeToggle();
         });
-
-        // Überwachen Sie Änderungen im Farbschema
-        tg.onEvent('themeChanged', forceColorScheme);
     </script>
 </body>
 </html>
