@@ -237,12 +237,6 @@
             });
         }
 
-        function playWelcomeSound() {
-            const welcomeSound = document.getElementById('click-sound');
-            welcomeSound.currentTime = 0;
-            welcomeSound.play().catch(e => console.log("Fehler beim Abspielen des Willkommens-Sounds:", e));
-        }
-
         function showNextScreen() {
             playSound();
             document.getElementById('welcome-container').style.display = 'none';
@@ -269,8 +263,9 @@
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
 
+        // Der Start-Sound wird beim Laden der Seite abgespielt
         window.addEventListener('load', () => {
-            playWelcomeSound(); // Hier wird der Willkommens-Sound abgespielt
+            playStartSound();
         });
     </script>
 </body>
