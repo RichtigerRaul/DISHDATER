@@ -19,7 +19,7 @@
             color: var(--tg-theme-text-color, #000000);
         }
 
-        .container {
+        .container, .button-container {
             background-color: var(--tg-theme-secondary-bg-color, white);
             padding: 30px;
             border-radius: 16px;
@@ -55,6 +55,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            margin: 10px 0;
         }
 
         button:hover {
@@ -84,6 +85,10 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
+        .button-group {
+            margin-top: 20px;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -94,13 +99,31 @@
                 transform: scale(1);
             }
         }
+
+        /* Trennung von Preferences und den anderen Buttons */
+        .preferences {
+            margin-bottom: 30px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Willkommen bei Dish Dater!</h1>
-        <p>Entdecke neue, inspirierende Rezepte, die perfekt zu dir passen.</p>
-        <button onclick="sendMessage()">Jetzt Starten</button>
+    <!-- Erste Ansicht -->
+    <div class="container" id="welcome-container">
+        <h1>Willkommen bei Dish Dater! 🍽️</h1>
+        <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
+        <button onclick="showNextScreen()">Start 🚀</button>
+    </div>
+
+    <!-- Zweite Ansicht mit 5 Buttons -->
+    <div class="button-container" id="buttons-container" style="display: none;">
+        <button class="preferences">🔧 Preferences</button>
+        <div class="button-group">
+            <button>🍳 Breakfast</button>
+            <button>🥗 Lunch</button>
+            <button>🍲 Dinner</button>
+            <button>🍪 Snacks</button>
+        </div>
     </div>
 
     <script>
@@ -109,15 +132,16 @@
         tg.expand();
         tg.ready();
 
-        function sendMessage() {
-            tg.sendData("Start wurde geklickt!");
-            tg.MainButton.setText("Hauptmenü");
-            tg.MainButton.show();
+        function sendMessage(message) {
+            tg.sendData(message);
         }
 
-        Telegram.WebApp.onEvent('mainButtonClicked', function() {
-            tg.showAlert('Sie haben das Hauptmenü geöffnet!');
-        });
+        // Funktion, um zum nächsten Bildschirm mit den 5 Buttons zu wechseln
+        function showNextScreen() {
+            document.getElementById('welcome-container').style.display = 'none';
+            document.getElementById('buttons-container').style.display = 'block';
+            sendMessage("Start wurde geklickt!");
+        }
 
         // Debug-Informationen
         console.log("Telegram WebApp object:", tg);
