@@ -172,7 +172,6 @@
             margin-top: 20px;
             background-color: #ff4b5c;
         }
-
     </style>
 </head>
 <body>
@@ -233,7 +232,7 @@
         tg.expand();
         tg.ready();
 
-        // Funktion, um den Sound abzuspielen
+        // Funktion, um den Click-Sound abzuspielen
         function playSound() {
             const sound = document.getElementById('click-sound');
             sound.currentTime = 0; // Zurücksetzen auf den Anfang
@@ -276,7 +275,7 @@
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
 
-        // Play start sound when the page loads
+        // Startsound abspielen, wenn die Seite geladen ist
         window.addEventListener('load', playStartSound);
     </script>
 </body>
