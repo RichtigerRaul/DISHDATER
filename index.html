@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #ffffff;
+            --bg-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
             --text-color: #000000;
-            --container-bg: #ffffff;
+            --container-bg: rgba(255, 255, 255, 0.9);
             --button-gradient: linear-gradient(45deg, #6a11cb, #2575fc);
             --button-hover-gradient: linear-gradient(45deg, #5b0ecf, #1f6fe8);
             --switch-bg: #f0f2f5;
@@ -24,7 +24,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            background: var(--bg-color);
             color: var(--text-color);
         }
 
@@ -44,7 +44,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--bg-color);
+            background: var(--bg-color);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -61,7 +61,7 @@
         #loading-bar {
             width: 200px;
             height: 10px;
-            background-color: #f0f0f0;
+            background-color: rgba(255, 255, 255, 0.5);
             border-radius: 5px;
             overflow: hidden;
         }
@@ -116,32 +116,9 @@
             transform: translateY(2px);
         }
 
-        button::after {
-            content: '';
-            position: absolute;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.3);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.4s ease;
-            border-radius: 50%;
-        }
-
-        button:focus::after {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .button-container {
@@ -248,7 +225,7 @@
     </div>
 
     <!-- Einstellungen Ansicht -->
-    <div class="settings-container" id="settings-container">
+    <div class="settings-container" id="settings-container" style="display: none;">
         <h1>Einstellungen</h1>
         
         <!-- Switch für Tierisch, standardmäßig aktiviert -->
@@ -287,13 +264,13 @@
         tg.expand();
         tg.ready();
 
-        // Funktion zum Anpassen der Farben basierend auf dem Farbschema
-        function adjustColors() {
-            const isDarkMode = tg.colorScheme === 'dark';
-            document.documentElement.style.setProperty('--bg-color', isDarkMode ? '#2f3136' : '#ffffff');
-            document.documentElement.style.setProperty('--text-color', isDarkMode ? '#ffffff' : '#000000');
-            document.documentElement.style.setProperty('--container-bg', isDarkMode ? '#36393f' : '#ffffff');
-            document.documentElement.style.setProperty('--switch-bg', isDarkMode ? '#202225' : '#f0f2f5');
+        // Funktion zum Erzwingen des Farbschemas
+        function forceColorScheme() {
+            document.body.style.background = 'var(--bg-color)';
+            document.body.style.color = 'var(--text-color)';
+            document.querySelectorAll('.container, .button-container, .settings-container').forEach(el => {
+                el.style.backgroundColor = 'var(--container-bg)';
+            });
         }
 
         // Funktion zum Simulieren des Ladevorgangs
@@ -362,12 +339,12 @@
 
         // Starten Sie den Ladevorgang und passen Sie die Farben an, wenn die Seite geladen ist
         window.addEventListener('load', function() {
-            adjustColors();
+            forceColorScheme();
             simulateLoading();
         });
 
         // Überwachen Sie Änderungen im Farbschema
-        tg.onEvent('themeChanged', adjustColors);
+        tg.onEvent('themeChanged', forceColorScheme);
     </script>
 </body>
 </html>
