@@ -180,17 +180,17 @@
     <div class="container" id="welcome-container">
         <h1>Willkommen bei Dish Dater! 🍽️</h1>
         <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
-        <button onclick="showNextScreen()">Start 🚀</button>
+        <button onclick="playSound(); showNextScreen()">Start 🚀</button>
     </div>
 
     <!-- Zweite Ansicht mit Buttons -->
     <div class="button-container" id="buttons-container" style="display: none;">
-        <button>🍳 Frühstück</button>
-        <button>🥗 Mittagessen</button>
-        <button>🍲 Abendessen</button>
-        <button>🍪 Snacks</button>
+        <button onclick="playSound();">🍳 Frühstück</button>
+        <button onclick="playSound();">🥗 Mittagessen</button>
+        <button onclick="playSound();">🍲 Abendessen</button>
+        <button onclick="playSound();">🍪 Snacks</button>
         <!-- Getrennt platzierter Button für Einstellungen -->
-        <button class="einstellungen-button" onclick="showSettings()">🔧 Einstellungen</button>
+        <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
     </div>
 
     <!-- Einstellungen Ansicht -->
@@ -200,7 +200,7 @@
         <!-- Switch für Tierisch, standardmäßig aktiviert -->
         <div class="switch-wrapper">
             <span class="switch-label">Tierisch</span>
-            <div class="switch-button active" id="switch-animal" onclick="toggleSwitch('switch-animal')">
+            <div class="switch-button active" id="switch-animal" onclick="toggleSwitch('switch-animal'); playSound()">
                 <div class="switch-circle"></div>
             </div>
         </div>
@@ -208,19 +208,22 @@
         <!-- Switch für Milch, standardmäßig aktiviert -->
         <div class="switch-wrapper">
             <span class="switch-label">Milch</span>
-            <div class="switch-button active" id="switch-milk" onclick="toggleSwitch('switch-milk')">
+            <div class="switch-button active" id="switch-milk" onclick="toggleSwitch('switch-milk'); playSound()">
                 <div class="switch-circle"></div>
             </div>
         </div>
 
         <!-- Beschreibung -->
         <p class="description">
-            Dish Dater ist auf dem Weg, eine umfangreiche Plattform für Rezeptempfehlungen und Ernährungsanpassungen zu werden. Auch in der aktuellen Entwicklungsphase bieten wir dir bereits wertvolle Funktionen, die kontinuierlich erweitert werden. Bleib dabei und erlebe, wie eine innovative App entsteht, die auf deine individuellen Bedürfnisse zugeschnitten ist. Wir bedanken uns für deine Geduld und freuen uns, dich auf dieser Reise mitzunehmen!
+            Dish Dater ist auf dem Weg, eine umfangreiche Plattform für Rezeptempfehlungen und Ernährungsanpassungen zu werden. Auch in der aktuellen Entwicklungsphase bieten wir bereits wertvolle Funktionen, die kontinuierlich erweitert werden. Bleiben Sie dabei und erleben Sie, wie eine innovative App entsteht, die auf Ihre individuellen Bedürfnisse zugeschnitten ist. Wir bedanken uns für Ihre Geduld und freuen uns, Sie auf dieser Reise mitzunehmen!
         </p>
 
         <!-- Zurück-Button -->
-        <button class="back-button" onclick="goBack()">🔙 Zurück</button>
+        <button class="back-button" onclick="playSound(); goBack()">🔙 Zurück</button>
     </div>
+
+    <!-- Audio-Element für den Soundeffekt -->
+    <audio id="click-sound" src="https://jmp.sh/GEKHmP70" preload="auto"></audio>
 
     <script>
         let tg = window.Telegram.WebApp;
@@ -228,6 +231,13 @@
         // Telegram WebApp Einstellungen
         tg.expand();
         tg.ready();
+
+        // Funktion, um den Sound abzuspielen
+        function playSound() {
+            const sound = document.getElementById('click-sound');
+            sound.currentTime = 0; // Zurücksetzen auf den Anfang
+            sound.play();
+        }
 
         // Funktion, um zum nächsten Bildschirm mit den 5 Buttons zu wechseln
         function showNextScreen() {
@@ -248,7 +258,7 @@
             document.getElementById('buttons-container').style.display = 'flex';
         }
 
-        // Funktion zum Umschalten der Switches
+                // Funktion zum Umschalten der Switches
         function toggleSwitch(id) {
             const switchButton = document.getElementById(id);
             switchButton.classList.toggle('active');
@@ -261,3 +271,4 @@
     </script>
 </body>
 </html>
+
