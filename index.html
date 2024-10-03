@@ -27,8 +27,7 @@
             max-width: 300px;
             width: 100%;
             text-align: center;
-            opacity: 0; /* Start mit unsichtbar */
-            transition: opacity 1s ease; /* Smooth Übergang */
+            animation: fadeIn 1s ease-in-out;
         }
 
         h1 {
@@ -54,6 +53,8 @@
             font-size: 16px;
             font-weight: 600;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             margin: 10px 0;
             width: 100%;
         }
@@ -68,12 +69,45 @@
             transform: translateY(2px);
         }
 
+        button::after {
+            content: '';
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.3);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.4s ease;
+            border-radius: 50%;
+        }
+
+        button:focus::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         .button-container {
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
+        .einstellungen-button {
+            margin-top: 20px;
+        }
+
+        /* Einstellungen-Stil */
         .settings-container {
             display: none;
             flex-direction: column;
@@ -141,23 +175,28 @@
     </style>
 </head>
 <body>
+    <!-- Erste Ansicht -->
     <div class="container" id="welcome-container">
         <h1>Willkommen bei Dish Dater! 🍽️</h1>
         <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
         <button onclick="showNextScreen()">Start 🚀</button>
     </div>
 
-    <div class="button-container" id="buttons-container">
+    <!-- Zweite Ansicht mit Buttons -->
+    <div class="button-container" id="buttons-container" style="display: none;">
         <button onclick="playSound();">🍳 Frühstück</button>
         <button onclick="playSound();">🥗 Mittagessen</button>
         <button onclick="playSound();">🍲 Abendessen</button>
         <button onclick="playSound();">🍪 Snacks</button>
+        <!-- Getrennt platzierter Button für Einstellungen -->
         <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
     </div>
 
+    <!-- Einstellungen Ansicht -->
     <div class="settings-container" id="settings-container">
         <h1>Einstellungen</h1>
         
+        <!-- Switch für Tierisch, standardmäßig aktiviert -->
         <div class="switch-wrapper">
             <span class="switch-label">Tierisch</span>
             <div class="switch-button active" id="switch-animal" onclick="toggleSwitch('switch-animal'); playSound()">
@@ -165,6 +204,7 @@
             </div>
         </div>
 
+        <!-- Switch für Milch, standardmäßig aktiviert -->
         <div class="switch-wrapper">
             <span class="switch-label">Milch</span>
             <div class="switch-button active" id="switch-milk" onclick="toggleSwitch('switch-milk'); playSound()">
@@ -172,66 +212,72 @@
             </div>
         </div>
 
+        <!-- Beschreibung -->
         <p class="description">
             Dish Dater ist auf dem Weg, eine umfangreiche Plattform für Rezeptempfehlungen und Ernährungsanpassungen zu werden. Auch in der aktuellen Entwicklungsphase bieten wir bereits wertvolle Funktionen, die kontinuierlich erweitert werden. Bleiben Sie dabei und erleben Sie, wie eine innovative App entsteht, die auf Ihre individuellen Bedürfnisse zugeschnitten ist. Wir bedanken uns für Ihre Geduld und freuen uns, Sie auf dieser Reise mitzunehmen!
         </p>
 
+        <!-- Zurück-Button -->
         <button class="back-button" onclick="playSound(); goBack()">🔙 Zurück</button>
     </div>
 
+    <!-- Audio-Elemente für die Soundeffekte -->
     <audio id="click-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
+    <audio id="start-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddstart.mp3" preload="auto"></audio>
 
     <script>
         let tg = window.Telegram.WebApp;
 
+        // Telegram WebApp Einstellungen
         tg.expand();
         tg.ready();
 
+        // Funktion, um den Click-Sound abzuspielen
         function playSound() {
             const sound = document.getElementById('click-sound');
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log("Fehler beim Abspielen des Click-Sounds:", e));
+            sound.currentTime = 0; // Zurücksetzen auf den Anfang
+            sound.play();
         }
 
+        // Funktion, um den Start-Sound abzuspielen
+        function playStartSound() {
+            const startSound = document.getElementById('start-sound');
+            startSound.play();
+        }
+
+        // Funktion, um zum nächsten Bildschirm mit den 5 Buttons zu wechseln
         function showNextScreen() {
-            // Sound beim Klicken abspielen
-            playSound(); 
-            // Willkommenscontainer ausblenden
-            const welcomeContainer = document.getElementById('welcome-container');
-            welcomeContainer.style.opacity = 0; 
-
-            setTimeout(() => {
-                welcomeContainer.style.display = 'none'; // Element nach der Animation ausblenden
-                document.getElementById('buttons-container').style.display = 'flex'; // Buttons einblenden
-                document.getElementById('buttons-container').style.opacity = 1; // Sichtbarkeit wieder herstellen
-                document.getElementById('buttons-container').style.transition = 'opacity 1s ease'; // Animation für Einblenden
-            }, 1000); // Wartezeit für das Ausblenden
+            playSound();
+            document.getElementById('welcome-container').style.display = 'none';
+            document.getElementById('buttons-container').style.display = 'flex';
+            tg.sendData("Start wurde geklickt!");
         }
 
-        // Initialisieren des Willkommenscontainers
-        window.onload = function() {
-            const welcomeContainer = document.getElementById('welcome-container');
-            welcomeContainer.style.opacity = 1; // Willkommensnachricht einblenden
-        };
-
+        // Funktion, um die Einstellungen anzuzeigen
         function showSettings() {
             document.getElementById('buttons-container').style.display = 'none';
             document.getElementById('settings-container').style.display = 'flex';
         }
 
+        // Funktion, um zur vorherigen Ansicht zurückzukehren
         function goBack() {
             document.getElementById('settings-container').style.display = 'none';
             document.getElementById('buttons-container').style.display = 'flex';
         }
 
+        // Funktion zum Umschalten der Switches
         function toggleSwitch(id) {
             const switchButton = document.getElementById(id);
             switchButton.classList.toggle('active');
         }
 
+        // Debug-Informationen für Telegram WebApp
         console.log("Telegram WebApp object:", tg);
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
+
+        // Startsound abspielen, wenn die Seite geladen ist
+        window.addEventListener('load', playStartSound);
     </script>
 </body>
 </html>
