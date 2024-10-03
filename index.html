@@ -237,6 +237,12 @@
             });
         }
 
+        function playWelcomeSound() {
+            const welcomeSound = document.getElementById('click-sound');
+            welcomeSound.currentTime = 0;
+            welcomeSound.play().catch(e => console.log("Fehler beim Abspielen des Willkommens-Sounds:", e));
+        }
+
         function showNextScreen() {
             playSound();
             document.getElementById('welcome-container').style.display = 'none';
@@ -264,11 +270,8 @@
         console.log("Platform:", tg.platform);
 
         window.addEventListener('load', () => {
-            playStartSound();
-            setTimeout(playStartSound, 1000);
+            playWelcomeSound(); // Hier wird der Willkommens-Sound abgespielt
         });
-
-        document.addEventListener('click', playStartSound, { once: true });
     </script>
 </body>
 </html>
