@@ -179,7 +179,7 @@
     <div class="container" id="welcome-container">
         <h1>Willkommen bei Dish Dater! 🍽️</h1>
         <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
-        <button onclick="startApp()">Start 🚀</button>
+        <button onclick="showNextScreen()">Start 🚀</button>
     </div>
 
     <!-- Zweite Ansicht mit Buttons -->
@@ -227,7 +227,6 @@
 
     <script>
         let tg = window.Telegram.WebApp;
-        let startSoundPlayed = false;
 
         // Telegram WebApp Einstellungen
         tg.expand();
@@ -242,22 +241,13 @@
 
         // Funktion, um den Start-Sound abzuspielen
         function playStartSound() {
-            if (!startSoundPlayed) {
-                const startSound = document.getElementById('start-sound');
-                startSound.play();
-                startSoundPlayed = true;
-            }
-        }
-
-        // Funktion, um die App zu starten und zum nächsten Bildschirm zu wechseln
-        function startApp() {
-            playStartSound();
-            playSound();
-            showNextScreen();
+            const startSound = document.getElementById('start-sound');
+            startSound.play();
         }
 
         // Funktion, um zum nächsten Bildschirm mit den 5 Buttons zu wechseln
         function showNextScreen() {
+            playSound();
             document.getElementById('welcome-container').style.display = 'none';
             document.getElementById('buttons-container').style.display = 'flex';
             tg.sendData("Start wurde geklickt!");
@@ -286,8 +276,8 @@
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
 
-        // Event Listener für die erste Interaktion des Nutzers
-        document.addEventListener('click', playStartSound, { once: true });
+        // Startsound abspielen, wenn die Seite geladen ist
+        window.addEventListener('load', playStartSound);
     </script>
 </body>
 </html>
