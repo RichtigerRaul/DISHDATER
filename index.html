@@ -7,6 +7,15 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --container-bg: #ffffff;
+            --button-gradient: linear-gradient(45deg, #6a11cb, #2575fc);
+            --button-hover-gradient: linear-gradient(45deg, #5b0ecf, #1f6fe8);
+            --switch-bg: #f0f2f5;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             display: flex;
@@ -16,11 +25,11 @@
             height: 100vh;
             margin: 0;
             background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-            color: var(--tg-theme-text-color, #000000);
+            color: var(--text-color);
         }
 
         .container, .button-container, .settings-container {
-            background-color: var(--tg-theme-secondary-bg-color, white);
+            background-color: var(--container-bg);
             padding: 20px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -35,7 +44,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #ffffff;
+            background-color: var(--bg-color);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -64,26 +73,25 @@
             transition: width 0.5s ease-in-out;
         }
 
-        /* Nur für den Willkommenscontainer */
         #welcome-container {
             animation: fadeIn 1s ease-in-out;
         }
 
         h1 {
             font-size: 2rem;
-            color: #333;
+            color: var(--text-color);
             margin-bottom: 20px;
             line-height: 1.3;
         }
 
         p {
             font-size: 1rem;
-            color: #555;
+            color: var(--text-color);
             margin-bottom: 20px;
         }
 
         button {
-            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            background: var(--button-gradient);
             color: white;
             border: none;
             padding: 10px 20px;
@@ -99,7 +107,7 @@
         }
 
         button:hover {
-            background: linear-gradient(45deg, #5b0ecf, #1f6fe8);
+            background: var(--button-hover-gradient);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             transform: translateY(-3px);
         }
@@ -146,7 +154,6 @@
             margin-top: 20px;
         }
 
-        /* Einstellungen-Stil */
         .settings-container {
             display: none;
             flex-direction: column;
@@ -160,7 +167,7 @@
             width: 100%;
             align-items: center;
             padding: 10px;
-            background-color: var(--tg-theme-bg-color, #f0f2f5);
+            background-color: var(--switch-bg);
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -169,6 +176,7 @@
             font-size: 1rem;
             font-weight: 600;
             margin-right: 10px;
+            color: var(--text-color);
         }
 
         .switch-button {
@@ -203,7 +211,7 @@
         .description {
             margin-top: 30px;
             font-size: 0.9rem;
-            color: #777;
+            color: var(--text-color);
             text-align: center;
         }
 
@@ -279,6 +287,15 @@
         tg.expand();
         tg.ready();
 
+        // Funktion zum Anpassen der Farben basierend auf dem Farbschema
+        function adjustColors() {
+            const isDarkMode = tg.colorScheme === 'dark';
+            document.documentElement.style.setProperty('--bg-color', isDarkMode ? '#2f3136' : '#ffffff');
+            document.documentElement.style.setProperty('--text-color', isDarkMode ? '#ffffff' : '#000000');
+            document.documentElement.style.setProperty('--container-bg', isDarkMode ? '#36393f' : '#ffffff');
+            document.documentElement.style.setProperty('--switch-bg', isDarkMode ? '#202225' : '#f0f2f5');
+        }
+
         // Funktion zum Simulieren des Ladevorgangs
         function simulateLoading() {
             let progress = 0;
@@ -298,7 +315,7 @@
         // Funktion, um den Click-Sound abzuspielen
         function playSound() {
             const sound = document.getElementById('click-sound');
-            sound.currentTime = 0; // Zurücksetzen auf den Anfang
+            sound.currentTime = 0;
             sound.play().catch(function(error) {
                 console.log("Soundwiedergabe fehlgeschlagen:", error);
             });
@@ -314,7 +331,7 @@
 
         // Funktion, um zum nächsten Bildschirm mit den 5 Buttons zu wechseln
         function showNextScreen() {
-            playStartSound(); // Startsound beim Klicken auf Start abspielen
+            playStartSound();
             document.getElementById('welcome-container').style.display = 'none';
             document.getElementById('buttons-container').style.display = 'flex';
             tg.sendData("Start wurde geklickt!");
@@ -343,10 +360,14 @@
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
 
-        // Starten Sie den Ladevorgang, wenn die Seite geladen ist
+        // Starten Sie den Ladevorgang und passen Sie die Farben an, wenn die Seite geladen ist
         window.addEventListener('load', function() {
+            adjustColors();
             simulateLoading();
         });
+
+        // Überwachen Sie Änderungen im Farbschema
+        tg.onEvent('themeChanged', adjustColors);
     </script>
 </body>
 </html>
