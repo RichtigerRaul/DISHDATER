@@ -21,37 +21,37 @@
 
         .container, .button-container {
             background-color: var(--tg-theme-secondary-bg-color, white);
-            padding: 30px;
+            padding: 20px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+            max-width: 300px;
             width: 100%;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #333;
             margin-bottom: 20px;
             line-height: 1.3;
         }
 
         p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #555;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         button {
             background: linear-gradient(45deg, #6a11cb, #2575fc);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 16px;
+            font-weight: 600;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -62,7 +62,7 @@
         button:hover {
             background: linear-gradient(45deg, #5b0ecf, #1f6fe8);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         button:active {
@@ -97,11 +97,15 @@
             }
         }
 
-        /* Menü-Layout: Alle Buttons untereinander anordnen */
+        /* Menü-Layout: Buttons untereinander anordnen, Einstellungen getrennt */
         .button-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
+        }
+
+        .einstellungen-button {
+            margin-top: 20px;
         }
 
     </style>
@@ -114,13 +118,14 @@
         <button onclick="showNextScreen()">Start 🚀</button>
     </div>
 
-    <!-- Zweite Ansicht mit 5 Buttons untereinander -->
+    <!-- Zweite Ansicht mit Buttons -->
     <div class="button-container" id="buttons-container" style="display: none;">
-        <button>🔧 Einstellungen</button>
         <button>🍳 Frühstück</button>
         <button>🥗 Mittagessen</button>
         <button>🍲 Abendessen</button>
         <button>🍪 Snacks</button>
+        <!-- Getrennt platzierter Button für Einstellungen -->
+        <button class="einstellungen-button">🔧 Einstellungen</button>
     </div>
 
     <script>
