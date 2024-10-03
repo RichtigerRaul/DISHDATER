@@ -240,13 +240,18 @@
         function playSound() {
             const sound = document.getElementById('click-sound');
             sound.currentTime = 0; // Zurücksetzen auf den Anfang
-            sound.play();
+            sound.play().catch(function(error) {
+                console.log("Soundwiedergabe fehlgeschlagen:", error);
+            });
         }
 
         // Funktion, um den Start-Sound abzuspielen
         function playStartSound() {
             const startSound = document.getElementById('start-sound');
-            startSound.play();
+            startSound.play().catch(function(error) {
+                console.log("Automatisches Abspielen des Startsounds fehlgeschlagen:", error);
+                // Hier können Sie eine Benutzerbenachrichtigung hinzufügen, falls gewünscht
+            });
         }
 
         // Funktion, um zum nächsten Bildschirm mit den 5 Buttons zu wechseln
@@ -281,7 +286,10 @@
         console.log("Platform:", tg.platform);
 
         // Startsound abspielen, wenn die Seite geladen ist
-        window.addEventListener('load', playStartSound);
+        window.addEventListener('load', function() {
+            // Verzögerung hinzufügen, um sicherzustellen, dass die Audio-Ressource geladen ist
+            setTimeout(playStartSound, 1000);
+        });
     </script>
 </body>
 </html>
