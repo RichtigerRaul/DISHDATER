@@ -221,6 +221,8 @@
         tg.expand();
         tg.ready();
 
+        let soundInitialized = false;
+
         function playSound() {
             const sound = document.getElementById('click-sound');
             sound.currentTime = 0;
@@ -229,6 +231,7 @@
 
         function playStartSound() {
             const startSound = document.getElementById('start-sound');
+            startSound.currentTime = 0; // Startsound von vorne abspielen
             startSound.play().catch(e => {
                 console.log("Fehler beim Abspielen des Start-Sounds:", e);
                 setTimeout(() => {
@@ -238,7 +241,10 @@
         }
 
         function showNextScreen() {
-            playSound();
+            if (!soundInitialized) {
+                soundInitialized = true; // Ton wird nun initiiert
+                playStartSound();
+            }
             document.getElementById('welcome-container').style.display = 'none';
             document.getElementById('buttons-container').style.display = 'flex';
             tg.sendData("Start wurde geklickt!");
@@ -263,9 +269,18 @@
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
 
-        // Der Start-Sound wird beim Laden der Seite abgespielt
+        // Der Sound wird beim ersten Klick auf die Seite geladen und kann dann verwendet werden
+        document.addEventListener('click', () => {
+            if (!soundInitialized) {
+                playStartSound(); // Initialisiere den Sound beim ersten Klick
+                soundInitialized = true;
+            }
+        });
+
         window.addEventListener('load', () => {
-            playStartSound();
+            if (soundInitialized) {
+                playStartSound(); // Starte den Sound, wenn der Sound initialisiert wurde
+            }
         });
     </script>
 </body>
