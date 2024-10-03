@@ -27,7 +27,6 @@
             max-width: 300px;
             width: 100%;
             text-align: center;
-            animation: fadeIn 1s ease-in-out;
         }
 
         h1 {
@@ -53,8 +52,6 @@
             font-size: 16px;
             font-weight: 600;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
             margin: 10px 0;
             width: 100%;
         }
@@ -69,42 +66,10 @@
             transform: translateY(2px);
         }
 
-        button::after {
-            content: '';
-            position: absolute;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.3);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.4s ease;
-            border-radius: 50%;
-        }
-
-        button:focus::after {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
         .button-container {
-            display: flex;
+            display: none;
             flex-direction: column;
             gap: 10px;
-        }
-
-        .einstellungen-button {
-            margin-top: 20px;
         }
 
         .settings-container {
@@ -180,7 +145,7 @@
         <button onclick="showNextScreen()">Start 🚀</button>
     </div>
 
-    <div class="button-container" id="buttons-container" style="display: none;">
+    <div class="button-container" id="buttons-container">
         <button onclick="playSound();">🍳 Frühstück</button>
         <button onclick="playSound();">🥗 Mittagessen</button>
         <button onclick="playSound();">🍲 Abendessen</button>
@@ -213,7 +178,6 @@
     </div>
 
     <audio id="click-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
-    <audio id="start-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddstart.mp3" preload="auto"></audio>
 
     <script>
         let tg = window.Telegram.WebApp;
@@ -221,30 +185,13 @@
         tg.expand();
         tg.ready();
 
-        let soundInitialized = false;
-
         function playSound() {
             const sound = document.getElementById('click-sound');
             sound.currentTime = 0;
             sound.play().catch(e => console.log("Fehler beim Abspielen des Click-Sounds:", e));
         }
 
-        function playStartSound() {
-            const startSound = document.getElementById('start-sound');
-            startSound.currentTime = 0; // Startsound von vorne abspielen
-            startSound.play().catch(e => {
-                console.log("Fehler beim Abspielen des Start-Sounds:", e);
-                setTimeout(() => {
-                    startSound.play().catch(e => console.log("Erneuter Fehler beim Abspielen des Start-Sounds:", e));
-                }, 1000);
-            });
-        }
-
         function showNextScreen() {
-            if (!soundInitialized) {
-                soundInitialized = true; // Ton wird nun initiiert
-                playStartSound();
-            }
             document.getElementById('welcome-container').style.display = 'none';
             document.getElementById('buttons-container').style.display = 'flex';
             tg.sendData("Start wurde geklickt!");
@@ -268,20 +215,6 @@
         console.log("Telegram WebApp object:", tg);
         console.log("Telegram WebApp version:", tg.version);
         console.log("Platform:", tg.platform);
-
-        // Der Sound wird beim ersten Klick auf die Seite geladen und kann dann verwendet werden
-        document.addEventListener('click', () => {
-            if (!soundInitialized) {
-                playStartSound(); // Initialisiere den Sound beim ersten Klick
-                soundInitialized = true;
-            }
-        });
-
-        window.addEventListener('load', () => {
-            if (soundInitialized) {
-                playStartSound(); // Starte den Sound, wenn der Sound initialisiert wurde
-            }
-        });
     </script>
 </body>
 </html>
