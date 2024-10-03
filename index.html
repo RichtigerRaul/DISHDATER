@@ -223,7 +223,7 @@
     </div>
 
     <!-- Audio-Element für den Soundeffekt -->
-    <audio id="click-sound" src="https://jmp.sh/GEKHmP70" preload="auto"></audio>
+    <audio id="click-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
 
     <script>
         let tg = window.Telegram.WebApp;
@@ -252,13 +252,13 @@
             document.getElementById('settings-container').style.display = 'flex';
         }
 
-        // Funktion zum Zurückgehen zur Hauptansicht
+        // Funktion, um zur vorherigen Ansicht zurückzukehren
         function goBack() {
             document.getElementById('settings-container').style.display = 'none';
             document.getElementById('buttons-container').style.display = 'flex';
         }
 
-                // Funktion zum Umschalten der Switches
+        // Funktion zum Umschalten der Switches
         function toggleSwitch(id) {
             const switchButton = document.getElementById(id);
             switchButton.classList.toggle('active');
