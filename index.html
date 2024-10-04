@@ -3,80 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dish Dater</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Dish Dater - Auswahl</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Dein vorhandenes CSS */
         :root {
             --bg-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
             --text-color: #000000;
             --container-bg: rgba(255, 255, 255, 0.9);
             --button-gradient: linear-gradient(45deg, #6a11cb, #2575fc);
             --button-hover-gradient: linear-gradient(45deg, #5b0ecf, #1f6fe8);
-            --switch-bg: #f0f2f5;
-        }
-
-        body.dark-mode {
-            --bg-color: linear-gradient(120deg, #2c3e50 0%, #4ca1af 100%);
-            --text-color: #ffffff;
-            --container-bg: rgba(0, 0, 0, 0.7);
-            --switch-bg: #2c3e50;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: var(--bg-color);
-            color: var(--text-color);
+            padding: 0 15px;
             transition: all 0.3s ease;
         }
 
-        .container, .button-container, .settings-container {
+        .container {
             background-color: var(--container-bg);
-            padding: 20px;
+            padding: 30px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 300px;
+            max-width: 400px;
             width: 100%;
             text-align: center;
-            transition: all 0.3s ease;
         }
 
-        #content {
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-            background-color: var(--container-bg);
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         button {
             background: var(--button-gradient);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px;
+            font-size: 1.2rem;
             border-radius: 25px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            margin: 10px 0;
-            width: 100%;
         }
 
         button:hover {
             background: var(--button-hover-gradient);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             transform: translateY(-3px);
         }
 
@@ -84,119 +68,85 @@
             transform: translateY(2px);
         }
 
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .einstellungen-button {
-            margin-top: 20px;
-        }
-
-        .settings-container {
-            display: none;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
+        .darkmode-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
+
     <!-- Darkmode Toggle -->
     <div class="darkmode-toggle" onclick="toggleDarkMode()">🌓</div>
 
-    <!-- Ladebildschirm -->
-    <div id="loading-screen">
-        <img id="logo" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddlogo.jpg" alt="Dish Dater Logo">
-        <div id="loading-bar">
-            <div id="loading-progress"></div>
+    <!-- Container für Auswahl -->
+    <div class="container">
+        <h1>Wähle eine Mahlzeit</h1>
+        <div class="button-container">
+            <button onclick="navigateToPage('frühstück')">🍳 Frühstück</button>
+            <button onclick="navigateToPage('mittagessen')">🥗 Mittagessen</button>
+            <button onclick="navigateToPage('abendessen')">🍲 Abendessen</button>
+            <button onclick="navigateToPage('snacks')">🍪 Snacks</button>
         </div>
     </div>
 
-    <!-- Erste Ansicht -->
-    <div class="container" id="welcome-container" style="display: none;">
-        <h1>Willkommen bei Dish Dater! 🍽️</h1>
-        <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
-        <button onclick="showNextScreen()">Start 🚀</button>
-    </div>
-
-    <!-- Zweite Ansicht mit Buttons -->
-    <div class="button-container" id="buttons-container" style="display: none;">
-        <button onclick="loadContent('ddf.html')">🍳 Frühstück</button>
-        <button onclick="loadContent('ddm.html')">🥗 Mittagessen</button>
-        <button onclick="loadContent('dda.html')">🍲 Abendessen</button>
-        <button onclick="loadContent('dds.html')">🍪 Snacks</button>
-        <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
-    </div>
-
-    <!-- Inhalt wird hier geladen -->
-    <div id="content"></div>
-
-    <!-- Einstellungen Ansicht -->
-    <div class="settings-container" id="settings-container" style="display: none;">
-        <h1>Einstellungen</h1>
-        <!-- Switches und andere Einstellungen hier -->
-        <button class="back-button" onclick="goBack()">🔙 Zurück</button>
-    </div>
-
+    <!-- Sound-Elemente -->
     <audio id="click-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
     <audio id="start-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddstart.mp3" preload="auto"></audio>
 
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.ready();
+        // Funktion zum Abspielen des Click-Sounds
+        function playClickSound() {
+            const sound = document.getElementById('click-sound');
+            sound.currentTime = 0;
+            sound.play().catch(function(error) {
+                console.log("Soundwiedergabe fehlgeschlagen:", error);
+            });
+        }
 
-        // Darkmode-Umschaltung
+        // Funktion zum Umschalten des Darkmode
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
+            playClickSound();
+            updateDarkmodeToggle();
         }
 
-        // Lade Inhalt dynamisch
-        function loadContent(file) {
-            const contentDiv = document.getElementById('content');
-            fetch(file)
-                .then(response => response.text())
-                .then(data => {
-                    contentDiv.innerHTML = data;
-                })
-                .catch(error => {
-                    contentDiv.innerHTML = '<p>Fehler beim Laden der Inhalte.</p>';
-                });
+        // Funktion zur Aktualisierung des Darkmode-Icons
+        function updateDarkmodeToggle() {
+            const darkmodeToggle = document.querySelector('.darkmode-toggle');
+            if (document.body.classList.contains('dark-mode')) {
+                darkmodeToggle.textContent = '🌞';
+            } else {
+                darkmodeToggle.textContent = '🌓';
+            }
         }
 
-        // Zum nächsten Bildschirm wechseln
-        function showNextScreen() {
-            document.getElementById('welcome-container').style.display = 'none';
-            document.getElementById('buttons-container').style.display = 'flex';
+        // Funktion zur Navigation zu den jeweiligen Seiten
+        function navigateToPage(meal) {
+            playClickSound();
+            switch(meal) {
+                case 'frühstück':
+                    window.location.href = 'ddf.html';
+                    break;
+                case 'mittagessen':
+                    window.location.href = 'ddm.html';
+                    break;
+                case 'abendessen':
+                    window.location.href = 'dda.html';
+                    break;
+                case 'snacks':
+                    window.location.href = 'dds.html';
+                    break;
+                default:
+                    alert('Ungültige Auswahl!');
+            }
         }
 
-        // Einstellungen anzeigen
-        function showSettings() {
-            document.getElementById('buttons-container').style.display = 'none';
-            document.getElementById('settings-container').style.display = 'flex';
-        }
-
-        // Zurück zur Button-Ansicht
-        function goBack() {
-            document.getElementById('settings-container').style.display = 'none';
-            document.getElementById('buttons-container').style.display = 'flex';
-        }
-
-        // Ladeanimation simulieren
-        window.addEventListener('load', function() {
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 10;
-                document.getElementById('loading-progress').style.width = `${progress}%`;
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    document.getElementById('loading-screen').style.display = 'none';
-                    document.getElementById('welcome-container').style.display = 'block';
-                }
-            }, 200);
-        });
+        // Initiale Aktualisierung des Darkmode-Icons
+        updateDarkmodeToggle();
     </script>
 </body>
 </html>
