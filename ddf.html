@@ -6,245 +6,154 @@
     <title>Frühstück - Dish Dater</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-            --text-color: #000000;
-            --container-bg: rgba(255, 255, 255, 0.9);
-            --button-gradient: linear-gradient(45deg, #6a11cb, #2575fc);
-            --button-hover-gradient: linear-gradient(45deg, #5b0ecf, #1f6fe8);
-        }
-
         body {
             font-family: 'Roboto', sans-serif;
-            background: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 20px;
-            overflow: hidden;
-        }
-
-        .container {
-            background-color: var(--container-bg);
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .ingredient {
+            background-color: #f9f9f9;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
 
-        .ingredient img {
+        h1 {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+
+        .ingredient-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
-            max-width: 300px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 16px;
+            max-width: 400px;
         }
 
-        .ingredient-name {
-            font-size: 1.5rem;
+        .ingredient-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .ingredient-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
             margin-top: 10px;
         }
 
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-            width: 80%;
-            max-width: 200px;
-            margin-top: 20px;
-        }
-
-        .button {
-            background: var(--button-gradient);
+        button {
+            background-color: #6a11cb;
             color: white;
             border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .button:hover {
-            background: var(--button-hover-gradient);
-            transform: translateY(-3px);
-        }
-
-        .results {
-            margin-top: 30px;
-        }
-
-        .back-button {
-            margin-top: 20px;
             padding: 10px 20px;
-            background-color: #ff4b5c;
-            color: white;
-            border: none;
             border-radius: 25px;
             cursor: pointer;
-            font-size: 16px;
+            transition: background-color 0.3s ease;
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        button:hover {
+            background-color: #5b0ecf;
+        }
+
+        /* Zurück-Button */
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 1000; /* Damit der Button immer oben bleibt */
         }
 
         .back-button:hover {
-            background-color: #ff6b7c;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 0;
-                margin: 0;
-            }
-
-            .ingredient img {
-                max-width: 250px;
-            }
-
-            .buttons {
-                width: 100%;
-                max-width: 180px;
-            }
-
-            .button {
-                width: 50px;
-                height: 50px;
-            }
+            background-color: #444;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="swipe-container">
-        <div class="ingredient" id="ingredient">
-            <img id="ingredient-img" src="" alt="Zutat">
-            <div class="ingredient-name" id="ingredient-name">Zutat Name</div>
-        </div>
-        <div class="buttons">
-            <button class="button" id="dislike-btn">👎</button>
-            <button class="button" id="like-btn">👍</button>
+
+    <h1>Wähle eine Zutat</h1>
+    <div class="ingredient-container" id="ingredient-container">
+        <!-- Hier wird die Zutat angezeigt -->
+        <div class="ingredient-card">
+            <img src="zutaten-bild.jpg" alt="Zutat">
+            <h2 id="ingredient-name">Zutat Name</h2>
+            <div class="button-container">
+                <button id="like-button">👍 Like</button>
+                <button id="dislike-button">👎 Dislike</button>
+            </div>
         </div>
     </div>
 
-    <div class="results" id="recipe-results" style="display: none;">
-        <h2>Passendes Rezept</h2>
-        <p id="recipe-name"></p>
-        <p id="recipe-description"></p>
-        <button class="back-button" onclick="goBack()">Zurück zur Auswahl</button>
-    </div>
-
-    <audio id="like-sound" src="sounds/like.mp3"></audio>
-    <audio id="dislike-sound" src="sounds/dislike.mp3"></audio>
+    <button class="back-button" onclick="goBack()">Zurück</button>
 
     <script>
-        let ingredients = [
-            { name: "Ei", img: "link-zu-ei-bild" },
-            { name: "Milch", img: "link-zu-milch-bild" },
-            { name: "Banane", img: "link-zu-banane-bild" },
-            { name: "Brot", img: "link-zu-brot-bild" },
-            { name: "Speck", img: "link-zu-speck-bild" }
+        // Funktion zum Zurücknavigieren
+        function goBack() {
+            window.location.href = 'index.html'; // Zurück zur Hauptseite
+        }
+
+        // Weitere JavaScript-Logik für das Swipen oder Anzeigen von Zutaten wird hier eingefügt
+        // Hier ist ein Beispiel, um eine Zutat anzuzeigen
+        const ingredients = [
+            { name: "Eier", image: "https://example.com/eier.jpg" },
+            { name: "Brot", image: "https://example.com/brot.jpg" },
+            // Füge weitere Zutaten hinzu
         ];
 
-        let recipes = [
-            {
-                name: "Omelette",
-                description: "Ein köstliches Frühstücks-Omelette mit Ei und Milch.",
-                ingredients: ["Ei", "Milch"]
-            },
-            {
-                name: "Frühstücks-Sandwich",
-                description: "Ein leckeres Sandwich mit Brot und Speck.",
-                ingredients: ["Brot", "Speck"]
-            },
-            {
-                name: "Smoothie",
-                description: "Ein gesunder Smoothie mit Banane und Milch.",
-                ingredients: ["Banane", "Milch"]
-            }
-        ];
-
-        let likedIngredients = [];
-        let dislikedIngredients = [];
         let currentIngredientIndex = 0;
 
-        const ingredientImg = document.getElementById("ingredient-img");
-        const ingredientName = document.getElementById("ingredient-name");
-        const likeSound = document.getElementById("like-sound");
-        const dislikeSound = document.getElementById("dislike-sound");
+        function showIngredient(index) {
+            const ingredient = ingredients[index];
+            document.getElementById("ingredient-name").innerText = ingredient.name;
+            document.querySelector(".ingredient-card img").src = ingredient.image;
+        }
 
-        const showIngredient = () => {
-            const ingredient = ingredients[currentIngredientIndex];
-            ingredientImg.src = ingredient.img;
-            ingredientName.textContent = ingredient.name;
-        };
-
-        const showRecipeResults = () => {
-            const recipeContainer = document.getElementById("recipe-results");
-            const swipeContainer = document.getElementById("swipe-container");
-
-            let bestRecipe = null;
-            let bestScore = -1;
-
-            recipes.forEach(recipe => {
-                let likeScore = recipe.ingredients.filter(i => likedIngredients.includes(i)).length;
-                let dislikeScore = recipe.ingredients.filter(i => dislikedIngredients.includes(i)).length;
-                let score = likeScore - dislikeScore;
-
-                if (score > bestScore) {
-                    bestScore = score;
-                    bestRecipe = recipe;
-                }
-            });
-
-            document.getElementById("recipe-name").textContent = bestRecipe.name;
-            document.getElementById("recipe-description").textContent = bestRecipe.description;
-
-            swipeContainer.style.display = "none";
-            recipeContainer.style.display = "block";
-        };
-
-        const handleSwipe = (liked) => {
-            const currentIngredient = ingredients[currentIngredientIndex];
-
-            if (liked) {
-                likedIngredients.push(currentIngredient.name);
-                likeSound.play();
-            } else {
-                dislikedIngredients.push(currentIngredient.name);
-                dislikeSound.play();
-            }
-
+        document.getElementById("like-button").addEventListener("click", () => {
+            // Logik für den "Like"-Button
             currentIngredientIndex++;
-
             if (currentIngredientIndex < ingredients.length) {
-                showIngredient();
+                showIngredient(currentIngredientIndex);
             } else {
-                showRecipeResults();
+                alert("Du hast alle Zutaten durch.");
             }
-        };
+        });
 
-        document.getElementById("like-btn").addEventListener("click", () => handleSwipe(true));
-        document.getElementById("dislike-btn").addEventListener("click", () => handleSwipe(false));
+        document.getElementById("dislike-button").addEventListener("click", () => {
+            // Logik für den "Dislike"-Button
+            currentIngredientIndex++;
+            if (currentIngredientIndex < ingredients.length) {
+                showIngredient(currentIngredientIndex);
+            } else {
+                alert("Du hast alle Zutaten durch.");
+            }
+        });
 
-        const goBack = () => {
-            window.location.href = "index.html";
-        };
-
-        window.onload = () => {
-            showIngredient();
-        };
+        // Initiale Zutat anzeigen
+        showIngredient(currentIngredientIndex);
     </script>
 </body>
 </html>
