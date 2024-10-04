@@ -14,6 +14,14 @@
             --button-hover-gradient: linear-gradient(45deg, #5b0ecf, #1f6fe8);
         }
 
+        body.dark-mode {
+            --bg-color: linear-gradient(120deg, #2c3e50 0%, #4ca1af 100%);
+            --text-color: #ffffff;
+            --container-bg: rgba(30, 30, 30, 0.9);
+            --button-gradient: linear-gradient(45deg, #333333, #555555);
+            --button-hover-gradient: linear-gradient(45deg, #444444, #666666);
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background: var(--bg-color);
@@ -35,7 +43,7 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
-            display: none; /* Startseite versteckt */
+            display: none;
         }
 
         h1 {
@@ -77,7 +85,6 @@
             cursor: pointer;
         }
 
-        /* Willkommensseite */
         #welcome-screen {
             display: flex;
             flex-direction: column;
@@ -106,7 +113,6 @@
             transform: translateY(2px);
         }
 
-        /* Loading-Screen */
         #loading-screen {
             display: none;
             flex-direction: column;
@@ -157,10 +163,10 @@
     <div class="container" id="main-menu">
         <h1>Wähle eine Mahlzeit</h1>
         <div class="button-container">
-            <button onclick="navigateToPage('frühstück')">🍳 Frühstück</button>
-            <button onclick="navigateToPage('mittagessen')">🥗 Mittagessen</button>
-            <button onclick="navigateToPage('abendessen')">🍲 Abendessen</button>
-            <button onclick="navigateToPage('snacks')">🍪 Snacks</button>
+            <button class="nav-button" data-page="ddf.html">🍳 Frühstück</button>
+            <button class="nav-button" data-page="ddm.html">🥗 Mittagessen</button>
+            <button class="nav-button" data-page="dda.html">🍲 Abendessen</button>
+            <button class="nav-button" data-page="dds.html">🍪 Snacks</button>
         </div>
     </div>
 
@@ -187,14 +193,13 @@
             });
         }
 
-        // Funktion zum Umschalten des Darkmode
+        // Darkmode umschalten
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
-            playClickSound();
             updateDarkmodeToggle();
         }
 
-        // Funktion zur Aktualisierung des Darkmode-Icons
+        // Darkmode Icon aktualisieren
         function updateDarkmodeToggle() {
             const darkmodeToggle = document.querySelector('.darkmode-toggle');
             if (document.body.classList.contains('dark-mode')) {
@@ -204,41 +209,36 @@
             }
         }
 
-        // Funktion zur Navigation zu den jeweiligen Seiten
-        function navigateToPage(meal) {
+        // Navigation zu den Seiten
+        function navigateToPage(page) {
             playClickSound();
-            switch(meal) {
-                case 'frühstück':
-                    window.location.href = 'ddf.html';
-                    break;
-                case 'mittagessen':
-                    window.location.href = 'ddm.html';
-                    break;
-                case 'abendessen':
-                    window.location.href = 'dda.html';
-                    break;
-                case 'snacks':
-                    window.location.href = 'dds.html';
-                    break;
-                default:
-                    alert('Ungültige Auswahl!');
-            }
+            setTimeout(() => {
+                window.location.href = page;
+            }, 300); // Verzögerung, damit der Sound zuerst gespielt wird
         }
 
-        // Start der App: Startseite verschwindet, Ladescreen erscheint und dann das Hauptmenü
+        // Start der App
         function startApp() {
             playStartSound();
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('loading-screen').style.display = 'flex';
 
-            // Simulation eines Ladevorgangs
+            // Ladezeit simulieren
             setTimeout(function() {
                 document.getElementById('loading-screen').style.display = 'none';
                 document.getElementById('main-menu').style.display = 'block';
-            }, 2000); // 2 Sekunden Ladezeit simuliert
+            }, 2000);
         }
 
-        // Initiale Aktualisierung des Darkmode-Icons
+        // Hinzufügen von Klick-Events für die Navigationsbuttons
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const page = button.getAttribute('data-page');
+                navigateToPage(page);
+            });
+        });
+
+        // Darkmode Icon initialisieren
         updateDarkmodeToggle();
     </script>
 </body>
