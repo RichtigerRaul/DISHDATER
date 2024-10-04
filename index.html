@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dish Dater - Auswahl</title>
+    <title>Dish Dater - Willkommen</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -24,7 +24,7 @@
             height: 100vh;
             margin: 0;
             padding: 0 15px;
-            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
         .container {
@@ -35,6 +35,7 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
+            display: none; /* Startseite versteckt */
         }
 
         h1 {
@@ -75,6 +76,64 @@
             font-size: 24px;
             cursor: pointer;
         }
+
+        /* Willkommensseite */
+        #welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        #start-button {
+            background: var(--button-gradient);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #start-button:hover {
+            background: var(--button-hover-gradient);
+        }
+
+        #start-button:active {
+            transform: translateY(2px);
+        }
+
+        /* Loading-Screen */
+        #loading-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100vh;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #loading-text {
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -82,8 +141,20 @@
     <!-- Darkmode Toggle -->
     <div class="darkmode-toggle" onclick="toggleDarkMode()">🌓</div>
 
+    <!-- Willkommensscreen -->
+    <div id="welcome-screen">
+        <h1>Willkommen bei Dish Dater!</h1>
+        <button id="start-button" onclick="startApp()">Start</button>
+    </div>
+
+    <!-- Ladescreen -->
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <div id="loading-text">Lädt...</div>
+    </div>
+
     <!-- Container für Auswahl -->
-    <div class="container">
+    <div class="container" id="main-menu">
         <h1>Wähle eine Mahlzeit</h1>
         <div class="button-container">
             <button onclick="navigateToPage('frühstück')">🍳 Frühstück</button>
@@ -98,6 +169,15 @@
     <audio id="start-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddstart.mp3" preload="auto"></audio>
 
     <script>
+        // Funktion zum Abspielen des Start-Sounds
+        function playStartSound() {
+            const sound = document.getElementById('start-sound');
+            sound.currentTime = 0;
+            sound.play().catch(function(error) {
+                console.log("Soundwiedergabe fehlgeschlagen:", error);
+            });
+        }
+
         // Funktion zum Abspielen des Click-Sounds
         function playClickSound() {
             const sound = document.getElementById('click-sound');
@@ -143,6 +223,19 @@
                 default:
                     alert('Ungültige Auswahl!');
             }
+        }
+
+        // Start der App: Startseite verschwindet, Ladescreen erscheint und dann das Hauptmenü
+        function startApp() {
+            playStartSound();
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'flex';
+
+            // Simulation eines Ladevorgangs
+            setTimeout(function() {
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('main-menu').style.display = 'block';
+            }, 2000); // 2 Sekunden Ladezeit simuliert
         }
 
         // Initiale Aktualisierung des Darkmode-Icons
