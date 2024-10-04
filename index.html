@@ -3,243 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dish Dater - Willkommen</title>
+    <title>Dish Dater</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-            --text-color: #000000;
-            --container-bg: rgba(255, 255, 255, 0.9);
-            --button-gradient: linear-gradient(45deg, #6a11cb, #2575fc);
-            --button-hover-gradient: linear-gradient(45deg, #5b0ecf, #1f6fe8);
-        }
-
-        body.dark-mode {
-            --bg-color: linear-gradient(120deg, #2c3e50 0%, #4ca1af 100%);
-            --text-color: #ffffff;
-            --container-bg: rgba(30, 30, 30, 0.9);
-            --button-gradient: linear-gradient(45deg, #333333, #555555);
-            --button-hover-gradient: linear-gradient(45deg, #444444, #666666);
-        }
-
         body {
             font-family: 'Roboto', sans-serif;
-            background: var(--bg-color);
-            color: var(--text-color);
+            background-color: #f9f9f9;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
+            min-height: 100vh;
             margin: 0;
-            padding: 0 15px;
-            overflow: hidden;
-        }
-
-        .container {
-            background-color: var(--container-bg);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            display: none;
+            padding: 0;
+            transition: background-color 0.3s;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
         }
 
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
         button {
-            background: var(--button-gradient);
+            background-color: #6a11cb;
             color: white;
             border: none;
-            padding: 15px;
-            font-size: 1.2rem;
+            padding: 15px 30px;
             border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease;
+            font-size: 1.2rem;
+            margin: 10px;
         }
 
         button:hover {
-            background: var(--button-hover-gradient);
-            transform: translateY(-3px);
+            background-color: #5b0ecf;
         }
 
-        button:active {
-            transform: translateY(2px);
-        }
-
-        .darkmode-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        #welcome-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
-            height: 100vh;
-        }
-
-        #start-button {
-            background: var(--button-gradient);
+        /* Darkmode Styling */
+        .darkmode {
+            background-color: #333;
             color: white;
-            padding: 15px 30px;
-            font-size: 1.5rem;
+        }
+
+        /* Darkmode Button */
+        .darkmode-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            padding: 10px;
             border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
-        #start-button:hover {
-            background: var(--button-hover-gradient);
-        }
-
-        #start-button:active {
-            transform: translateY(2px);
-        }
-
-        #loading-screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            height: 100vh;
-        }
-
-        .loader {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        #loading-text {
-            margin-top: 15px;
-            font-size: 1.2rem;
+        .darkmode-button:hover {
+            background-color: #5b0ecf;
         }
     </style>
 </head>
 <body>
 
-    <!-- Darkmode Toggle -->
-    <div class="darkmode-toggle" onclick="toggleDarkMode()">🌓</div>
+    <button class="darkmode-button" id="darkmode-toggle">🌙 Darkmode</button>
 
-    <!-- Willkommensscreen -->
-    <div id="welcome-screen">
-        <h1>Willkommen bei Dish Dater!</h1>
-        <button id="start-button" onclick="startApp()">Start</button>
-    </div>
-
-    <!-- Ladescreen -->
-    <div id="loading-screen">
-        <div class="loader"></div>
-        <div id="loading-text">Lädt...</div>
-    </div>
-
-    <!-- Container für Auswahl -->
-    <div class="container" id="main-menu">
-        <h1>Wähle eine Mahlzeit</h1>
-        <div class="button-container">
-            <button class="nav-button" data-page="ddf.html">🍳 Frühstück</button>
-            <button class="nav-button" data-page="ddm.html">🥗 Mittagessen</button>
-            <button class="nav-button" data-page="dda.html">🍲 Abendessen</button>
-            <button class="nav-button" data-page="dds.html">🍪 Snacks</button>
-        </div>
-    </div>
-
-    <!-- Sound-Elemente -->
-    <audio id="click-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
-    <audio id="start-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddstart.mp3" preload="auto"></audio>
+    <h1>Willkommen beim Dish Dater!</h1>
+    <button onclick="location.href='mahlzeiten.html'">Starte</button>
 
     <script>
-        // Funktion zum Abspielen des Start-Sounds
-        function playStartSound() {
-            const sound = document.getElementById('start-sound');
-            sound.currentTime = 0;
-            sound.play().catch(function(error) {
-                console.log("Soundwiedergabe fehlgeschlagen:", error);
-            });
-        }
+        // Darkmode Toggle
+        const darkmodeButton = document.getElementById("darkmode-toggle");
+        const body = document.body;
 
-        // Funktion zum Abspielen des Click-Sounds
-        function playClickSound() {
-            const sound = document.getElementById('click-sound');
-            sound.currentTime = 0;
-            sound.play().catch(function(error) {
-                console.log("Soundwiedergabe fehlgeschlagen:", error);
-            });
-        }
-
-        // Darkmode umschalten
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            updateDarkmodeToggle();
-        }
-
-        // Darkmode Icon aktualisieren
-        function updateDarkmodeToggle() {
-            const darkmodeToggle = document.querySelector('.darkmode-toggle');
-            if (document.body.classList.contains('dark-mode')) {
-                darkmodeToggle.textContent = '🌞';
+        darkmodeButton.addEventListener("click", () => {
+            body.classList.toggle("darkmode");
+            if (body.classList.contains("darkmode")) {
+                darkmodeButton.innerText = "☀️ Lightmode";
             } else {
-                darkmodeToggle.textContent = '🌓';
+                darkmodeButton.innerText = "🌙 Darkmode";
             }
-        }
-
-        // Navigation zu den Seiten
-        function navigateToPage(page) {
-            playClickSound();
-            setTimeout(() => {
-                window.location.href = page;
-            }, 300); // Verzögerung, damit der Sound zuerst gespielt wird
-        }
-
-        // Start der App
-        function startApp() {
-            playStartSound();
-            document.getElementById('welcome-screen').style.display = 'none';
-            document.getElementById('loading-screen').style.display = 'flex';
-
-            // Ladezeit simulieren
-            setTimeout(function() {
-                document.getElementById('loading-screen').style.display = 'none';
-                document.getElementById('main-menu').style.display = 'block';
-            }, 2000);
-        }
-
-        // Hinzufügen von Klick-Events für die Navigationsbuttons
-        document.querySelectorAll('.nav-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const page = button.getAttribute('data-page');
-                navigateToPage(page);
-            });
         });
-
-        // Darkmode Icon initialisieren
-        updateDarkmodeToggle();
     </script>
 </body>
 </html>
