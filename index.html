@@ -70,7 +70,9 @@
     <button class="darkmode-button" id="darkmode-toggle">🌙 Darkmode</button>
 
     <h1>Willkommen beim Dish Dater!</h1>
-    <button onclick="location.href='mahlzeiten.html'">Starte</button>
+    <button onclick="startApp()">Starte</button>
+
+    <audio id="button-sound" src="https://github.com/RichtigerRaul/DISHDATER/blob/main/ddstart.mp3" preload="auto"></audio>
 
     <script>
         // Darkmode Toggle
@@ -85,6 +87,14 @@
                 darkmodeButton.innerText = "🌙 Darkmode";
             }
         });
+
+        function startApp() {
+            const sound = document.getElementById("button-sound");
+            sound.play(); // Sound abspielen
+            setTimeout(() => {
+                location.href = 'mahlzeiten.html'; // Weiterleitung zur Mahlzeiten-Auswahl
+            }, 1000); // Verzögerung für den Sound
+        }
     </script>
 </body>
 </html>
