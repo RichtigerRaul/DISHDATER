@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frühstück - Dish Dater</title>
+    <title>Zutaten Auswahl - Dish Dater</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -16,6 +16,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s;
         }
 
         h1 {
@@ -23,137 +24,116 @@
             margin: 20px 0;
         }
 
-        .ingredient-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 400px;
+        .ingredient {
+            text-align: center;
         }
 
-        .ingredient-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #ffffff;
+        .ingredient img {
+            width: 200px;
+            height: auto;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            margin: 10px 0;
-            width: 100%;
         }
 
-        .ingredient-card img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        button {
+        .like-button, .dislike-button {
             background-color: #6a11cb;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 10px;
+            border-radius: 50%;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            flex: 1;
-            margin: 0 5px;
+            font-size: 1.5rem;
+            margin: 10px;
         }
 
-        button:hover {
+        .like-button:hover, .dislike-button:hover {
             background-color: #5b0ecf;
         }
 
-        /* Zurück-Button */
-        .back-button {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+        /* Darkmode Styling */
+        .darkmode {
             background-color: #333;
             color: white;
+        }
+
+        /* Darkmode Button */
+        .darkmode-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #6a11cb;
+            color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px;
             border-radius: 25px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            z-index: 1000; /* Damit der Button immer oben bleibt */
         }
 
+        .darkmode-button:hover {
+            background-color: #5b0ecf;
+        }
+
+        .back-button {
+            background-color: #f44336;
+        }
+        
         .back-button:hover {
-            background-color: #444;
+            background-color: #e53935;
         }
     </style>
 </head>
 <body>
 
-    <h1>Wähle eine Zutat</h1>
-    <div class="ingredient-container" id="ingredient-container">
-        <!-- Hier wird die Zutat angezeigt -->
-        <div class="ingredient-card">
-            <img src="zutaten-bild.jpg" alt="Zutat">
-            <h2 id="ingredient-name">Zutat Name</h2>
-            <div class="button-container">
-                <button id="like-button">👍 Like</button>
-                <button id="dislike-button">👎 Dislike</button>
-            </div>
+    <button class="darkmode-button" id="darkmode-toggle">🌙 Darkmode</button>
+    
+    <h1>Zutaten Auswahl</h1>
+    <div class="ingredient">
+        <img src="zutatenbild.jpg" alt="Zutat">
+        <p>Name der Zutat</p>
+        <div>
+            <button class="like-button" onclick="likeIngredient()">👍</button>
+            <button class="dislike-button" onclick="dislikeIngredient()">👎</button>
         </div>
     </div>
 
-    <button class="back-button" onclick="goBack()">Zur Mahlzeiten Auswahl</button>
+    <button class="back-button" onclick="goBack()">Zurück</button>
+
+    <audio id="button-sound" src="https://github.com/RichtigerRaul/DISHDATER/blob/main/ddbutton.mp3" preload="auto"></audio>
 
     <script>
-        // Funktion zum Zurücknavigieren zur Mahlzeiten Auswahl
+        // Darkmode Toggle
+        const darkmodeButton = document.getElementById("darkmode-toggle");
+        const body = document.body;
+
+        darkmodeButton.addEventListener("click", () => {
+            body.classList.toggle("darkmode");
+            if (body.classList.contains("darkmode")) {
+                darkmodeButton.innerText = "☀️ Lightmode";
+            } else {
+                darkmodeButton.innerText = "🌙 Darkmode";
+            }
+        });
+
+        function likeIngredient() {
+            const sound = document.getElementById("button-sound");
+            sound.play(); // Sound abspielen
+            // Logik für das Auswählen einer Zutat
+        }
+
+        function dislikeIngredient() {
+            const sound = document.getElementById("button-sound");
+            sound.play(); // Sound abspielen
+            // Logik für das Ablehnen einer Zutat
+        }
+
         function goBack() {
-            window.location.href = 'mahlzeiten.html'; // Hier den richtigen Link zur Mahlzeiten Auswahl angeben
+            const sound = document.getElementById("button-sound");
+            sound.play(); // Sound abspielen
+            setTimeout(() => {
+                location.href = 'mahlzeiten.html'; // Zurück zur Mahlzeiten-Auswahl
+            }, 1000); // Verzögerung für den Sound
         }
-
-        // Weitere JavaScript-Logik für das Swipen oder Anzeigen von Zutaten wird hier eingefügt
-        // Hier ist ein Beispiel, um eine Zutat anzuzeigen
-        const ingredients = [
-            { name: "Eier", image: "https://example.com/eier.jpg" },
-            { name: "Brot", image: "https://example.com/brot.jpg" },
-            // Füge weitere Zutaten hinzu
-        ];
-
-        let currentIngredientIndex = 0;
-
-        function showIngredient(index) {
-            const ingredient = ingredients[index];
-            document.getElementById("ingredient-name").innerText = ingredient.name;
-            document.querySelector(".ingredient-card img").src = ingredient.image;
-        }
-
-        document.getElementById("like-button").addEventListener("click", () => {
-            // Logik für den "Like"-Button
-            currentIngredientIndex++;
-            if (currentIngredientIndex < ingredients.length) {
-                showIngredient(currentIngredientIndex);
-            } else {
-                alert("Du hast alle Zutaten durch.");
-            }
-        });
-
-        document.getElementById("dislike-button").addEventListener("click", () => {
-            // Logik für den "Dislike"-Button
-            currentIngredientIndex++;
-            if (currentIngredientIndex < ingredients.length) {
-                showIngredient(currentIngredientIndex);
-            } else {
-                alert("Du hast alle Zutaten durch.");
-            }
-        });
-
-        // Initiale Zutat anzeigen
-        showIngredient(currentIngredientIndex);
     </script>
 </body>
 </html>
