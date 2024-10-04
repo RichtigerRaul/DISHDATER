@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frühstück - Dish Dater</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            --text-color: #000000;
+            --container-bg: rgba(255, 255, 255, 0.9);
+            --button-gradient: linear-gradient(45deg, #6a11cb, #2575fc);
+            --button-hover-gradient: linear-gradient(45deg, #5b0ecf, #1f6fe8);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .ingredient {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .ingredient img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .ingredient-name {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+            margin-top: 20px;
+        }
+
+        .button {
+            background: var(--button-gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button:hover {
+            background: var(--button-hover-gradient);
+            transform: translateY(-3px);
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4b5c;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-button:hover {
+            background-color: #ff6b7c;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" id="swipe-container">
+        <div class="ingredient" id="ingredient">
+            <img id="ingredient-img" src="" alt="Zutat">
+            <div class="ingredient-name" id="ingredient-name">Zutat Name</div>
+        </div>
+        <div class="buttons">
+            <button class="button" id="dislike-btn">👎</button>
+            <button class="button" id="like-btn">👍</button>
+        </div>
+    </div>
+
+    <div class="results" id="recipe-results" style="display: none;">
+        <h2>Passendes Rezept</h2>
+        <p id="recipe-name"></p>
+        <p id="recipe-description"></p>
+        <button class="back-button" onclick="goBack()">Zurück zur Auswahl</button>
+    </div>
+
+    <script>
+        let ingredients = [
+            { name: "Ei", img: "link-zu-ei-bild" },
+            { name: "Milch", img: "link-zu-milch-bild" },
+            { name: "Banane", img: "link-zu-banane-bild" },
+            { name: "Brot", img: "link-zu-brot-bild" },
+            { name: "Speck", img: "link-zu-speck-bild" }
+        ];
+
+        let recipes = [
+            {
+                name: "Omelette",
+                description: "Ein köstliches Frühstücks-Omelette mit Ei und Milch.",
+                ingredients: ["Ei", "Milch"]
+            },
+            {
+                name: "Frühstücks-Sandwich",
+                description: "Ein leckeres Sandwich mit Brot und Speck.",
+                ingredients: ["Brot", "Speck"]
+            },
+            {
+                name: "Smoothie",
+                description: "Ein gesunder Smoothie mit Banane und Milch.",
+                ingredients: ["Banane", "Milch"]
+            }
+        ];
+
+        let likedIngredients = [];
+        let dislikedIngredients = [];
+        let currentIngredientIndex = 0;
+
+        const ingredientImg = document.getElementById("ingredient-img");
+        const ingredientName = document.getElementById("ingredient-name");
+
+        const showIngredient = () => {
+            const ingredient = ingredients[currentIngredientIndex];
+            ingredientImg.src = ingredient.img;
+            ingredientName.textContent = ingredient.name;
+        };
+
+        const showRecipeResults = () => {
+            const recipeContainer = document.getElementById("recipe-results");
+            const swipeContainer = document.getElementById("swipe-container");
+
+            let bestRecipe = null;
+            let bestScore = -1;
+
+            recipes.forEach(recipe => {
+                let likeScore = recipe.ingredients.filter(i => likedIngredients.includes(i)).length;
+                let dislikeScore = recipe.ingredients.filter(i => dislikedIngredients.includes(i)).length;
+                let score = likeScore - dislikeScore;
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestRecipe = recipe;
+                }
+            });
+
+            document.getElementById("recipe-name").textContent = bestRecipe.name;
+            document.getElementById("recipe-description").textContent = bestRecipe.description;
+
+            swipeContainer.style.display = "none";
+            recipeContainer.style.display = "block";
+        };
+
+        const handleSwipe = (liked) => {
+            const currentIngredient = ingredients[currentIngredientIndex];
+
+            if (liked) {
+                likedIngredients.push(currentIngredient.name);
+            } else {
+                dislikedIngredients.push(currentIngredient.name);
+            }
+
+            currentIngredientIndex++;
+
+            if (currentIngredientIndex < ingredients.length) {
+                showIngredient();
+            } else {
+                showRecipeResults();
+            }
+        };
+
+        document.getElementById("like-btn").addEventListener("click", () => handleSwipe(true));
+        document.getElementById("dislike-btn").addEventListener("click", () => handleSwipe(false));
+
+        const goBack = () => {
+            window.location.href = "index.html";
+        };
+
+        window.onload = () => {
+            showIngredient();
+        };
+    </script>
+</body>
+</html>
 
