@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frühstück - DishDater</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<div id="swipe-container">
+    <div id="emoji-overlay"></div> <!-- Overlay für das Emoji -->
+    <img id="ingredient-img" class="ingredient-image" src="" alt="Zutat">
+</div>
 
-    <!-- Hauptcontainer für das Zutaten-Swiping -->
-    <div id="swipe-container">
-        <img id="ingredient-img" src="" alt="Zutat" class="ingredient-image">
-        <div id="buttons">
-            <button id="dislike-btn">👎</button>
-            <button id="like-btn">❤️</button>
-        </div>
-    </div>
+<div class="controls">
+    <button id="like-btn" class="btn">👍</button>
+    <button id="dislike-btn" class="btn">👎</button>
+</div>
 
-    <!-- Back-Button zum Menü -->
-    <button id="back-btn">⬅️ Zurück zum Menü</button>
-
-    <script src="scripts.js"></script>
-</body>
-</html>
+<button id="back-btn" class="btn-back">Zurück zum Menü</button>
