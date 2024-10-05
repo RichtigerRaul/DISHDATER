@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dish Dater - Einstellungen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Einstellungen</h1>
 
+        <!-- Tierische Produkte Auswahl -->
+        <div>
+            <label>
+                <input type="checkbox" id="tierisch-checkbox"> Tierisch
+            </label>
+        </div>
+
+        <!-- Milchprodukte Auswahl -->
+        <div>
+            <label>
+                <input type="checkbox" id="milch-checkbox"> Milch
+            </label>
+        </div>
+
+        <!-- Back Button -->
+        <button id="back-button">Zurück zum Menü</button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Back-Button Logik
+            const backButton = document.getElementById('back-button');
+            
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    // Navigation zurück zum Menu
+                    window.location.href = 'menu.html';
+                });
+            }
+
+            // Beispiel für das Speichern der Einstellungen (kann erweitert werden)
+            const tierischCheckbox = document.getElementById('tierisch-checkbox');
+            const milchCheckbox = document.getElementById('milch-checkbox');
+
+            // Beim Verlassen der Seite oder Klick auf "Back", die Einstellungen speichern
+            function saveSettings() {
+                const settings = {
+                    tierisch: tierischCheckbox.checked,
+                    milch: milchCheckbox.checked
+                };
+                localStorage.setItem('userSettings', JSON.stringify(settings)); // Einstellungen in Local Storage speichern
+            }
+
+            // Einstellungen beim Klick auf den Back-Button speichern
+            backButton.addEventListener('click', saveSettings);
+
+            // Einstellungen beim Laden der Seite wiederherstellen
+            const savedSettings = localStorage.getItem('userSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                tierischCheckbox.checked = settings.tierisch;
+                milchCheckbox.checked = settings.milch;
+            }
+        });
+    </script>
+</body>
+</html>
