@@ -6,22 +6,14 @@ document.addEventListener("DOMContentLoaded", function() {
     
     if (startButton) {
         startButton.addEventListener('click', function() {
-            // Navigation zur Menüseite
-            navigateTo('menu.html'); // Hier wird auf menu.html weitergeleitet
+            navigateToMenu();
         });
     }
 
-    // Einstellungen laden, falls auf settings.html
-    if (document.getElementById('animal-checkbox') && document.getElementById('milk-checkbox')) {
-        loadSettings();
-    }
-
-    // Eventlistener für "Zurück" Button in den Einstellungen
-    const backButton = document.getElementById('back-button');
-    if (backButton) {
-        backButton.addEventListener('click', function() {
-            saveSettings(); // Einstellungen speichern
-            goBack(); // Zur vorherigen Seite zurückkehren
-        });
-    }
+    // Weitere Eventlistener können hier hinzugefügt werden, wenn benötigt
 });
+
+// Navigation zur Menü-Seite
+function navigateToMenu() {
+    window.location.href = 'menu.html'; // Leitet zur menu.html weiter
+}
