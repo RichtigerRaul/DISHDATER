@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dish Dater - Menü</title>
-    <link rel="stylesheet" href="style.css"> <!-- Verlinkung der CSS-Datei -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
@@ -21,9 +21,11 @@
     <script>
         function navigateTo(page) {
             const sound = document.getElementById('button-sound');
-            sound.currentTime = 0; // Sound von vorne abspielen
-            sound.play();
-            window.location.href = page; // Navigation zur gewählten Seite
+            sound.play().then(() => {
+                window.location.href = page; // Navigation zur gewählten Seite
+            }).catch((error) => {
+                console.error("Sound konnte nicht abgespielt werden:", error);
+            });
         }
     </script>
 </body>
