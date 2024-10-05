@@ -9,27 +9,30 @@
         body {
             font-family: 'Roboto', sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            color: var(--tg-theme-text-color, #000000);
         }
 
         .container, .tinder-container, .button-container, .settings-container {
-            background-color: white;
+            background-color: var(--tg-theme-secondary-bg-color, white);
             padding: 20px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             max-width: 300px;
             width: 100%;
             text-align: center;
+            opacity: 0; /* Start mit unsichtbar */
+            transition: opacity 1s ease; /* Smooth Übergang */
         }
 
-        .tinder-container {
-            display: none;
-            position: relative;
-            height: 500px;
+        .container h1, .tinder-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
 
         .button-container {
@@ -38,9 +41,19 @@
             gap: 10px;
         }
 
+        .tinder-container {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 500px;
+            position: relative;
+        }
+
         .tinder-card {
             width: 100%;
-            height: 100%;
+            max-width: 280px;
+            height: auto;
             position: absolute;
             top: 0;
             left: 0;
@@ -57,7 +70,6 @@
 
         .tinder-card img {
             width: 80%;
-            height: auto;
             border-radius: 10px;
         }
 
@@ -66,10 +78,11 @@
             margin: 10px 0;
         }
 
-        .buttons {
+        .tinder-buttons {
             display: flex;
             justify-content: space-around;
             width: 100%;
+            margin-bottom: 10px;
         }
 
         button {
@@ -99,18 +112,6 @@
             background-color: #ff4b5c;
         }
 
-        h1 {
-            font-size: 2rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
         .selected-mode {
             margin-bottom: 10px;
             font-size: 1.2rem;
@@ -134,22 +135,22 @@
 
     <div class="tinder-container" id="tinder-container">
         <div class="selected-mode" id="selected-mode"></div>
+        
         <div class="tinder-card" id="card-1">
             <img src="https://via.placeholder.com/200" alt="Beispielbild">
             <h2>Zutat 1</h2>
-            <div class="buttons">
-                <button onclick="swipeLeft()">Dislike</button>
-                <button onclick="swipeRight()">Like</button>
-            </div>
         </div>
+
         <div class="tinder-card" id="card-2" style="display:none;">
             <img src="https://via.placeholder.com/200" alt="Beispielbild">
             <h2>Zutat 2</h2>
-            <div class="buttons">
-                <button onclick="swipeLeft()">Dislike</button>
-                <button onclick="swipeRight()">Like</button>
-            </div>
         </div>
+
+        <div class="tinder-buttons">
+            <button onclick="swipeLeft()">Dislike</button>
+            <button onclick="swipeRight()">Like</button>
+        </div>
+
         <button class="back-button" onclick="goBack()">Zurück</button>
     </div>
 
@@ -166,7 +167,7 @@
             currentMealMode = meal;
             document.getElementById('selected-mode').textContent = "Modus: " + meal;
             document.getElementById('buttons-container').style.display = 'none';
-            document.getElementById('tinder-container').style.display = 'block';
+            document.getElementById('tinder-container').style.display = 'flex';
             currentCardIndex = 1;
             showCard(currentCardIndex);
         }
