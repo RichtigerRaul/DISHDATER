@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dish Dater - Willkommen</title>
-    <link rel="stylesheet" href="style.css"> <!-- Verlinkung der CSS-Datei -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
@@ -17,9 +17,11 @@
     <script>
         document.getElementById('start-button').addEventListener('click', function() {
             const startSound = document.getElementById('start-sound');
-            startSound.currentTime = 0; // Startsound von vorne abspielen
-            startSound.play();
-            window.location.href = 'menu.html'; // Weiterleitung zur Menüseite
+            startSound.play().then(() => {
+                window.location.href = 'menu.html'; // Weiterleitung zur Menüseite
+            }).catch((error) => {
+                console.error("Sound konnte nicht abgespielt werden:", error);
+            });
         });
     </script>
 </body>
