@@ -8,13 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container" id="welcome-container">
+    <!-- Willkommenscontainer -->
+    <div class="container" id="welcome-container" style="display: flex; opacity: 1;">
         <h1>Willkommen bei Dish Dater! 🍽️</h1>
         <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
         <button onclick="showNextScreen()">Start 🚀</button>
     </div>
 
-    <div class="button-container" id="buttons-container">
+    <!-- Button-Container für die Auswahl von Mahlzeiten -->
+    <div class="button-container" id="buttons-container" style="display: none; opacity: 0;">
         <button onclick="playSound();">🍳 Frühstück</button>
         <button onclick="playSound();">🥗 Mittagessen</button>
         <button onclick="playSound();">🍲 Abendessen</button>
@@ -22,7 +24,8 @@
         <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
     </div>
 
-    <div class="settings-container" id="settings-container">
+    <!-- Einstellungs-Container -->
+    <div class="settings-container" id="settings-container" style="display: none;">
         <h1>Einstellungen</h1>
         
         <div class="switch-wrapper">
@@ -46,20 +49,24 @@
         <button class="back-button" onclick="playSound(); goBack()">🔙 Zurück</button>
     </div>
 
+    <!-- Audio für den Klicksound -->
     <audio id="click-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
 
+    <!-- JavaScript für Interaktionen -->
     <script>
         let tg = window.Telegram.WebApp;
 
         tg.expand();
         tg.ready();
 
+        // Klick-Sound abspielen
         function playSound() {
             const sound = document.getElementById('click-sound');
             sound.currentTime = 0;
             sound.play().catch(e => console.log("Fehler beim Abspielen des Click-Sounds:", e));
         }
 
+        // Wechselt zur nächsten Szene (Button-Container)
         function showNextScreen() {
             playSound(); 
             const welcomeContainer = document.getElementById('welcome-container');
@@ -67,27 +74,31 @@
 
             setTimeout(() => {
                 welcomeContainer.style.display = 'none'; 
-                document.getElementById('buttons-container').style.display = 'flex'; 
-                document.getElementById('buttons-container').style.opacity = 1; 
-                document.getElementById('buttons-container').style.transition = 'opacity 1s ease'; 
+                const buttonsContainer = document.getElementById('buttons-container');
+                buttonsContainer.style.display = 'flex'; 
+                buttonsContainer.style.opacity = 1; 
             }, 1000); 
         }
 
+        // Initialisiert den Willkommenscontainer beim Laden der Seite
         window.onload = function() {
             const welcomeContainer = document.getElementById('welcome-container');
-            welcomeContainer.style.opacity = 1; 
+            welcomeContainer.style.opacity = 1;
         };
 
+        // Zeigt den Einstellungscontainer und versteckt den Button-Container
         function showSettings() {
             document.getElementById('buttons-container').style.display = 'none';
             document.getElementById('settings-container').style.display = 'flex';
         }
 
+        // Zurück vom Einstellungscontainer zum Button-Container
         function goBack() {
             document.getElementById('settings-container').style.display = 'none';
             document.getElementById('buttons-container').style.display = 'flex';
         }
 
+        // Schaltet den Schalter an/aus
         function toggleSwitch(id) {
             const switchButton = document.getElementById(id);
             switchButton.classList.toggle('active');
