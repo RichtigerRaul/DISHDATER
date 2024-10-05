@@ -18,10 +18,10 @@
 
     <!-- Button-Container für verschiedene Optionen -->
     <div class="button-container" id="buttons-container">
-        <button onclick="playSound();">🍳 Frühstück</button>
-        <button onclick="playSound();">🥗 Mittagessen</button>
-        <button onclick="playSound();">🍲 Abendessen</button>
-        <button onclick="playSound();">🍪 Snacks</button>
+        <button onclick="navigateToIngredients()">🍳 Frühstück</button>
+        <button onclick="navigateToIngredients()">🥗 Mittagessen</button>
+        <button onclick="navigateToIngredients()">🍲 Abendessen</button>
+        <button onclick="navigateToIngredients()">🍪 Snacks</button>
         <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
     </div>
 
@@ -44,7 +44,7 @@
         </div>
 
         <p class="description">
-            Dish Dater ist auf dem Weg, eine umfangreiche Plattform für Rezeptempfehlungen und Ernährungsanpassungen zu werden. Auch in der aktuellen Entwicklungsphase bieten wir dir bereits wertvolle Funktionen, die kontinuierlich erweitert werden. Bleib dabei und erlebe, wie eine innovative App entsteht, die auf deine individuellen Bedürfnisse zugeschnitten ist. Wir bedanken uns für deine Geduld und freuen uns, dich auf dieser Reise mitzunehmen!
+            Dish Dater ist auf dem Weg, eine umfangreiche Plattform für Rezeptempfehlungen und Ernährungsanpassungen zu werden. Auch in der aktuellen Entwicklungsphase bieten wir bereits wertvolle Funktionen, die kontinuierlich erweitert werden. Bleiben Sie dabei und erleben Sie, wie eine innovative App entsteht, die auf Ihre individuellen Bedürfnisse zugeschnitten ist. Wir bedanken uns für Ihre Geduld und freuen uns, Sie auf dieser Reise mitzunehmen!
         </p>
 
         <button class="back-button" onclick="playSound(); goBack()">🔙 Zurück</button>
@@ -83,6 +83,10 @@
             const welcomeContainer = document.getElementById('welcome-container');
             welcomeContainer.style.opacity = 1; 
         };
+
+        function navigateToIngredients() {
+            window.location.href = "zutaten.html"; // Navigiere zur Zutaten-Seite
+        }
 
         function showSettings() {
             document.getElementById('buttons-container').style.display = 'none';
