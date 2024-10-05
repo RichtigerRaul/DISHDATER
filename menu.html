@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahlzeiten Auswahl</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="button-container" id="buttons-container">
+        <button onclick="playSound(); goToDDSwipe('frühstück')">🍳 Frühstück</button>
+        <button onclick="playSound(); goToDDSwipe('mittag')">🥗 Mittagessen</button>
+        <button onclick="playSound(); goToDDSwipe('abendessen')">🍲 Abendessen</button>
+        <button onclick="playSound(); goToDDSwipe('snacks')">🍪 Snacks</button>
+        <button class="einstellungen-button" onclick="playSound(); goToSettings()">🔧 Einstellungen</button>
+    </div>
+
+    <audio id="click-sound" src="ddbutton.mp3" preload="auto"></audio>
+
+    <script>
+        function playSound() {
+            const sound = document.getElementById('click-sound');
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log("Fehler beim Abspielen des Click-Sounds:", e));
+        }
+
+        function goToSettings() {
+            window.location.href = "settings.html";
+        }
+
+        function goToDDSwipe(mealType) {
+            window.location.href = "ddswipe.html?meal=" + mealType;
+        }
+    </script>
+</body>
+</html>
 
