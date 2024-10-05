@@ -4,38 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dish Dater</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Verlinkung der style.css -->
 </head>
 <body>
     <div class="container" id="welcome-container">
         <h1>Willkommen bei Dish Dater! 🍽️</h1>
         <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
-        <button onclick="startApp()">Start 🚀</button>
+        <button id="start-button">Start 🚀</button>
     </div>
 
-    <audio id="click-sound" src="ddbutton.mp3" preload="auto"></audio>
+    <div class="button-container" id="buttons-container">
+        <button onclick="playSound()">🍳 Frühstück</button>
+        <button onclick="playSound()">🥗 Mittagessen</button>
+        <button onclick="playSound()">🍲 Abendessen</button>
+        <button onclick="playSound()">🍪 Snacks</button>
+        <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
+    </div>
+
+    <div class="settings-container" id="settings-container">
+        <h1>Einstellungen</h1>
+
+        <div class="switch-wrapper">
+            <span class="switch-label">Tierisch</span>
+            <div class="switch-button active" id="switch-animal" onclick="toggleSwitch('switch-animal'); playSound()">
+                <div class="switch-circle"></div>
+            </div>
+        </div>
+
+        <div class="switch-wrapper">
+            <span class="switch-label">Milch</span>
+            <div class="switch-button active" id="switch-milk" onclick="toggleSwitch('switch-milk'); playSound()">
+                <div class="switch-circle"></div>
+            </div>
+        </div>
+
+        <p class="description">
+            Dish Dater ist auf dem Weg, eine umfangreiche Plattform für Rezeptempfehlungen und Ernährungsanpassungen zu werden. Auch in der aktuellen Entwicklungsphase bieten wir bereits wertvolle Funktionen, die kontinuierlich erweitert werden. Bleiben Sie dabei und erleben Sie, wie eine innovative App entsteht, die auf Ihre individuellen Bedürfnisse zugeschnitten ist. Wir bedanken uns für Ihre Geduld und freuen uns, Sie auf dieser Reise mitzunehmen!
+        </p>
+
+        <button class="back-button" onclick="playSound(); goBack()">🔙 Zurück</button>
+    </div>
+
+    <audio id="click-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
 
     <script>
         let tg = window.Telegram.WebApp;
+
         tg.expand();
         tg.ready();
 
+        // Sicherstellen, dass der Sound beim Klicken abgespielt wird
         function playSound() {
             const sound = document.getElementById('click-sound');
             sound.currentTime = 0;
             sound.play().catch(e => console.log("Fehler beim Abspielen des Click-Sounds:", e));
         }
 
-        function startApp() {
-            playSound();
-            window.location.href = "menu.html"; // Weiterleitung zu menu.html
+        // Starten der App
+        document.getElementById('start-button').addEventListener('click', function() {
+            playSound(); // Sound abspielen
+            showNextScreen(); // Willkommensnachricht ausblenden
+        });
+
+        // Funktion zum Wechseln zum Menü
+        function showNextScreen() {
+            const welcomeContainer = document.getElementById('welcome-container');
+            welcomeContainer.style.opacity = 0;
+
+            setTimeout(() => {
+                welcomeContainer.style.display = 'none';
+                document.getElementById('buttons-container').style.display = 'flex';
+                document.getElementById('buttons-container').style.opacity = 1;
+                document.getElementById('buttons-container').style.transition = 'opacity 1s ease';
+            }, 1000);
         }
 
+        // Initialisieren des Willkommenscontainers
         window.onload = function() {
             const welcomeContainer = document.getElementById('welcome-container');
             welcomeContainer.style.opacity = 1;
         };
+
+        // Einstellungsfenster anzeigen
+        function showSettings() {
+            document.getElementById('buttons-container').style.display = 'none';
+            document.getElementById('settings-container').style.display = 'flex';
+        }
+
+        // Zurück zur Menüseite
+        function goBack() {
+            document.getElementById('settings-container').style.display = 'none';
+            document.getElementById('buttons-container').style.display = 'flex';
+        }
+
+        // Schalter für die Einstellungen
+        function toggleSwitch(id) {
+            const switchButton = document.getElementById(id);
+            switchButton.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
