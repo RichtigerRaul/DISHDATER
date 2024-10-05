@@ -12,17 +12,11 @@
         <button id="start-button">Start 🚀</button>
     </div>
 
-    <audio id="start-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddstart.mp3" preload="auto"></audio>
-
     <script>
         document.getElementById('start-button').addEventListener('click', function() {
-            const startSound = document.getElementById('start-sound');
-            startSound.play().then(() => {
-                window.location.href = 'menu.html'; // Weiterleitung zur Menüseite
-            }).catch((error) => {
-                console.error("Sound konnte nicht abgespielt werden:", error);
-            });
+            window.location.href = 'menu.html'; // Weiterleitung zur Menüseite
         });
     </script>
 </body>
 </html>
+
