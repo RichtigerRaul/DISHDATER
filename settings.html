@@ -4,55 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dish Dater - Einstellungen</title>
-    <link rel="stylesheet" href="style.css"> <!-- Verlinkung der CSS-Datei -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Einstellungen</h1>
-        <div class="switch-wrapper">
-            <span class="switch-label">Tierisch</span>
-            <input type="checkbox" id="switch-animal" onclick="toggleSwitch('switch-animal')">
+        
+        <div>
+            <label>
+                <input type="checkbox" id="animal-checkbox"> Tierisch
+            </label>
         </div>
-        <div class="switch-wrapper">
-            <span class="switch-label">Milch</span>
-            <input type="checkbox" id="switch-milk" onclick="toggleSwitch('switch-milk')">
+        <div>
+            <label>
+                <input type="checkbox" id="milk-checkbox"> Milch
+            </label>
         </div>
+
+        <button id="save-button">Speichern</button>
         <button onclick="goBack()">🔙 Zurück</button>
     </div>
 
     <script>
-        function toggleSwitch(id) {
-            const switchCheckbox = document.getElementById(id);
-            saveSettings();
-        }
+        // Lade die gespeicherten Einstellungen
+        document.addEventListener("DOMContentLoaded", function() {
+            const animalPref = localStorage.getItem('animal') === 'true';
+            const milkPref = localStorage.getItem('milk') === 'true';
 
-        function saveSettings() {
-            const animalSetting = document.getElementById('switch-animal').checked;
-            const milkSetting = document.getElementById('switch-milk').checked;
+            document.getElementById('animal-checkbox').checked = animalPref;
+            document.getElementById('milk-checkbox').checked = milkPref;
+        });
 
-            const settings = {
-                animal: animalSetting,
-                milk: milkSetting
-            };
-
-            localStorage.setItem('dishDaterSettings', JSON.stringify(settings)); // Einstellungen speichern
-        }
-
-        function loadSettings() {
-            const savedSettings = localStorage.getItem('dishDaterSettings');
-
-            if (savedSettings) {
-                const settings = JSON.parse(savedSettings);
-                document.getElementById('switch-animal').checked = settings.animal;
-                document.getElementById('switch-milk').checked = settings.milk;
-            }
-        }
+        document.getElementById('save-button').addEventListener('click', function() {
+            localStorage.setItem('animal', document.getElementById('animal-checkbox').checked);
+            localStorage.setItem('milk', document.getElementById('milk-checkbox').checked);
+            alert('Einstellungen gespeichert!');
+        });
 
         function goBack() {
-            window.history.back(); // Zurück zur vorherigen Seite
+            window.history.back(); // Gehe zur vorherigen Seite zurück
         }
-
-        window.onload = loadSettings; // Einstellungen beim Laden der Seite laden
     </script>
 </body>
 </html>
+
