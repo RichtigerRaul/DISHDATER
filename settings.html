@@ -3,49 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Einstellungen</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dish Dater - Einstellungen</title>
+    <link rel="stylesheet" href="style.css"> <!-- Verlinkung der CSS-Datei -->
 </head>
 <body>
-    <div class="settings-container" id="settings-container">
+    <div class="container">
         <h1>Einstellungen</h1>
-        
         <div class="switch-wrapper">
             <span class="switch-label">Tierisch</span>
-            <div class="switch-button active" id="switch-animal" onclick="toggleSwitch('switch-animal'); playSound()">
-                <div class="switch-circle"></div>
-            </div>
+            <input type="checkbox" id="switch-animal" onclick="toggleSwitch('switch-animal')">
         </div>
-
         <div class="switch-wrapper">
             <span class="switch-label">Milch</span>
-            <div class="switch-button active" id="switch-milk" onclick="toggleSwitch('switch-milk'); playSound()">
-                <div class="switch-circle"></div>
-            </div>
+            <input type="checkbox" id="switch-milk" onclick="toggleSwitch('switch-milk')">
         </div>
-
-        <p class="description">Personalisierte Einstellungen für dein Menü</p>
-        <button class="back-button" onclick="playSound(); goBack()">🔙 Zurück</button>
+        <button onclick="goBack()">🔙 Zurück</button>
     </div>
 
-    <audio id="click-sound" src="ddbutton.mp3" preload="auto"></audio>
-
     <script>
-        function playSound() {
-            const sound = document.getElementById('click-sound');
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log("Fehler beim Abspielen des Click-Sounds:", e));
+        function toggleSwitch(id) {
+            const switchCheckbox = document.getElementById(id);
+            saveSettings();
+        }
+
+        function saveSettings() {
+            const animalSetting = document.getElementById('switch-animal').checked;
+            const milkSetting = document.getElementById('switch-milk').checked;
+
+            const settings = {
+                animal: animalSetting,
+                milk: milkSetting
+            };
+
+            localStorage.setItem('dishDaterSettings', JSON.stringify(settings)); // Einstellungen speichern
+        }
+
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('dishDaterSettings');
+
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                document.getElementById('switch-animal').checked = settings.animal;
+                document.getElementById('switch-milk').checked = settings.milk;
+            }
         }
 
         function goBack() {
-            window.location.href = "menu.html";
+            window.history.back(); // Zurück zur vorherigen Seite
         }
 
-        function toggleSwitch(id) {
-            const switchButton = document.getElementById(id);
-            switchButton.classList.toggle('active');
-        }
+        window.onload = loadSettings; // Einstellungen beim Laden der Seite laden
     </script>
 </body>
 </html>
-
