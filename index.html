@@ -3,139 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dish Dater</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <!-- Verlinkung der style.css -->
+    <title>Dish Dater - Willkommen</title>
+    <link rel="stylesheet" href="style.css"> <!-- Verlinkung der CSS-Datei -->
 </head>
 <body>
-    <div class="container" id="welcome-container">
+    <div class="container">
         <h1>Willkommen bei Dish Dater! 🍽️</h1>
-        <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
         <button id="start-button">Start 🚀</button>
     </div>
 
-    <div class="button-container" id="buttons-container" style="display:none;">
-        <button onclick="playSound(); navigateTo('breakfast.html')">🍳 Frühstück</button>
-        <button onclick="playSound(); navigateTo('lunch.html')">🥗 Mittagessen</button>
-        <button onclick="playSound(); navigateTo('dinner.html')">🍲 Abendessen</button>
-        <button onclick="playSound(); navigateTo('snacks.html')">🍪 Snacks</button>
-        <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
-    </div>
-
-    <div class="settings-container" id="settings-container" style="display:none;">
-        <h1>Einstellungen</h1>
-
-        <div class="switch-wrapper">
-            <span class="switch-label">Tierisch</span>
-            <div class="switch-button" id="switch-animal" onclick="toggleSwitch('switch-animal')">
-                <div class="switch-circle"></div>
-            </div>
-        </div>
-
-        <div class="switch-wrapper">
-            <span class="switch-label">Milch</span>
-            <div class="switch-button" id="switch-milk" onclick="toggleSwitch('switch-milk')">
-                <div class="switch-circle"></div>
-            </div>
-        </div>
-
-        <p class="description">
-            Dish Dater ist auf dem Weg, eine umfangreiche Plattform für Rezeptempfehlungen und Ernährungsanpassungen zu werden.
-        </p>
-
-        <button class="back-button" onclick="playSound(); goBack()">🔙 Zurück</button>
-    </div>
-
-    <audio id="click-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
-    <audio id="start-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddstart.mp3" preload="auto"></audio> <!-- Start-Sound hinzugefügt -->
+    <audio id="start-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddstart.mp3" preload="auto"></audio>
 
     <script>
-        let tg = window.Telegram.WebApp;
-
-        tg.expand();
-        tg.ready();
-
-        function playSound() {
-            const sound = document.getElementById('click-sound');
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log("Fehler beim Abspielen des Sounds:", e));
-        }
-
         document.getElementById('start-button').addEventListener('click', function() {
-            playStartSound(); // Start-Sound abspielen
-            showNextScreen(); // Willkommensnachricht ausblenden
-        });
-
-        function playStartSound() {
             const startSound = document.getElementById('start-sound');
-            startSound.currentTime = 0;
-            startSound.play().catch(e => console.log("Fehler beim Abspielen des Start-Sounds:", e));
-        }
-
-        function showNextScreen() {
-            const welcomeContainer = document.getElementById('welcome-container');
-            welcomeContainer.style.opacity = 0;
-
-            setTimeout(() => {
-                welcomeContainer.style.display = 'none';
-                const buttonsContainer = document.getElementById('buttons-container');
-                buttonsContainer.style.display = 'flex';
-                buttonsContainer.style.opacity = 1;
-            }, 1000);
-        }
-
-        window.onload = function() {
-            const welcomeContainer = document.getElementById('welcome-container');
-            welcomeContainer.style.opacity = 1;
-            loadSettings();
-        };
-
-        function showSettings() {
-            document.getElementById('buttons-container').style.display = 'none';
-            document.getElementById('settings-container').style.display = 'flex';
-        }
-
-        function goBack() {
-            document.getElementById('settings-container').style.display = 'none';
-            document.getElementById('buttons-container').style.display = 'flex';
-        }
-
-        function toggleSwitch(id) {
-            const switchButton = document.getElementById(id);
-            switchButton.classList.toggle('active');
-            saveSettings();
-        }
-
-        function saveSettings() {
-            const animalSwitch = document.getElementById('switch-animal').classList.contains('active');
-            const milkSwitch = document.getElementById('switch-milk').classList.contains('active');
-
-            const settings = {
-                animal: animalSwitch,
-                milk: milkSwitch
-            };
-
-            localStorage.setItem('dishDaterSettings', JSON.stringify(settings));
-        }
-
-        function loadSettings() {
-            const savedSettings = localStorage.getItem('dishDaterSettings');
-
-            if (savedSettings) {
-                const settings = JSON.parse(savedSettings);
-                if (settings.animal) {
-                    document.getElementById('switch-animal').classList.add('active');
-                }
-                if (settings.milk) {
-                    document.getElementById('switch-milk').classList.add('active');
-                }
-            }
-        }
-
-        function navigateTo(mealPage) {
-            window.location.href = mealPage; // Zu der angegebenen Seite navigieren
-        }
+            startSound.currentTime = 0; // Startsound von vorne abspielen
+            startSound.play();
+            window.location.href = 'menu.html'; // Weiterleitung zur Menüseite
+        });
     </script>
 </body>
 </html>
