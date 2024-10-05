@@ -73,11 +73,24 @@ button:active {
     background-color: #0056b3;
 }
 
-/* Swipe-Effekt für das Bild */
-#swipe-container img.swipe-left {
-    transform: translateX(-100%);
+#swipe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100vw; /* Macht den Container so breit wie das Fenster */
+    height: 80vh; /* Nutzt 80% der Höhe des Bildschirms */
+    touch-action: pan-y; /* Verhindert, dass der Browser das Scrollen des Bildschirms blockiert */
 }
 
-#swipe-container img.swipe-right {
-    transform: translateX(100%);
+.ingredient-image {
+    max-width: 350px;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
 }
+
