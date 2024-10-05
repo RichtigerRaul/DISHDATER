@@ -45,26 +45,18 @@ document.getElementById('back-btn').addEventListener('click', () => {
     window.location.href = 'menu.html'; // Link zur Menüseite anpassen
 });
 
-// Swipe-Handling (neu angepasst)
+// Variablen für Swipe-Handling
 let touchstartX = 0;
 let touchendX = 0;
 
 const swipeZone = document.getElementById('swipe-container');
 
-swipeZone.addEventListener('touchstart', (event) => {
-    touchstartX = event.changedTouches[0].screenX;
-}, false);
-
-swipeZone.addEventListener('touchend', (event) => {
-    touchendX = event.changedTouches[0].screenX;
-    handleGesture();
-}, false);
-
+// Funktion zur Behandlung von Gesten
 function handleGesture() {
     const ingredientImg = document.getElementById('ingredient-img');
     
     if (touchendX < touchstartX - 50) {
-        // User swiped left (like)
+        // Swipe nach links (like)
         console.log('Swipe left - Like:', ingredients[currentIndex].name);
         ingredientImg.classList.add('swipe-left');
         setTimeout(() => {
@@ -73,7 +65,7 @@ function handleGesture() {
         }, 300); // Warte 300ms für die Animation
     }
     if (touchendX > touchstartX + 50) {
-        // User swiped right (dislike)
+        // Swipe nach rechts (dislike)
         console.log('Swipe right - Dislike:', ingredients[currentIndex].name);
         ingredientImg.classList.add('swipe-right');
         setTimeout(() => {
@@ -81,6 +73,31 @@ function handleGesture() {
             previousIngredient();
         }, 300); // Warte 300ms für die Animation
     }
+}
+
+// Funktion zum Starten des Swipes
+function startSwipe(x) {
+    touchstartX = x;
+}
+
+// Funktion zum Beenden des Swipes
+function endSwipe(x) {
+    touchendX = x;
+    handleGesture();
+}
+
+// Prüfe, ob Pointer-Events unterstützt werden
+if (window.PointerEvent) {
+    swipeZone.addEventListener('pointerdown', (event) => startSwipe(event.clientX), false);
+    swipeZone.addEventListener('pointerup', (event) => endSwipe(event.clientX), false);
+} else {
+    // Fallback für Touch-Events
+    swipeZone.addEventListener('touchstart', (event) => {
+        startSwipe(event.changedTouches[0].screenX);
+    }, false);
+    swipeZone.addEventListener('touchend', (event) => {
+        endSwipe(event.changedTouches[0].screenX);
+    }, false);
 }
 
 // Initiales Laden des ersten Bildes
