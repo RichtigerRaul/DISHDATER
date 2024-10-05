@@ -17,6 +17,19 @@ function loadIngredient() {
     ingredientImg.alt = ingredients[currentIndex].name;
 }
 
+// Funktion zum Anzeigen des Emojis (Like oder Dislike)
+function showEmoji(emoji) {
+    const emojiOverlay = document.getElementById('emoji-overlay');
+    emojiOverlay.textContent = emoji;
+    emojiOverlay.classList.add('show');
+    
+    // Emoji nach 500ms ausblenden und das nächste Bild anzeigen
+    setTimeout(() => {
+        emojiOverlay.classList.remove('show');
+        nextIngredient();
+    }, 500); // Warte 500ms
+}
+
 // Funktion, um zum nächsten Bild zu wechseln
 function nextIngredient() {
     currentIndex = (currentIndex + 1) % ingredients.length;
@@ -32,12 +45,12 @@ function previousIngredient() {
 // Eventlistener für die Buttons
 document.getElementById('like-btn').addEventListener('click', () => {
     console.log('Like:', ingredients[currentIndex].name);
-    nextIngredient();
+    showEmoji('👍'); // Like-Emoji anzeigen
 });
 
 document.getElementById('dislike-btn').addEventListener('click', () => {
     console.log('Dislike:', ingredients[currentIndex].name);
-    nextIngredient();
+    showEmoji('👎'); // Dislike-Emoji anzeigen
 });
 
 // Eventlistener für den Back-Button (Zurück zum Menü)
@@ -45,7 +58,7 @@ document.getElementById('back-btn').addEventListener('click', () => {
     window.location.href = 'menu.html'; // Link zur Menüseite anpassen
 });
 
-// Variablen für Swipe-Handling
+// Swipe-Handling (wie zuvor)
 let touchstartX = 0;
 let touchendX = 0;
 
@@ -53,25 +66,15 @@ const swipeZone = document.getElementById('swipe-container');
 
 // Funktion zur Behandlung von Gesten
 function handleGesture() {
-    const ingredientImg = document.getElementById('ingredient-img');
-    
     if (touchendX < touchstartX - 50) {
         // Swipe nach links (like)
         console.log('Swipe left - Like:', ingredients[currentIndex].name);
-        ingredientImg.classList.add('swipe-left');
-        setTimeout(() => {
-            ingredientImg.classList.remove('swipe-left');
-            nextIngredient();
-        }, 300); // Warte 300ms für die Animation
+        showEmoji('👍');
     }
     if (touchendX > touchstartX + 50) {
         // Swipe nach rechts (dislike)
         console.log('Swipe right - Dislike:', ingredients[currentIndex].name);
-        ingredientImg.classList.add('swipe-right');
-        setTimeout(() => {
-            ingredientImg.classList.remove('swipe-right');
-            previousIngredient();
-        }, 300); // Warte 300ms für die Animation
+        showEmoji('👎');
     }
 }
 
