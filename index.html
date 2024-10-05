@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="style.css"> <!-- Verlinkung der style.css -->
 </head>
 <body>
+    <!-- Willkommenscontainer -->
     <div class="container" id="welcome-container">
         <h1>Willkommen bei Dish Dater! 🍽️</h1>
         <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
         <button id="start-button">Start 🚀</button>
     </div>
 
+    <!-- Button-Container für Mahlzeitenauswahl -->
     <div class="button-container" id="buttons-container">
         <button onclick="playSound()">🍳 Frühstück</button>
         <button onclick="playSound()">🥗 Mittagessen</button>
@@ -23,25 +25,26 @@
         <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
     </div>
 
+    <!-- Einstellungscontainer -->
     <div class="settings-container" id="settings-container">
         <h1>Einstellungen</h1>
 
         <div class="switch-wrapper">
             <span class="switch-label">Tierisch</span>
-            <div class="switch-button active" id="switch-animal" onclick="toggleSwitch('switch-animal'); playSound()">
+            <div class="switch-button" id="switch-animal" onclick="toggleSwitch('switch-animal')">
                 <div class="switch-circle"></div>
             </div>
         </div>
 
         <div class="switch-wrapper">
             <span class="switch-label">Milch</span>
-            <div class="switch-button active" id="switch-milk" onclick="toggleSwitch('switch-milk'); playSound()">
+            <div class="switch-button" id="switch-milk" onclick="toggleSwitch('switch-milk')">
                 <div class="switch-circle"></div>
             </div>
         </div>
 
         <p class="description">
-            Dish Dater ist auf dem Weg, eine umfangreiche Plattform für Rezeptempfehlungen und Ernährungsanpassungen zu werden. Auch in der aktuellen Entwicklungsphase bieten wir bereits wertvolle Funktionen, die kontinuierlich erweitert werden. Bleiben Sie dabei und erleben Sie, wie eine innovative App entsteht, die auf Ihre individuellen Bedürfnisse zugeschnitten ist. Wir bedanken uns für Ihre Geduld und freuen uns, Sie auf dieser Reise mitzunehmen!
+            Dish Dater ist auf dem Weg, eine umfangreiche Plattform für Rezeptempfehlungen und Ernährungsanpassungen zu werden.
         </p>
 
         <button class="back-button" onclick="playSound(); goBack()">🔙 Zurück</button>
@@ -59,7 +62,7 @@
         function playSound() {
             const sound = document.getElementById('click-sound');
             sound.currentTime = 0;
-            sound.play().catch(e => console.log("Fehler beim Abspielen des Click-Sounds:", e));
+            sound.play().catch(e => console.log("Fehler beim Abspielen des Sounds:", e));
         }
 
         // Starten der App
@@ -85,6 +88,9 @@
         window.onload = function() {
             const welcomeContainer = document.getElementById('welcome-container');
             welcomeContainer.style.opacity = 1;
+
+            // Überprüfen, ob gespeicherte Einstellungen vorhanden sind
+            loadSettings();
         };
 
         // Einstellungsfenster anzeigen
@@ -103,6 +109,35 @@
         function toggleSwitch(id) {
             const switchButton = document.getElementById(id);
             switchButton.classList.toggle('active');
+            saveSettings();
+        }
+
+        // Einstellungen in Local Storage speichern
+        function saveSettings() {
+            const animalSwitch = document.getElementById('switch-animal').classList.contains('active');
+            const milkSwitch = document.getElementById('switch-milk').classList.contains('active');
+
+            const settings = {
+                animal: animalSwitch,
+                milk: milkSwitch
+            };
+
+            localStorage.setItem('dishDaterSettings', JSON.stringify(settings));
+        }
+
+        // Einstellungen aus Local Storage laden
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('dishDaterSettings');
+
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                if (settings.animal) {
+                    document.getElementById('switch-animal').classList.add('active');
+                }
+                if (settings.milk) {
+                    document.getElementById('switch-milk').classList.add('active');
+                }
+            }
         }
     </script>
 </body>
