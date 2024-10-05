@@ -23,6 +23,12 @@ function nextIngredient() {
     loadIngredient();
 }
 
+// Funktion, um zum vorherigen Bild zu wechseln
+function previousIngredient() {
+    currentIndex = (currentIndex - 1 + ingredients.length) % ingredients.length;
+    loadIngredient();
+}
+
 // Eventlistener für die Buttons
 document.getElementById('like-btn').addEventListener('click', () => {
     console.log('Like:', ingredients[currentIndex].name);
@@ -38,6 +44,44 @@ document.getElementById('dislike-btn').addEventListener('click', () => {
 document.getElementById('back-btn').addEventListener('click', () => {
     window.location.href = 'menu.html'; // Link zur Menüseite anpassen
 });
+
+// Swipe-Handling
+let touchstartX = 0;
+let touchendX = 0;
+
+const swipeZone = document.getElementById('swipe-container');
+
+swipeZone.addEventListener('touchstart', (event) => {
+    touchstartX = event.changedTouches[0].screenX;
+});
+
+swipeZone.addEventListener('touchend', (event) => {
+    touchendX = event.changedTouches[0].screenX;
+    handleGesture();
+});
+
+function handleGesture() {
+    const ingredientImg = document.getElementById('ingredient-img');
+    
+    if (touchendX < touchstartX - 50) {
+        // User swiped left (like)
+        console.log('Swipe left - Like:', ingredients[currentIndex].name);
+        ingredientImg.classList.add('swipe-left');
+        setTimeout(() => {
+            ingredientImg.classList.remove('swipe-left');
+            nextIngredient();
+        }, 300); // Warte 300ms für die Animation
+    }
+    if (touchendX > touchstartX + 50) {
+        // User swiped right (dislike)
+        console.log('Swipe right - Dislike:', ingredients[currentIndex].name);
+        ingredientImg.classList.add('swipe-right');
+        setTimeout(() => {
+            ingredientImg.classList.remove('swipe-right');
+            previousIngredient();
+        }, 300); // Warte 300ms für die Animation
+    }
+}
 
 // Initiales Laden des ersten Bildes
 loadIngredient();
