@@ -1,10 +1,10 @@
 // Beispielbilder von Zutaten
 const ingredients = [
-    {name: 'Eier', img: 'https://example.com/eier.jpg'},
-    {name: 'Speck', img: 'https://example.com/speck.jpg'},
-    {name: 'Toast', img: 'https://example.com/toast.jpg'},
-    {name: 'Avocado', img: 'https://example.com/avocado.jpg'},
-    {name: 'Pfannkuchen', img: 'https://example.com/pfannkuchen.jpg'}
+    {name: 'Eier', img: 'https://example.com/eier.jpg'}, // Ersetze mit echten Bild-URLs
+    {name: 'Speck', img: 'https://example.com/speck.jpg'}, // Ersetze mit echten Bild-URLs
+    {name: 'Toast', img: 'https://example.com/toast.jpg'}, // Ersetze mit echten Bild-URLs
+    {name: 'Avocado', img: 'https://example.com/avocado.jpg'}, // Ersetze mit echten Bild-URLs
+    {name: 'Pfannkuchen', img: 'https://example.com/pfannkuchen.jpg'} // Ersetze mit echten Bild-URLs
 ];
 
 // Index des aktuellen Bildes
@@ -36,7 +36,7 @@ document.getElementById('dislike-btn').addEventListener('click', () => {
 
 // Eventlistener für den Back-Button (Zurück zum Menü)
 document.getElementById('back-btn').addEventListener('click', () => {
-    window.location.href = 'menu.html'; // Link zur Menüseite
+    window.location.href = 'menu.html'; // Link zur Menüseite anpassen
 });
 
 // Initiales Laden des ersten Bildes
