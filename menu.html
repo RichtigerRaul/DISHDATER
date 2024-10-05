@@ -3,35 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahlzeiten Auswahl</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dish Dater - Menü</title>
+    <link rel="stylesheet" href="style.css"> <!-- Verlinkung der CSS-Datei -->
 </head>
 <body>
-    <div class="button-container" id="buttons-container">
-        <button onclick="playSound(); goToDDSwipe('frühstück')">🍳 Frühstück</button>
-        <button onclick="playSound(); goToDDSwipe('mittag')">🥗 Mittagessen</button>
-        <button onclick="playSound(); goToDDSwipe('abendessen')">🍲 Abendessen</button>
-        <button onclick="playSound(); goToDDSwipe('snacks')">🍪 Snacks</button>
-        <button class="einstellungen-button" onclick="playSound(); goToSettings()">🔧 Einstellungen</button>
+    <div class="container">
+        <h1>Wähle eine Option:</h1>
+        <button onclick="navigateTo('breakfast.html')">🍳 Frühstück</button>
+        <button onclick="navigateTo('lunch.html')">🥗 Mittagessen</button>
+        <button onclick="navigateTo('dinner.html')">🍲 Abendessen</button>
+        <button onclick="navigateTo('snacks.html')">🍪 Snacks</button>
+        <button onclick="navigateTo('settings.html')">🔧 Einstellungen</button>
     </div>
 
-    <audio id="click-sound" src="ddbutton.mp3" preload="auto"></audio>
+    <audio id="button-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
 
     <script>
-        function playSound() {
-            const sound = document.getElementById('click-sound');
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log("Fehler beim Abspielen des Click-Sounds:", e));
-        }
-
-        function goToSettings() {
-            window.location.href = "settings.html";
-        }
-
-        function goToDDSwipe(mealType) {
-            window.location.href = "ddswipe.html?meal=" + mealType;
+        function navigateTo(page) {
+            const sound = document.getElementById('button-sound');
+            sound.currentTime = 0; // Sound von vorne abspielen
+            sound.play();
+            window.location.href = page; // Navigation zur gewählten Seite
         }
     </script>
 </body>
 </html>
-
