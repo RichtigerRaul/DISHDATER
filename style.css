@@ -1,171 +1,74 @@
-/* Allgemeine Stile für alle Seiten */
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    min-height: 100vh;
     margin: 0;
-    background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-    color: var(--tg-theme-text-color, #000000);
 }
 
 .container, .button-container, .settings-container {
-    background-color: var(--tg-theme-secondary-bg-color, white);
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    max-width: 340px;
-    width: 100%;
     text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-    line-height: 1.3;
-}
-
-p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
+    font-size: 24px;
 }
 
 button {
-    background: linear-gradient(45deg, #6a11cb, #2575fc);
-    color: white;
+    padding: 10px 20px;
+    margin: 10px;
     border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
+    border-radius: 5px;
     cursor: pointer;
+    background-color: #007bff;
+    color: white;
     font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin: 10px 0;
-    width: 100%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-    background: linear-gradient(45deg, #5b0ecf, #1f6fe8);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    background-color: #0056b3;
 }
 
-button:active {
-    transform: translateY(2px);
-}
-
-.button-container {
-    display: none;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.settings-container {
-    display: none;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-}
-
-.back-button {
-    margin-top: 20px;
-    background-color: #ff4b5c;
-}
-
-/* Schalter-Stile (Switches) für die Einstellungen */
 .switch-wrapper {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
     align-items: center;
-    padding: 10px;
-    background-color: var(--tg-theme-bg-color, #f0f2f5);
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
 }
 
 .switch-label {
-    font-size: 1rem;
-    font-weight: 600;
     margin-right: 10px;
 }
 
 .switch-button {
     width: 50px;
     height: 25px;
-    position: relative;
-    background-color: red;
+    background-color: #ccc;
     border-radius: 25px;
+    position: relative;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+}
+
+.switch-button .switch-circle {
+    width: 22px;
+    height: 22px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.2s;
 }
 
 .switch-button.active {
-    background-color: green;
-}
-
-.switch-circle {
-    position: absolute;
-    width: 23px;
-    height: 23px;
-    top: 1px;
-    left: 1px;
-    background-color: white;
-    border-radius: 50%;
-    transition: all 0.3s ease;
+    background-color: #66bb6a;
 }
 
 .switch-button.active .switch-circle {
-    left: calc(100% - 24px);
-}
-
-/* Description Text für die Einstellungen */
-.description {
-    margin-top: 30px;
-    font-size: 0.9rem;
-    color: #777;
-    text-align: center;
-}
-
-/* Animationen */
-.container, .button-container, .settings-container {
-    opacity: 0; /* Unsichtbar beim Start */
-    transform: translateY(30px);
-    transition: all 0.5s ease;
-}
-
-.container.visible, .button-container.visible, .settings-container.visible {
-    opacity: 1; /* Sichtbar beim Laden */
-    transform: translateY(0);
-}
-
-/* Spezifische Stile für ddswipe.html */
-#meal-title {
-    font-size: 1.5rem;
-    color: #444;
-    margin-bottom: 20px;
-}
-
-/* Mobile Optimierungen */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-    
-    button {
-        font-size: 14px;
-        padding: 10px 15px;
-    }
-
-    .container, .button-container, .settings-container {
-        max-width: 90%;
-        padding: 15px;
-    }
+    transform: translateX(25px);
 }
