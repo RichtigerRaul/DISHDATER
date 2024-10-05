@@ -45,7 +45,7 @@ document.getElementById('back-btn').addEventListener('click', () => {
     window.location.href = 'menu.html'; // Link zur Menüseite anpassen
 });
 
-// Swipe-Handling
+// Swipe-Handling (neu angepasst)
 let touchstartX = 0;
 let touchendX = 0;
 
@@ -53,12 +53,12 @@ const swipeZone = document.getElementById('swipe-container');
 
 swipeZone.addEventListener('touchstart', (event) => {
     touchstartX = event.changedTouches[0].screenX;
-});
+}, false);
 
 swipeZone.addEventListener('touchend', (event) => {
     touchendX = event.changedTouches[0].screenX;
     handleGesture();
-});
+}, false);
 
 function handleGesture() {
     const ingredientImg = document.getElementById('ingredient-img');
