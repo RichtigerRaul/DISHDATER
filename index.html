@@ -13,8 +13,18 @@
         <button id="start-button">Start 🚀</button>
     </div>
 
-    <!-- Externe JS-Dateien -->
-    <script src="navigation.js"></script> <!-- Navigation logic -->
-    <script src="app.js"></script> <!-- App logic -->
+    <!-- JavaScript eingebettet -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const startButton = document.getElementById('start-button');
+            
+            if (startButton) {
+                startButton.addEventListener('click', function() {
+                    // Navigation zur Menu-Seite
+                    window.location.href = 'menu.html';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
