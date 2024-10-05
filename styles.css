@@ -1,37 +1,82 @@
+/* Behalte das bestehende Design des Swipe-Containers */
 #swipe-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    width: 100vw; /* Macht den Container so breit wie das Fenster */
-    height: 80vh; /* Nutzt 80% der Höhe des Bildschirms */
-    touch-action: pan-y; /* Verhindert, dass der Browser das Scrollen des Bildschirms blockiert */
-    position: relative;
+    width: 100%; /* Breite bleibt wie zuvor */
+    height: 350px; /* Passe Höhe des Containers an */
+    position: relative; /* Erforderlich für Emoji-Overlay */
+    overflow: hidden; /* Verhindert, dass Emojis das Layout stören */
 }
 
+/* Behalte die Größe und das Styling des Bildes */
 .ingredient-image {
-    max-width: 350px;
-    max-height: 350px;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: cover;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
     transition: transform 0.3s ease;
 }
 
-/* Emoji-Overlay */
+/* Emoji-Overlay Styling - zentral über dem Bild */
 #emoji-overlay {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 5rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 10;
+    font-size: 4rem; /* Größe der Emojis */
+    opacity: 0; /* Standardmäßig unsichtbar */
+    transition: opacity 0.3s ease; /* Animation für Ein-/Ausblenden */
+    pointer-events: none; /* Emojis sollen keine Mausereignisse abfangen */
+    z-index: 2; /* Stellt sicher, dass das Emoji über dem Bild liegt */
 }
 
+/* Beim Einblenden */
 #emoji-overlay.show {
     opacity: 1;
+}
+
+/* Behalte das Design der Buttons */
+.controls {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 2rem; /* Größere Emojis für die Buttons */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: scale(1.1); /* Vergrößerung bei Hover für bessere Usability */
+}
+
+.btn-back {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+}
+
+/* Swipe-Animation bleibt unverändert */
+.swipe-left {
+    transform: translateX(-100%);
+}
+
+.swipe-right {
+    transform: translateX(100%);
 }
