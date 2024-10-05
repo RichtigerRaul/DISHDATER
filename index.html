@@ -6,26 +6,155 @@
     <title>Dish Dater</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <!-- Verlinkung der CSS-Datei -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            color: var(--tg-theme-text-color, #000000);
+        }
+
+        .container, .button-container, .settings-container {
+            background-color: var(--tg-theme-secondary-bg-color, white);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            width: 100%;
+            text-align: center;
+            opacity: 0; /* Start mit unsichtbar */
+            transition: opacity 1s ease; /* Smooth Übergang */
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #5b0ecf, #1f6fe8);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        .button-container {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .settings-container {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .switch-wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--tg-theme-bg-color, #f0f2f5);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .switch-label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .switch-button {
+            width: 50px;
+            height: 25px;
+            position: relative;
+            background-color: red;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .switch-button.active {
+            background-color: green;
+        }
+
+        .switch-circle {
+            position: absolute;
+            width: 23px;
+            height: 23px;
+            top: 1px;
+            left: 1px;
+            background-color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .switch-button.active .switch-circle {
+            left: calc(100% - 24px);
+        }
+
+        .description {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            background-color: #ff4b5c;
+        }
+    </style>
 </head>
 <body>
-    <!-- Willkommenscontainer -->
     <div class="container" id="welcome-container">
         <h1>Willkommen bei Dish Dater! 🍽️</h1>
         <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
         <button onclick="showNextScreen()">Start 🚀</button>
     </div>
 
-    <!-- Button-Container für verschiedene Optionen -->
     <div class="button-container" id="buttons-container">
-        <button onclick="navigateToIngredients()">🍳 Frühstück</button>
-        <button onclick="navigateToIngredients()">🥗 Mittagessen</button>
-        <button onclick="navigateToIngredients()">🍲 Abendessen</button>
-        <button onclick="navigateToIngredients()">🍪 Snacks</button>
+        <button onclick="playSound();">🍳 Frühstück</button>
+        <button onclick="playSound();">🥗 Mittagessen</button>
+        <button onclick="playSound();">🍲 Abendessen</button>
+        <button onclick="playSound();">🍪 Snacks</button>
         <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
     </div>
 
-    <!-- Einstellungscontainer -->
     <div class="settings-container" id="settings-container">
         <h1>Einstellungen</h1>
         
@@ -50,7 +179,6 @@
         <button class="back-button" onclick="playSound(); goBack()">🔙 Zurück</button>
     </div>
 
-    <!-- Audio für Klickgeräusche -->
     <audio id="click-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
 
     <script>
@@ -66,32 +194,29 @@
         }
 
         function showNextScreen() {
+            // Sound beim Klicken abspielen
             playSound(); 
+            // Willkommenscontainer ausblenden
             const welcomeContainer = document.getElementById('welcome-container');
             welcomeContainer.style.opacity = 0; 
 
             setTimeout(() => {
-                welcomeContainer.style.display = 'none'; 
-                document.getElementById('buttons-container').style.display = 'flex'; 
-                document.getElementById('buttons-container').style.opacity = 1; 
-                document.getElementById('buttons-container').style.transition = 'opacity 1s ease'; 
-            }, 1000); 
+                welcomeContainer.style.display = 'none'; // Element nach der Animation ausblenden
+                document.getElementById('buttons-container').style.display = 'flex'; // Buttons einblenden
+                document.getElementById('buttons-container').style.opacity = 1; // Sichtbarkeit wieder herstellen
+                document.getElementById('buttons-container').style.transition = 'opacity 1s ease'; // Animation für Einblenden
+            }, 1000); // Wartezeit für das Ausblenden
         }
 
         // Initialisieren des Willkommenscontainers
         window.onload = function() {
             const welcomeContainer = document.getElementById('welcome-container');
-            welcomeContainer.style.opacity = 1; 
+            welcomeContainer.style.opacity = 1; // Willkommensnachricht einblenden
         };
-
-        function navigateToIngredients() {
-            window.location.href = "zutaten.html"; // Navigiere zur Zutaten-Seite
-        }
 
         function showSettings() {
             document.getElementById('buttons-container').style.display = 'none';
             document.getElementById('settings-container').style.display = 'flex';
-            document.getElementById('settings-container').style.opacity = 1; // Sichere Sichtbarkeit
         }
 
         function goBack() {
