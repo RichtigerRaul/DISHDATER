@@ -1,10 +1,10 @@
 // Beispielbilder von Zutaten
 const ingredients = [
-    {name: 'Eier', img: 'https://example.com/eier.jpg'}, // Ersetze mit echten Bild-URLs
-    {name: 'Speck', img: 'https://example.com/speck.jpg'}, // Ersetze mit echten Bild-URLs
-    {name: 'Toast', img: 'https://example.com/toast.jpg'}, // Ersetze mit echten Bild-URLs
-    {name: 'Avocado', img: 'https://example.com/avocado.jpg'}, // Ersetze mit echten Bild-URLs
-    {name: 'Pfannkuchen', img: 'https://example.com/pfannkuchen.jpg'} // Ersetze mit echten Bild-URLs
+    {name: 'Pfannkuchen', img: 'https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/pfannkuchen.jpeg'},
+    {name: 'Speck', img: 'https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/speck.jpeg'},
+    {name: 'Toast', img: 'https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/toast.jpeg'},
+    {name: 'Eier', img: 'https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/eier.jpeg'},
+    {name: 'Avocado', img: 'https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/avocado.jpeg'}
 ];
 
 // Index des aktuellen Bildes
