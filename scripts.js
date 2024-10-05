@@ -58,7 +58,7 @@ document.getElementById('back-btn').addEventListener('click', () => {
     window.location.href = 'menu.html'; // Link zur Menüseite anpassen
 });
 
-// Swipe-Handling (wie zuvor)
+// Swipe-Handling
 let touchstartX = 0;
 let touchendX = 0;
 
