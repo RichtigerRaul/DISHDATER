@@ -8,15 +8,125 @@
 </head>
 <body>
     <div class="container">
-        <h1>Frühstücksoptionen</h1>
-        <p>Hier sind deine Frühstücksoptionen...</p>
-        <button onclick="goBack()">🔙 Zurück</button>
+        <h1>Frühstück Zutaten</h1>
+
+        <!-- Zutaten-Anzeige -->
+        <div id="ingredient-container">
+            <img id="ingredient-image" src="placeholder.jpg" alt="Zutat Bild" style="width: 200px; height: 200px;">
+            <h2 id="ingredient-name">Zutat Name</h2>
+            <div id="ingredient-nutritions" style="display: none;">
+                <p id="calories"></p>
+                <p id="protein"></p>
+                <p id="fat"></p>
+                <p id="carbs"></p>
+            </div>
+        </div>
+
+        <!-- Like / Dislike Buttons -->
+        <button id="like-button">Like</button>
+        <button id="dislike-button">Dislike</button>
+
+        <!-- Back Button -->
+        <button id="back-button">Zurück zum Menü</button>
     </div>
 
+    <!-- JavaScript -->
     <script>
-        function goBack() {
-            window.history.back();
+        // Beispiel-Zutaten (normalerweise aus der recipe.json Datei geladen)
+        const ingredients = [
+            {
+                "name": "Apfel",
+                "image": "https://via.placeholder.com/200",
+                "nutritions": { "calories": 52, "protein": 0.3, "fat": 0.2, "carbs": 14 },
+                "category": []
+            },
+            {
+                "name": "Joghurt",
+                "image": "https://via.placeholder.com/200",
+                "nutritions": { "calories": 60, "protein": 10, "fat": 3, "carbs": 12 },
+                "category": ["milch"]
+            },
+            {
+                "name": "Speck",
+                "image": "https://via.placeholder.com/200",
+                "nutritions": { "calories": 450, "protein": 20, "fat": 40, "carbs": 1 },
+                "category": ["tierisch"]
+            }
+        ];
+
+        let currentIngredientIndex = 0;
+        let userLikes = [];
+        let userDislikes = [];
+
+        const ingredientImage = document.getElementById('ingredient-image');
+        const ingredientName = document.getElementById('ingredient-name');
+        const ingredientNutritions = document.getElementById('ingredient-nutritions');
+        const calories = document.getElementById('calories');
+        const protein = document.getElementById('protein');
+        const fat = document.getElementById('fat');
+        const carbs = document.getElementById('carbs');
+
+        const likeButton = document.getElementById('like-button');
+        const dislikeButton = document.getElementById('dislike-button');
+        const backButton = document.getElementById('back-button');
+
+        // Funktion zur Anzeige der aktuellen Zutat
+        function showIngredient() {
+            const ingredient = ingredients[currentIngredientIndex];
+            ingredientImage.src = ingredient.image;
+            ingredientName.innerText = ingredient.name;
+            calories.innerText = "Kalorien: " + ingredient.nutritions.calories;
+            protein.innerText = "Protein: " + ingredient.nutritions.protein;
+            fat.innerText = "Fett: " + ingredient.nutritions.fat;
+            carbs.innerText = "Kohlenhydrate: " + ingredient.nutritions.carbs;
         }
+
+        // Funktion zum Wechseln zwischen Bild und Nährwerten
+        ingredientImage.addEventListener('click', function() {
+            if (ingredientNutritions.style.display === 'none') {
+                ingredientNutritions.style.display = 'block';
+            } else {
+                ingredientNutritions.style.display = 'none';
+            }
+        });
+
+        // Like-Funktion
+        likeButton.addEventListener('click', function() {
+            userLikes.push(ingredients[currentIngredientIndex]);
+            nextIngredient();
+        });
+
+        // Dislike-Funktion
+        dislikeButton.addEventListener('click', function() {
+            userDislikes.push(ingredients[currentIngredientIndex]);
+            nextIngredient();
+        });
+
+        // Zeigt die nächste Zutat an
+        function nextIngredient() {
+            currentIngredientIndex++;
+            if (currentIngredientIndex >= ingredients.length) {
+                // Alle Zutaten wurden angezeigt, zeige das Ergebnis an
+                showResult();
+            } else {
+                showIngredient();
+            }
+        }
+
+        // Funktion zur Anzeige des Ergebnisses (basiert auf Likes)
+        function showResult() {
+            let mostLikedIngredient = userLikes[0];
+            // Du kannst hier komplexe Logik hinzufügen, um das beste Rezept auszuwählen
+            alert("Das beste Rezept beinhaltet: " + mostLikedIngredient.name);
+        }
+
+        // Back-Button zum Menü
+        backButton.addEventListener('click', function() {
+            window.location.href = 'menu.html';
+        });
+
+        // Initialisiere die Anzeige mit der ersten Zutat
+        showIngredient();
     </script>
 </body>
 </html>
