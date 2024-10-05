@@ -1,3 +1,4 @@
+/* Allgemeines Styling */
 body {
     font-family: 'Roboto', sans-serif;
     display: flex;
@@ -10,18 +11,20 @@ body {
     color: var(--tg-theme-text-color, #000000);
 }
 
+/* Container für Inhalte */
 .container, .button-container, .settings-container {
     background-color: var(--tg-theme-secondary-bg-color, white);
     padding: 20px;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    max-width: 300px;
+    max-width: 350px; /* Etwas breiter für bessere Lesbarkeit */
     width: 100%;
     text-align: center;
     opacity: 0;
     transition: opacity 1s ease;
 }
 
+/* Titel Styling */
 h1 {
     font-size: 2rem;
     color: #333;
@@ -35,12 +38,13 @@ p {
     margin-bottom: 20px;
 }
 
+/* Button Styling */
 button {
     background: linear-gradient(45deg, #6a11cb, #2575fc);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 15px; /* Größerer Padding für größere Buttons */
+    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
@@ -59,19 +63,23 @@ button:active {
     transform: translateY(2px);
 }
 
+/* Button-Container */
 .button-container {
     display: none;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px; /* Abstand zwischen Buttons */
 }
 
+/* Einstellungscontainer Styling */
 .settings-container {
     display: none;
     flex-direction: column;
     gap: 20px;
     align-items: center;
+    opacity: 1; /* Sichtbar, wenn angezeigt */
 }
 
+/* Switch Styling */
 .switch-wrapper {
     display: flex;
     justify-content: space-between;
@@ -118,6 +126,7 @@ button:active {
     left: calc(100% - 24px);
 }
 
+/* Beschreibungstext */
 .description {
     margin-top: 30px;
     font-size: 0.9rem;
@@ -125,8 +134,10 @@ button:active {
     text-align: center;
 }
 
+/* Zurück-Button */
 .back-button {
     margin-top: 20px;
     background-color: #ff4b5c;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
-
