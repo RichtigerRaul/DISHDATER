@@ -9,14 +9,12 @@
     <link rel="stylesheet" href="style.css"> <!-- Verlinkung der style.css -->
 </head>
 <body>
-    <!-- Willkommenscontainer -->
     <div class="container" id="welcome-container">
         <h1>Willkommen bei Dish Dater! 🍽️</h1>
         <p>Finde die perfekten Rezepte für deine Vorlieben und Bedürfnisse. 🍝🍳</p>
         <button id="start-button">Start 🚀</button>
     </div>
 
-    <!-- Button-Container für Mahlzeitenauswahl (zunächst ausgeblendet) -->
     <div class="button-container" id="buttons-container" style="display:none;">
         <button onclick="playSound(); navigateTo('breakfast.html')">🍳 Frühstück</button>
         <button onclick="playSound(); navigateTo('lunch.html')">🥗 Mittagessen</button>
@@ -25,7 +23,6 @@
         <button class="einstellungen-button" onclick="playSound(); showSettings()">🔧 Einstellungen</button>
     </div>
 
-    <!-- Einstellungscontainer (zunächst ausgeblendet) -->
     <div class="settings-container" id="settings-container" style="display:none;">
         <h1>Einstellungen</h1>
 
@@ -59,68 +56,57 @@
         tg.expand();
         tg.ready();
 
-        // Sicherstellen, dass der Sound beim Klicken abgespielt wird
         function playSound() {
             const sound = document.getElementById('click-sound');
             sound.currentTime = 0;
             sound.play().catch(e => console.log("Fehler beim Abspielen des Sounds:", e));
         }
 
-        // Starten der App
         document.getElementById('start-button').addEventListener('click', function() {
             playStartSound(); // Start-Sound abspielen
             showNextScreen(); // Willkommensnachricht ausblenden
         });
 
-        // Funktion zum Abspielen des Start-Sounds
         function playStartSound() {
             const startSound = document.getElementById('start-sound');
             startSound.currentTime = 0;
             startSound.play().catch(e => console.log("Fehler beim Abspielen des Start-Sounds:", e));
         }
 
-        // Funktion zum Wechseln zum Menü (szeneartiger Übergang)
         function showNextScreen() {
             const welcomeContainer = document.getElementById('welcome-container');
-            welcomeContainer.style.opacity = 0; // Ausblenden des Startbildschirms
+            welcomeContainer.style.opacity = 0;
 
             setTimeout(() => {
-                welcomeContainer.style.display = 'none'; // Nach der Animation vollständig ausblenden
+                welcomeContainer.style.display = 'none';
                 const buttonsContainer = document.getElementById('buttons-container');
-                buttonsContainer.style.display = 'flex'; // Menü anzeigen
-                buttonsContainer.style.opacity = 1; // Einblenden
-            }, 1000); // Wartezeit für das Ausblenden
+                buttonsContainer.style.display = 'flex';
+                buttonsContainer.style.opacity = 1;
+            }, 1000);
         }
 
-        // Initialisieren des Willkommenscontainers
         window.onload = function() {
             const welcomeContainer = document.getElementById('welcome-container');
-            welcomeContainer.style.opacity = 1; // Willkommensnachricht einblenden
-
-            // Überprüfen, ob gespeicherte Einstellungen vorhanden sind
+            welcomeContainer.style.opacity = 1;
             loadSettings();
         };
 
-        // Einstellungsfenster anzeigen
         function showSettings() {
-            document.getElementById('buttons-container').style.display = 'none'; // Menü ausblenden
-            document.getElementById('settings-container').style.display = 'flex'; // Einstellungen anzeigen
+            document.getElementById('buttons-container').style.display = 'none';
+            document.getElementById('settings-container').style.display = 'flex';
         }
 
-        // Zurück zur Menüseite
         function goBack() {
-            document.getElementById('settings-container').style.display = 'none'; // Einstellungen ausblenden
-            document.getElementById('buttons-container').style.display = 'flex'; // Menü anzeigen
+            document.getElementById('settings-container').style.display = 'none';
+            document.getElementById('buttons-container').style.display = 'flex';
         }
 
-        // Schalter für die Einstellungen
         function toggleSwitch(id) {
             const switchButton = document.getElementById(id);
-            switchButton.classList.toggle('active'); // Zustand ändern
-            saveSettings(); // Einstellungen speichern
+            switchButton.classList.toggle('active');
+            saveSettings();
         }
 
-        // Einstellungen in Local Storage speichern
         function saveSettings() {
             const animalSwitch = document.getElementById('switch-animal').classList.contains('active');
             const milkSwitch = document.getElementById('switch-milk').classList.contains('active');
@@ -133,7 +119,6 @@
             localStorage.setItem('dishDaterSettings', JSON.stringify(settings));
         }
 
-        // Einstellungen aus Local Storage laden
         function loadSettings() {
             const savedSettings = localStorage.getItem('dishDaterSettings');
 
@@ -148,7 +133,6 @@
             }
         }
 
-        // Navigation zur Mahlzeiten-Seite
         function navigateTo(mealPage) {
             window.location.href = mealPage; // Zu der angegebenen Seite navigieren
         }
