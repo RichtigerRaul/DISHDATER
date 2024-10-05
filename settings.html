@@ -21,7 +21,6 @@
             </label>
         </div>
 
-        <button id="save-button">Speichern</button>
         <button onclick="goBack()">🔙 Zurück</button>
     </div>
 
@@ -35,16 +34,12 @@
             document.getElementById('milk-checkbox').checked = milkPref;
         });
 
-        document.getElementById('save-button').addEventListener('click', function() {
+        function goBack() {
+            // Speichere die Einstellungen beim Zurückkehren
             localStorage.setItem('animal', document.getElementById('animal-checkbox').checked);
             localStorage.setItem('milk', document.getElementById('milk-checkbox').checked);
-            alert('Einstellungen gespeichert!');
-        });
-
-        function goBack() {
             window.history.back(); // Gehe zur vorherigen Seite zurück
         }
     </script>
 </body>
 </html>
-
