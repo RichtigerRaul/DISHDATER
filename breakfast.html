@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frühstück</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Frühstück - DishDater</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Frühstücksoptionen</h1>
-        <p>Hier sind deine Frühstücksoptionen...</p>
-        <button onclick="goBack()">🔙 Zurück</button>
+
+    <!-- Hauptcontainer für das Zutaten-Swiping -->
+    <div id="swipe-container">
+        <img id="ingredient-img" src="" alt="Zutat" class="ingredient-image">
+        <div id="buttons">
+            <button id="dislike-btn">Dislike</button>
+            <button id="like-btn">Like</button>
+        </div>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <!-- Back-Button zum Menü -->
+    <button id="back-btn">Zurück zum Menü</button>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
