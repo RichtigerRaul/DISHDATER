@@ -16,16 +16,9 @@
         <button onclick="navigateTo('settings.html')">🔧 Einstellungen</button>
     </div>
 
-    <audio id="button-sound" src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/ddbutton.mp3" preload="auto"></audio>
-
     <script>
         function navigateTo(page) {
-            const sound = document.getElementById('button-sound');
-            sound.play().then(() => {
-                window.location.href = page; // Navigation zur gewählten Seite
-            }).catch((error) => {
-                console.error("Sound konnte nicht abgespielt werden:", error);
-            });
+            window.location.href = page; // Navigation zur gewählten Seite
         }
     </script>
 </body>
