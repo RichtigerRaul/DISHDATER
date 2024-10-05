@@ -21,25 +21,12 @@
             </label>
         </div>
 
-        <button onclick="goBack()">🔙 Zurück</button>
+        <button id="back-button">🔙 Zurück</button>
     </div>
 
-    <script>
-        // Lade die gespeicherten Einstellungen
-        document.addEventListener("DOMContentLoaded", function() {
-            const animalPref = localStorage.getItem('animal') === 'true';
-            const milkPref = localStorage.getItem('milk') === 'true';
-
-            document.getElementById('animal-checkbox').checked = animalPref;
-            document.getElementById('milk-checkbox').checked = milkPref;
-        });
-
-        function goBack() {
-            // Speichere die Einstellungen beim Zurückkehren
-            localStorage.setItem('animal', document.getElementById('animal-checkbox').checked);
-            localStorage.setItem('milk', document.getElementById('milk-checkbox').checked);
-            window.history.back(); // Gehe zur vorherigen Seite zurück
-        }
-    </script>
+    <!-- Externe JS-Dateien -->
+    <script src="navigation.js"></script>
+    <script src="settings.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
