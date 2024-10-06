@@ -183,10 +183,12 @@
         }
 
         function goBack() {
-            // Test-Alert vor dem Redirect
-            alert('Zurück zum Menü');
-            // Seitenwechsel zu menu.html
-            window.location.href = './menu.html'; // Passe den Pfad bei Bedarf an
+            // Verwendet den Browser-Verlauf, um zur vorherigen Seite zu navigieren
+            if (window.history.length > 1) {
+                window.history.back(); // Geht zur vorherigen Seite
+            } else {
+                window.location.href = './menu.html'; // Falls kein Verlauf existiert, zur Menüseite gehen
+            }
         }
 
         function handleLike() {
@@ -234,7 +236,7 @@
             }, 300);
         }
 
-        // Verbesserte Swipe-Funktionalität
+                // Verbesserte Swipe-Funktionalität
         const swipeContainer = document.getElementById('swipeContainer');
         const hammer = new Hammer(swipeContainer);
         const card = document.getElementById('swipeCard');
