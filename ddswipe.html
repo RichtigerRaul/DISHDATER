@@ -52,14 +52,22 @@
             color: #666;
         }
         .back-button {
-            background-color: #0088cc;
+            background-color: #3498db;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 16px;
             cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+        .back-button:active {
+            transform: scale(0.98);
         }
         .settings-icons {
             display: flex;
@@ -117,6 +125,7 @@
     </style>
 </head>
 <body>
+    <button class="back-button" onclick="goBack()">← Zurück zum Menü</button>
     <div class="swipe-container" id="swipeContainer">
         <div class="swipe-card" id="swipeCard">
             <div class="meal-type" id="mealType"></div>
@@ -129,7 +138,6 @@
         <button class="dislike-button" onclick="handleDislike()">👎</button>
         <button class="like-button" onclick="handleLike()">👍</button>
     </div>
-    <button class="back-button" onclick="goBack()">Zurück zum Menü</button>
 
     <script>
         let currentMeal = localStorage.getItem('currentMeal') || 'Mahlzeit';
