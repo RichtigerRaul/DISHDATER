@@ -8,29 +8,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            justify-content: flex-start;
+            min-height: 100vh;
             margin: 0;
             background-color: #f0f2f5;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .swipe-container {
             width: 300px;
             height: 400px;
             position: relative;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
         .swipe-card {
             position: absolute;
             width: 100%;
             height: 100%;
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -40,16 +42,27 @@
             transition: transform 0.3s ease-out;
         }
         .meal-type {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 20px;
+            color: #2c3e50;
         }
         .swipe-info {
             text-align: center;
-            margin-top: 10px;
+            margin: 15px 0;
             font-style: italic;
-            color: #666;
+            color: #34495e;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .swipe-info::before,
+        .swipe-info::after {
+            content: '↔️';
+            margin: 0 10px;
+            font-size: 24px;
         }
         .back-button {
             background-color: #3498db;
@@ -59,28 +72,34 @@
             font-size: 16px;
             cursor: pointer;
             border-radius: 30px;
-            margin-bottom: 20px;
-            transition: background-color 0.3s, transform 0.1s;
+            transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
         }
         .back-button:hover {
             background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .back-button:active {
-            transform: scale(0.98);
+            transform: translateY(0);
         }
         .settings-icons {
             display: flex;
             justify-content: space-around;
             width: 100%;
-            margin-top: 10px;
+            margin: 20px 0;
         }
         .setting-icon {
-            font-size: 24px;
+            font-size: 28px;
             opacity: 0.2;
+            transition: opacity 0.3s, transform 0.3s;
         }
         .setting-icon.active {
             opacity: 1;
+        }
+        .setting-icon:hover {
+            transform: scale(1.2);
         }
         .like-dislike-container {
             display: flex;
@@ -92,30 +111,34 @@
             bottom: 20px;
         }
         .like-button, .dislike-button {
-            font-size: 24px;
+            font-size: 30px;
             background: none;
             border: none;
             cursor: pointer;
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background-color 0.3s, transform 0.1s;
+            transition: all 0.3s ease;
         }
         .like-button {
-            background-color: #4CAF50;
+            background-color: #2ecc71;
         }
         .dislike-button {
-            background-color: #f44336;
+            background-color: #e74c3c;
+        }
+        .like-button:hover, .dislike-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .like-button:active, .dislike-button:active {
             transform: scale(0.95);
         }
         .floating-emoji {
             position: absolute;
-            font-size: 50px;
+            font-size: 60px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -126,6 +149,7 @@
 </head>
 <body>
     <button class="back-button" onclick="goBack()">← Zurück zum Menü</button>
+    <div class="swipe-info">Wische für deine Wahl</div>
     <div class="swipe-container" id="swipeContainer">
         <div class="swipe-card" id="swipeCard">
             <div class="meal-type" id="mealType"></div>
@@ -133,7 +157,6 @@
         <div class="floating-emoji" id="floatingEmoji"></div>
     </div>
     <div class="settings-icons" id="settingsIcons"></div>
-    <div class="swipe-info">Wische nach links oder rechts</div>
     <div class="like-dislike-container">
         <button class="dislike-button" onclick="handleDislike()">👎</button>
         <button class="like-button" onclick="handleLike()">👍</button>
