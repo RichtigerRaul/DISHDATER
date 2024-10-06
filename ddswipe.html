@@ -69,7 +69,7 @@
         }
         .setting-icon {
             font-size: 24px;
-            opacity: 0.2;  /* Erhöhte Transparenz für nicht ausgewählte Einstellungen */
+            opacity: 0.2;
         }
         .setting-icon.active {
             opacity: 1;
@@ -135,7 +135,6 @@
         let currentMeal = localStorage.getItem('currentMeal') || 'Mahlzeit';
         let dietSettings = JSON.parse(localStorage.getItem('dietSettings')) || {};
         let isAnimating = false;
-        let tg = window.Telegram.WebApp;
 
         const settingEmojis = {
             'milk': '🥛',
@@ -184,17 +183,7 @@
         }
 
         function goBack() {
-            if (tg.initDataUnsafe.start_param === 'menu') {
-                tg.close();
-            } else {
-                tg.BackButton.show();
-                tg.onEvent('backButtonClicked', function(){
-                    window.location.href = 'menu.html';
-                });
-                tg.MainButton.setText('Zurück zum Menü').show().onClick(function(){
-                    window.location.href = 'menu.html';
-                });
-            }
+            window.location.href = 'menu.html';
         }
 
         function handleLike() {
@@ -273,7 +262,6 @@
 
         // Initialisierung
         window.onload = function() {
-            tg.ready();
             updateCard();
         }
     </script>
