@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISHDATER Einstellungen</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .settings-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .setting-item label {
+            margin-left: 10px;
+        }
+        .back-button {
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-title">
+        <h1>Einstellungen</h1>
+    </div>
+    <div class="settings-container">
+        <div class="setting-item">
+            <input type="checkbox" id="milk" name="milk">
+            <label for="milk">Milchprodukte</label>
+        </div>
+        <div class="setting-item">
+            <input type="checkbox" id="vegan" name="vegan">
+            <label for="vegan">Vegan</label>
+        </div>
+        <div class="setting-item">
+            <input type="checkbox" id="vegetarian" name="vegetarian">
+            <label for="vegetarian">Vegetarisch</label>
+        </div>
+        <div class="setting-item">
+            <input type="checkbox" id="vitamins" name="vitamins">
+            <label for="vitamins">Vitaminreich</label>
+        </div>
+        <div class="setting-item">
+            <input type="checkbox" id="protein" name="protein">
+            <label for="protein">Proteinreich</label>
+        </div>
+        <div class="setting-item">
+            <input type="checkbox" id="nofat" name="nofat">
+            <label for="nofat">Fettarm</label>
+        </div>
+    </div>
+    <button class="back-button" onclick="saveAndGoBack()">Speichern und Zurück</button>
+
+    <script>
+        // Laden der gespeicherten Einstellungen beim Seitenaufruf
+        window.onload = function() {
+            const settings = JSON.parse(localStorage.getItem('dietSettings')) || {};
+            for (const [key, value] of Object.entries(settings)) {
+                const checkbox = document.getElementById(key);
+                if (checkbox) checkbox.checked = value;
+            }
+        }
+
+        function saveAndGoBack() {
+            const settings = {};
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                settings[checkbox.id] = checkbox.checked;
+            });
+            localStorage.setItem('dietSettings', JSON.stringify(settings));
+            window.location.href = 'menu.html';
+        }
+
+        // Telegram WebApp Initialisierung
+        window.Telegram.WebApp.ready();
+    </script>
+</body>
+</html>
