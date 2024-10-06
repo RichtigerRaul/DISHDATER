@@ -7,32 +7,71 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             height: 100vh;
             margin: 0;
             background-color: #f0f2f5;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .menu-title {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .menu-title h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 0;
+        }
+        .menu-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 300px;
+        }
+        .main-meals {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .menu-button {
-            background-color: #0088cc;
+            background-color: #3498db;
             color: white;
             border: none;
             padding: 15px 30px;
             font-size: 16px;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 30px;
             margin: 10px;
-            width: 200px;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
         .menu-button:hover {
-            background-color: #006699;
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .snacks-button {
+            background-color: #e74c3c;
+        }
+        .snacks-button:hover {
+            background-color: #c0392b;
+        }
+        .settings-button {
+            background-color: #2ecc71;
+            margin-top: 30px;
+        }
+        .settings-button:hover {
+            background-color: #27ae60;
         }
     </style>
 </head>
@@ -40,11 +79,17 @@
     <div class="menu-title">
         <h1>DISHDATER</h1>
     </div>
-    <button class="menu-button" onclick="openSettings()">Einstellungen</button>
-    <button class="menu-button" onclick="openMeal('breakfast')">Frühstück</button>
-    <button class="menu-button" onclick="openMeal('lunch')">Mittagessen</button>
-    <button class="menu-button" onclick="openMeal('dinner')">Abendessen</button>
-    <button class="menu-button" onclick="openMeal('snacks')">Snacks</button>
+    <div class="menu-group main-meals">
+        <button class="menu-button" onclick="openMeal('breakfast')">Frühstück</button>
+        <button class="menu-button" onclick="openMeal('lunch')">Mittagessen</button>
+        <button class="menu-button" onclick="openMeal('dinner')">Abendessen</button>
+    </div>
+    <div class="menu-group">
+        <button class="menu-button snacks-button" onclick="openMeal('snacks')">Snacks</button>
+    </div>
+    <div class="menu-group">
+        <button class="menu-button settings-button" onclick="openSettings()">Einstellungen</button>
+    </div>
 
     <script>
         function openSettings() {
@@ -52,7 +97,6 @@
         }
 
         function openMeal(mealType) {
-            // Speichern des Mahlzeitentyps im localStorage
             localStorage.setItem('currentMeal', mealType);
             window.location.href = 'ddswipe.html';
         }
