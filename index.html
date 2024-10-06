@@ -28,6 +28,10 @@
             font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .start-button:hover {
+            background-color: #006699;
         }
     </style>
 </head>
@@ -45,6 +49,20 @@
 
         // Telegram WebApp Initialisierung
         window.Telegram.WebApp.ready();
+
+        // Aktiviere den Vollbildmodus, sobald die WebApp bereit ist
+        window.Telegram.WebApp.onEvent('viewportChanged', function() {
+            if (window.Telegram.WebApp.isExpanded) {
+                // WebApp ist bereits im Vollbildmodus
+                console.log('WebApp ist bereits im Vollbildmodus');
+            } else {
+                // Versuche, in den Vollbildmodus zu wechseln
+                window.Telegram.WebApp.expand();
+            }
+        });
+
+        // Versuche sofort in den Vollbildmodus zu wechseln
+        window.Telegram.WebApp.expand();
     </script>
 </body>
 </html>
