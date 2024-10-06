@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISHDATER</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .start-button {
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-message">
+        <h1>Willkommen bei DISHDATER</h1>
+        <p>Dein persönlicher Essensplaner für Telegram</p>
+    </div>
+    <button class="start-button" onclick="startApp()">Start</button>
 
+    <script>
+        function startApp() {
+            window.location.href = 'menu.html';
+        }
+
+        // Telegram WebApp Initialisierung
+        window.Telegram.WebApp.ready();
+    </script>
+</body>
+</html>
