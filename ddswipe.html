@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DISHDATER Swipe</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
@@ -13,11 +13,19 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            min-height: 100vh;
+            height: 100vh;
             margin: 0;
             background-color: #f0f2f5;
             padding: 20px;
             box-sizing: border-box;
+            overflow: hidden;
+        }
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-height: 100%;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -27,7 +35,7 @@
             position: relative;
             overflow: hidden;
             margin-top: 10px;
-            touch-action: pan-y;
+            touch-action: pan-x;
         }
         .swipe-card {
             position: absolute;
@@ -43,7 +51,6 @@
             padding: 20px;
             box-sizing: border-box;
             transition: transform 0.3s ease-out;
-            will-change: transform;
         }
         .meal-type {
             font-size: 28px;
@@ -142,21 +149,28 @@
     </style>
 </head>
 <body>
-    <button class="back-button" onclick="goBack()">← Zurück</button>
-    <div class="swipe-info">Wische nach links oder rechts</div>
-    <div class="swipe-container" id="swipeContainer">
-        <div class="swipe-card" id="swipeCard">
-            <div class="meal-type" id="mealType"></div>
+    <div class="content-wrapper">
+        <button class="back-button" onclick="goBack()">← Zurück</button>
+        <div class="swipe-info">Wische nach links oder rechts</div>
+        <div class="swipe-container" id="swipeContainer">
+            <div class="swipe-card" id="swipeCard">
+                <div class="meal-type" id="mealType"></div>
+            </div>
+            <div class="floating-emoji" id="floatingEmoji"></div>
         </div>
-        <div class="floating-emoji" id="floatingEmoji"></div>
-    </div>
-    <div class="settings-icons" id="settingsIcons"></div>
-    <div class="like-dislike-container">
-        <button class="dislike-button" onclick="handleDislike()">👎</button>
-        <button class="like-button" onclick="handleLike()">👍</button>
+        <div class="settings-icons" id="settingsIcons"></div>
+        <div class="like-dislike-container">
+            <button class="dislike-button" onclick="handleDislike()">👎</button>
+            <button class="like-button" onclick="handleLike()">👍</button>
+        </div>
     </div>
 
     <script>
+        // Prevent default touch behavior
+        document.body.addEventListener('touchmove', function(event) {
+            event.preventDefault();
+        }, { passive: false });
+
         let currentMeal = localStorage.getItem('currentMeal') || 'Mahlzeit';
         let dietSettings = JSON.parse(localStorage.getItem('dietSettings')) || {};
         let isAnimating = false;
@@ -257,18 +271,21 @@
             }, 300);
         }
 
-        // Verbesserte Swipe-Funktionalität
+        // Modifizierte Hammer.js Konfiguration
         const swipeContainer = document.getElementById('swipeContainer');
-        const hammer = new Hammer(swipeContainer);
+        const hammer = new Hammer(swipeContainer, {
+            touchAction: 'pan-y',
+            recognizers: [
+                [Hammer.Pan, { direction: Hammer.DIRECTION_HORIZONTAL }]
+            ]
+        });
         const card = document.getElementById('swipeCard');
 
         hammer.on('pan', function(event) {
             if (!isAnimating) {
                 let percentage = event.deltaX / swipeContainer.offsetWidth;
                 percentage = Math.min(Math.max(percentage, -1), 1);
-                requestAnimationFrame(() => {
-                    card.style.transform = `translateX(${percentage * 100}%)`;
-                });
+                card.style.transform = `translateX(${percentage * 100}%)`;
             }
         });
 
@@ -282,9 +299,7 @@
                     showFloatingEmoji(direction > 0 ? '👍' : '👎');
                 } else {
                     // Swipe not completed, return to center
-                    requestAnimationFrame(() => {
-                        card.style.transform = 'translateX(0)';
-                    });
+                    card.style.transform = 'translateX(0)';
                 }
             }
         });
