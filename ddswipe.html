@@ -18,6 +18,8 @@
             background-color: #f0f2f5;
             padding: 20px;
             box-sizing: border-box;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
         .swipe-container {
             width: 300px;
@@ -25,6 +27,7 @@
             position: relative;
             overflow: hidden;
             margin-top: 10px;
+            touch-action: pan-y;
         }
         .swipe-card {
             position: absolute;
@@ -40,6 +43,7 @@
             padding: 20px;
             box-sizing: border-box;
             transition: transform 0.3s ease-out;
+            will-change: transform;
         }
         .meal-type {
             font-size: 28px;
@@ -262,7 +266,9 @@
             if (!isAnimating) {
                 let percentage = event.deltaX / swipeContainer.offsetWidth;
                 percentage = Math.min(Math.max(percentage, -1), 1);
-                card.style.transform = `translateX(${percentage * 100}%)`;
+                requestAnimationFrame(() => {
+                    card.style.transform = `translateX(${percentage * 100}%)`;
+                });
             }
         });
 
@@ -276,7 +282,9 @@
                     showFloatingEmoji(direction > 0 ? '👍' : '👎');
                 } else {
                     // Swipe not completed, return to center
-                    card.style.transform = 'translateX(0)';
+                    requestAnimationFrame(() => {
+                        card.style.transform = 'translateX(0)';
+                    });
                 }
             }
         });
