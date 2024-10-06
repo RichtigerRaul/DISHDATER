@@ -126,10 +126,10 @@
     <div class="settings-icons" id="settingsIcons"></div>
     <div class="swipe-info">Wische nach links oder rechts</div>
     <div class="like-dislike-container">
-        <button class="dislike-button" id="dislikeButton">👎</button>
-        <button class="like-button" id="likeButton">👍</button>
+        <button class="dislike-button" onclick="handleDislike()">👎</button>
+        <button class="like-button" onclick="handleLike()">👍</button>
     </div>
-    <button class="back-button" id="backButton">Zurück zum Menü</button>
+    <button class="back-button" onclick="goBack()">Zurück zum Menü</button>
 
     <script>
         let currentMeal = localStorage.getItem('currentMeal') || 'Mahlzeit';
@@ -259,11 +259,6 @@
                 }
             }
         });
-
-        // Event Listeners
-        document.getElementById('backButton').addEventListener('click', goBack);
-        document.getElementById('likeButton').addEventListener('click', handleLike);
-        document.getElementById('dislikeButton').addEventListener('click', handleDislike);
 
         // Initialisierung
         window.onload = function() {
