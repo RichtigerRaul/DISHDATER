@@ -55,11 +55,11 @@
             background-color: #0088cc;
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 20px 40px;
+            font-size: 18px;
             cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
+            border-radius: 10px;
+            margin-top: 40px;
         }
         .settings-icons {
             display: flex;
@@ -129,7 +129,7 @@
         <button class="dislike-button" onclick="handleDislike()">👎</button>
         <button class="like-button" onclick="handleLike()">👍</button>
     </div>
-    <button class="back-button" onclick="goBack()">Zurück zum Menü</button>
+    <button class="back-button" id="backButton">Zurück zum Menü</button>
 
     <script>
         let currentMeal = localStorage.getItem('currentMeal') || 'Mahlzeit';
@@ -182,14 +182,11 @@
             return settingTexts[setting] || setting;
         }
 
-        function goBack() {
-            // Verwendet den Browser-Verlauf, um zur vorherigen Seite zu navigieren
-            if (window.history.length > 1) {
-                window.history.back(); // Geht zur vorherigen Seite
-            } else {
-                window.location.href = './menu.html'; // Falls kein Verlauf existiert, zur Menüseite gehen
-            }
-        }
+        // Angepasste Back-Funktion
+        document.getElementById('backButton').addEventListener('click', function() {
+            // Navigiere zurück zur vorherigen Seite oder ins Menü
+            window.location.href = './menu.html'; 
+        });
 
         function handleLike() {
             if (!isAnimating) {
@@ -235,8 +232,7 @@
                 }, 50);
             }, 300);
         }
-
-                // Verbesserte Swipe-Funktionalität
+              // Verbesserte Swipe-Funktionalität
         const swipeContainer = document.getElementById('swipeContainer');
         const hammer = new Hammer(swipeContainer);
         const card = document.getElementById('swipeCard');
