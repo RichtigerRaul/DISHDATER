@@ -35,7 +35,7 @@
             justify-content: space-between;
             padding: 20px;
             box-sizing: border-box;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease-out;
         }
         .meal-type {
             font-size: 24px;
@@ -80,6 +80,7 @@
     <script>
         let currentMeal = localStorage.getItem('currentMeal') || 'Mahlzeit';
         let dietSettings = JSON.parse(localStorage.getItem('dietSettings')) || {};
+        let isAnimating = false;
 
         function updateCard() {
             document.getElementById('mealType').textContent = getMealTypeText(currentMeal);
@@ -120,21 +121,44 @@
             window.location.href = 'menu.html';
         }
 
-        // Swipe-Funktionalität
+        // Verbesserte Swipe-Funktionalität
         const swipeContainer = document.getElementById('swipeContainer');
         const hammer = new Hammer(swipeContainer);
+        const card = document.getElementById('swipeCard');
 
-        hammer.on('swipeleft swiperight', function(event) {
-            const card = document.getElementById('swipeCard');
-            if (event.type === 'swipeleft') {
-                card.style.transform = 'translateX(-100%)';
-            } else {
-                card.style.transform = 'translateX(100%)';
+        hammer.on('pan', function(event) {
+            if (!isAnimating) {
+                let percentage = event.deltaX / swipeContainer.offsetWidth;
+                percentage = Math.min(Math.max(percentage, -1), 1);
+                card.style.transform = `translateX(${percentage * 100}%)`;
             }
-            setTimeout(() => {
-                card.style.transform = 'translateX(0)';
-                // Hier könnten Sie die nächste Karte laden oder andere Aktionen ausführen
-            }, 300);
+        });
+
+        hammer.on('panend', function(event) {
+            if (!isAnimating) {
+                isAnimating = true;
+                const threshold = 0.3;
+                if (Math.abs(event.deltaX) > swipeContainer.offsetWidth * threshold) {
+                    // Swipe completed
+                    const direction = event.deltaX > 0 ? 1 : -1;
+                    card.style.transform = `translateX(${direction * 100}%)`;
+                    setTimeout(() => {
+                        card.style.transition = 'none';
+                        card.style.transform = 'translateX(0)';
+                        setTimeout(() => {
+                            card.style.transition = 'transform 0.3s ease-out';
+                            isAnimating = false;
+                            // Hier könnten Sie die nächste Karte laden oder andere Aktionen ausführen
+                        }, 50);
+                    }, 300);
+                } else {
+                    // Swipe not completed, return to center
+                    card.style.transform = 'translateX(0)';
+                    setTimeout(() => {
+                        isAnimating = false;
+                    }, 300);
+                }
+            }
         });
 
         // Initialisierung
