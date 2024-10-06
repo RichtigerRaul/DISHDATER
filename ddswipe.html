@@ -74,6 +74,30 @@
         .setting-icon.active {
             opacity: 1;
         }
+        .like-dislike-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            position: absolute;
+            bottom: 20px;
+        }
+        .like-button, .dislike-button {
+            font-size: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .floating-emoji {
+            position: absolute;
+            font-size: 50px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: all 0.5s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -81,9 +105,14 @@
         <div class="swipe-card" id="swipeCard">
             <div class="meal-type" id="mealType"></div>
         </div>
+        <div class="floating-emoji" id="floatingEmoji"></div>
     </div>
     <div class="settings-icons" id="settingsIcons"></div>
     <div class="swipe-info">Wische nach links oder rechts</div>
+    <div class="like-dislike-container">
+        <button class="dislike-button" onclick="handleDislike()">👎</button>
+        <button class="like-button" onclick="handleLike()">👍</button>
+    </div>
     <button class="back-button" onclick="goBack()">Zurück zum Menü</button>
 
     <script>
@@ -141,6 +170,52 @@
             window.location.href = 'menu.html';
         }
 
+        function handleLike() {
+            if (!isAnimating) {
+                swipeCard(1);
+                showFloatingEmoji('👍');
+            }
+        }
+
+        function handleDislike() {
+            if (!isAnimating) {
+                swipeCard(-1);
+                showFloatingEmoji('👎');
+            }
+        }
+
+        function showFloatingEmoji(emoji) {
+            const floatingEmoji = document.getElementById('floatingEmoji');
+            floatingEmoji.textContent = emoji;
+            floatingEmoji.style.opacity = '1';
+            floatingEmoji.style.transform = 'translate(-50%, -150%)';
+            
+            setTimeout(() => {
+                floatingEmoji.style.opacity = '0';
+                floatingEmoji.style.transform = 'translate(-50%, -250%)';
+            }, 500);
+
+            setTimeout(() => {
+                floatingEmoji.style.transform = 'translate(-50%, -50%)';
+            }, 1000);
+        }
+
+        function swipeCard(direction) {
+            isAnimating = true;
+            const card = document.getElementById('swipeCard');
+            card.style.transform = `translateX(${direction * 100}%)`;
+            
+            setTimeout(() => {
+                card.style.transition = 'none';
+                card.style.transform = 'translateX(0)';
+                setTimeout(() => {
+                    card.style.transition = 'transform 0.3s ease-out';
+                    isAnimating = false;
+                    // Hier könnten Sie die nächste Karte laden oder andere Aktionen ausführen
+                }, 50);
+            }, 300);
+        }
+
         // Verbesserte Swipe-Funktionalität
         const swipeContainer = document.getElementById('swipeContainer');
         const hammer = new Hammer(swipeContainer);
@@ -156,27 +231,15 @@
 
         hammer.on('panend', function(event) {
             if (!isAnimating) {
-                isAnimating = true;
                 const threshold = 0.3;
                 if (Math.abs(event.deltaX) > swipeContainer.offsetWidth * threshold) {
                     // Swipe completed
                     const direction = event.deltaX > 0 ? 1 : -1;
-                    card.style.transform = `translateX(${direction * 100}%)`;
-                    setTimeout(() => {
-                        card.style.transition = 'none';
-                        card.style.transform = 'translateX(0)';
-                        setTimeout(() => {
-                            card.style.transition = 'transform 0.3s ease-out';
-                            isAnimating = false;
-                            // Hier könnten Sie die nächste Karte laden oder andere Aktionen ausführen
-                        }, 50);
-                    }, 300);
+                    swipeCard(direction);
+                    showFloatingEmoji(direction > 0 ? '👍' : '👎');
                 } else {
                     // Swipe not completed, return to center
                     card.style.transform = 'translateX(0)';
-                    setTimeout(() => {
-                        isAnimating = false;
-                    }, 300);
                 }
             }
         });
