@@ -22,6 +22,7 @@
             height: 400px;
             position: relative;
             overflow: hidden;
+            margin-bottom: 20px;
         }
         .swipe-card {
             position: absolute;
@@ -32,7 +33,8 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
             box-sizing: border-box;
             transition: transform 0.3s ease-out;
@@ -43,17 +45,11 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        .settings-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .settings-list li {
-            margin-bottom: 10px;
-        }
         .swipe-info {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 10px;
             font-style: italic;
+            color: #666;
         }
         .back-button {
             background-color: #0088cc;
@@ -65,15 +61,28 @@
             border-radius: 5px;
             margin-top: 20px;
         }
+        .settings-icons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .setting-icon {
+            font-size: 24px;
+            opacity: 0.5;
+        }
+        .setting-icon.active {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <div class="swipe-container" id="swipeContainer">
         <div class="swipe-card" id="swipeCard">
             <div class="meal-type" id="mealType"></div>
-            <ul class="settings-list" id="settingsList"></ul>
         </div>
     </div>
+    <div class="settings-icons" id="settingsIcons"></div>
     <div class="swipe-info">Wische nach links oder rechts</div>
     <button class="back-button" onclick="goBack()">Zurück zum Menü</button>
 
@@ -82,16 +91,26 @@
         let dietSettings = JSON.parse(localStorage.getItem('dietSettings')) || {};
         let isAnimating = false;
 
+        const settingEmojis = {
+            'milk': '🥛',
+            'vegan': '🌱',
+            'vegetarian': '🥗',
+            'vitamins': '🍊',
+            'protein': '🥩',
+            'nofat': '💪',
+            'healthy': '🥦'
+        };
+
         function updateCard() {
             document.getElementById('mealType').textContent = getMealTypeText(currentMeal);
-            const settingsList = document.getElementById('settingsList');
-            settingsList.innerHTML = '';
-            for (const [key, value] of Object.entries(dietSettings)) {
-                if (value) {
-                    const li = document.createElement('li');
-                    li.textContent = getSettingText(key);
-                    settingsList.appendChild(li);
-                }
+            const settingsIcons = document.getElementById('settingsIcons');
+            settingsIcons.innerHTML = '';
+            for (const [key, emoji] of Object.entries(settingEmojis)) {
+                const span = document.createElement('span');
+                span.textContent = emoji;
+                span.className = `setting-icon ${dietSettings[key] ? 'active' : ''}`;
+                span.title = getSettingText(key);
+                settingsIcons.appendChild(span);
             }
         }
 
