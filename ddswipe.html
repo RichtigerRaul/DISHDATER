@@ -16,7 +16,6 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f2f5;
-            position: relative; /* Damit der Back-Button relativ zu body positioniert werden kann */
         }
         .swipe-container {
             width: 300px;
@@ -52,7 +51,6 @@
             font-style: italic;
             color: #666;
         }
-        /* Back-Button oben links positioniert */
         .back-button {
             background-color: #0088cc;
             color: white;
@@ -61,9 +59,7 @@
             font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
-            position: absolute;
-            top: 20px;
-            left: 20px;
+            margin-top: 20px;
         }
         .settings-icons {
             display: flex;
@@ -133,9 +129,7 @@
         <button class="dislike-button" onclick="handleDislike()">👎</button>
         <button class="like-button" onclick="handleLike()">👍</button>
     </div>
-    
-    <!-- Back-Button oben links -->
-    <button class="back-button" id="backButton">Zurück zum Menü</button>
+    <button class="back-button" onclick="goBack()">Zurück zum Menü</button>
 
     <script>
         let currentMeal = localStorage.getItem('currentMeal') || 'Mahlzeit';
@@ -188,10 +182,9 @@
             return settingTexts[setting] || setting;
         }
 
-        // Angepasste Back-Funktion
-        document.getElementById('backButton').addEventListener('click', function() {
-            window.location.href = './menu.html'; 
-        });
+        function goBack() {
+            window.location.href = 'menu.html';
+        }
 
         function handleLike() {
             if (!isAnimating) {
@@ -234,6 +227,7 @@
                 setTimeout(() => {
                     card.style.transition = 'transform 0.3s ease-out';
                     isAnimating = false;
+                    // Hier könnten Sie die nächste Karte laden oder andere Aktionen ausführen
                 }, 50);
             }, 300);
         }
@@ -255,74 +249,21 @@
             if (!isAnimating) {
                 const threshold = 0.3;
                 if (Math.abs(event.deltaX) > swipeContainer.offsetWidth * threshold) {
+                    // Swipe completed
                     const direction = event.deltaX > 0 ? 1 : -1;
                     swipeCard(direction);
                     showFloatingEmoji(direction > 0 ? '👍' : '👎');
                 } else {
+                    // Swipe not completed, return to center
                     card.style.transform = 'translateX(0)';
                 }
             }
         });
 
-                // Initialisierung
+        // Initialisierung
         window.onload = function() {
             updateCard();
         }
-
-        // Swipe-Karteninhalte aktualisieren
-        function updateMeal() {
-            // Beispiel: Hier kannst du die Logik implementieren, um die nächste Mahlzeit anzuzeigen
-            const meals = ['breakfast', 'lunch', 'dinner', 'snacks'];
-            let randomMeal = meals[Math.floor(Math.random() * meals.length)];
-            currentMeal = randomMeal;
-            localStorage.setItem('currentMeal', currentMeal);
-            updateCard();
-        }
-
-        // Swipe-Card nach dem Swipen aktualisieren
-        function swipeCard(direction) {
-            isAnimating = true;
-            const card = document.getElementById('swipeCard');
-            card.style.transform = `translateX(${direction * 100}%)`;
-            
-            setTimeout(() => {
-                card.style.transition = 'none';
-                card.style.transform = 'translateX(0)';
-                updateMeal();  // Zeige nach dem Swipen eine neue Mahlzeit an
-                setTimeout(() => {
-                    card.style.transition = 'transform 0.3s ease-out';
-                    isAnimating = false;
-                }, 50);
-            }, 300);
-        }
-
-        // Verbessere das Swipe-Handling
-        const swipeContainer = document.getElementById('swipeContainer');
-        const hammer = new Hammer(swipeContainer);
-        const card = document.getElementById('swipeCard');
-
-        hammer.on('pan', function(event) {
-            if (!isAnimating) {
-                let percentage = event.deltaX / swipeContainer.offsetWidth;
-                percentage = Math.min(Math.max(percentage, -1), 1);
-                card.style.transform = `translateX(${percentage * 100}%)`;
-            }
-        });
-
-        hammer.on('panend', function(event) {
-            if (!isAnimating) {
-                const threshold = 0.3;
-                if (Math.abs(event.deltaX) > swipeContainer.offsetWidth * threshold) {
-                    const direction = event.deltaX > 0 ? 1 : -1;
-                    swipeCard(direction);
-                    showFloatingEmoji(direction > 0 ? '👍' : '👎');
-                } else {
-                    card.style.transform = 'translateX(0)';
-                }
-            }
-        });
-
     </script>
 </body>
 </html>
-
