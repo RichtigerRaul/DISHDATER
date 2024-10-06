@@ -183,7 +183,10 @@
         }
 
         function goBack() {
-            window.location.href = 'menu.html';
+            // Test-Alert vor dem Redirect
+            alert('Zurück zum Menü');
+            // Seitenwechsel zu menu.html
+            window.location.href = './menu.html'; // Passe den Pfad bei Bedarf an
         }
 
         function handleLike() {
@@ -227,7 +230,6 @@
                 setTimeout(() => {
                     card.style.transition = 'transform 0.3s ease-out';
                     isAnimating = false;
-                    // Hier könnten Sie die nächste Karte laden oder andere Aktionen ausführen
                 }, 50);
             }, 300);
         }
@@ -249,12 +251,10 @@
             if (!isAnimating) {
                 const threshold = 0.3;
                 if (Math.abs(event.deltaX) > swipeContainer.offsetWidth * threshold) {
-                    // Swipe completed
                     const direction = event.deltaX > 0 ? 1 : -1;
                     swipeCard(direction);
                     showFloatingEmoji(direction > 0 ? '👍' : '👎');
                 } else {
-                    // Swipe not completed, return to center
                     card.style.transform = 'translateX(0)';
                 }
             }
