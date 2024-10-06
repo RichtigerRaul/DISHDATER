@@ -24,7 +24,7 @@
             height: 400px;
             position: relative;
             overflow: hidden;
-            margin: 20px 0;
+            margin-top: 10px;
         }
         .swipe-card {
             position: absolute;
@@ -50,19 +50,10 @@
         }
         .swipe-info {
             text-align: center;
-            margin: 15px 0;
+            margin: 10px 0;
             font-style: italic;
             color: #34495e;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .swipe-info::before,
-        .swipe-info::after {
-            content: '↔️';
-            margin: 0 10px;
-            font-size: 24px;
+            font-size: 16px;
         }
         .back-button {
             background-color: #3498db;
@@ -74,7 +65,7 @@
             border-radius: 30px;
             transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .back-button:hover {
             background-color: #2980b9;
@@ -88,7 +79,7 @@
             display: flex;
             justify-content: space-around;
             width: 100%;
-            margin: 20px 0;
+            margin: 15px 0;
         }
         .setting-icon {
             font-size: 28px;
@@ -107,8 +98,7 @@
             width: 100%;
             padding: 0 20px;
             box-sizing: border-box;
-            position: absolute;
-            bottom: 20px;
+            margin-top: 15px;
         }
         .like-button, .dislike-button {
             font-size: 30px;
@@ -149,7 +139,7 @@
 </head>
 <body>
     <button class="back-button" onclick="goBack()">← Zurück zum Menü</button>
-    <div class="swipe-info">Wische für deine Wahl</div>
+    <div class="swipe-info">Wische nach links oder rechts</div>
     <div class="swipe-container" id="swipeContainer">
         <div class="swipe-card" id="swipeCard">
             <div class="meal-type" id="mealType"></div>
