@@ -25,6 +25,7 @@
                 "Frühstück",
                 "schnell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Frühstück",
             "herkunft": "Deutschland 🇩🇪"
         },
@@ -53,6 +54,7 @@
                 "Salat",
                 "mediterran"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "Italien 🇮🇹"
         },
@@ -77,6 +79,7 @@
                 "proteinreich",
                 "schnell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Frühstück",
             "herkunft": "Frankreich 🇫🇷"
         },
@@ -103,6 +106,7 @@
                 "Auflauf",
                 "familienfreundlich"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Deutschland 🇩🇪"
         },
@@ -131,6 +135,7 @@
                 "Salat",
                 "mediterran"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "Griechenland 🇬🇷"
         },
@@ -157,6 +162,7 @@
                 "Suppe",
                 "schnell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Italien 🇮🇹"
         },
@@ -185,6 +191,7 @@
                 "vegan (mit pflanzlicher Milch)",
                 "Frühstück"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Frühstück",
             "herkunft": "Schweiz 🇨🇭"
         },
@@ -213,6 +220,7 @@
                 "vegan",
                 "gesund"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "Spanien 🇪🇸"
         },
@@ -241,6 +249,7 @@
                 "Salat",
                 "kalt"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Deutschland 🇩🇪"
         },
@@ -267,6 +276,7 @@
                 "Frühstück",
                 "Snack"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Frühstück",
             "herkunft": "Australien 🇦🇺"
         },
@@ -293,6 +303,7 @@
                 "Brunch",
                 "Abendessen"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Frankreich 🇫🇷"
         },
@@ -321,6 +332,7 @@
                 "Suppe",
                 "schnell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "Deutschland 🇩🇪"
         },
@@ -346,6 +358,7 @@
                 "Salat",
                 "italienisch"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Vorspeise",
             "herkunft": "Italien 🇮🇹"
         },
@@ -371,6 +384,7 @@
                 "deutsch",
                 "traditionell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Deutschland 🇩🇪"
         },
@@ -396,6 +410,7 @@
                 "Dessert",
                 "schnell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Frühstück",
             "herkunft": "Griechenland 🇬🇷"
         },
@@ -423,6 +438,7 @@
                 "Sandwich",
                 "schnell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "Italien 🇮🇹"
         },
@@ -450,6 +466,7 @@
                 "sommerlich",
                 "kalt"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Beilage",
             "herkunft": "Deutschland 🇩🇪"
         },
@@ -478,6 +495,7 @@
                 "mexikanisch",
                 "sättigend"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Mexiko 🇲🇽"
         },
@@ -506,6 +524,7 @@
                 "italienisch",
                 "Hauptgericht"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Italien 🇮🇹"
         },
@@ -535,6 +554,7 @@
                 "griechisch",
                 "Salat"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Vorspeise",
             "herkunft": "Griechenland 🇬🇷"
         },
@@ -562,6 +582,7 @@
                 "proteinreich",
                 "schnell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "International 🌍"
         },
@@ -588,6 +609,7 @@
                 "Suppe",
                 "winterlich"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Deutschland 🇩🇪"
         },
@@ -614,6 +636,7 @@
                 "gefüllt",
                 "Ofengericht"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "International 🌍"
         },
@@ -639,6 +662,7 @@
                 "italienisch",
                 "schnell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "Italien 🇮🇹"
         },
@@ -666,6 +690,7 @@
                 "Salat",
                 "sommerlich"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Beilage",
             "herkunft": "Marokko 🇲🇦"
         },
@@ -695,6 +720,7 @@
                 "proteinreich",
                 "mediterran"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "Griechenland 🇬🇷"
         },
@@ -720,6 +746,7 @@
                 "low carb",
                 "proteinreich"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Frankreich 🇫🇷"
         },
@@ -748,6 +775,7 @@
                 "bunt",
                 "vitaminreich"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "International 🌍"
         },
@@ -775,6 +803,7 @@
                 "italienisch",
                 "schnell"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Italien 🇮🇹"
         },
@@ -801,6 +830,7 @@
                 "suppe",
                 "winterlich"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Deutschland 🇩🇪"
         },
@@ -830,6 +860,7 @@
                 "salat",
                 "mediterran"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Beilage",
             "herkunft": "Griechenland 🇬🇷"
         },
@@ -858,6 +889,7 @@
                 "proteinreich",
                 "italienisch"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Italien 🇮🇹"
         },
@@ -884,6 +916,7 @@
                 "sommerlich",
                 "fruchtig"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Vorspeise",
             "herkunft": "Griechenland 🇬🇷"
         },
@@ -911,6 +944,7 @@
                 "ofengericht",
                 "beilage"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Beilage",
             "herkunft": "International 🌍"
         },
@@ -938,6 +972,7 @@
                 "suppe",
                 "cremig"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Vorspeise",
             "herkunft": "Frankreich 🇫🇷"
         },
@@ -967,6 +1002,7 @@
                 "salat",
                 "proteinreich"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Beilage",
             "herkunft": "Mexiko 🇲🇽"
         },
@@ -993,6 +1029,7 @@
                 "schnell",
                 "gesund"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Frühstück",
             "herkunft": "International 🌍"
         },
@@ -1022,6 +1059,7 @@
                 "mediterran",
                 "proteinreich"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Mittagessen",
             "herkunft": "Spanien 🇪🇸"
         },
@@ -1051,6 +1089,7 @@
                 "asiatisch",
                 "scharf"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Abendessen",
             "herkunft": "Thailand 🇹🇭"
         },
@@ -1080,6 +1119,7 @@
                 "beilage",
                 "deutsche Küche"
             ],
+            "img":"/img/r/1.png",
             "mahlzeitenKategorie": "Beilage",
             "herkunft": "Deutschland 🇩🇪"
         }
