@@ -34,17 +34,23 @@
             border: 1px solid #ddd;
             padding: 10px;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1>Dishdater</h1>
-    <div id="zutat"></div>
-    <button id="likeButton">Like</button>
-    <button id="dislikeButton">Dislike</button>
-    <div id="liked">Likes: <span id="liked-list"></span></div>
-    <div id="disliked">Dislikes: <span id="disliked-list"></span></div>
-    <h2>Passende Rezepte</h2>
-    <div id="rezepte"></div>
+    <button id="startButton">Start</button>
+    <div id="gameArea" class="hidden">
+        <div id="zutat"></div>
+        <button id="likeButton">Like</button>
+        <button id="dislikeButton">Dislike</button>
+        <div id="liked">Likes: <span id="liked-list"></span></div>
+        <div id="disliked">Dislikes: <span id="disliked-list"></span></div>
+        <h2>Passende Rezepte</h2>
+        <div id="rezepte"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
