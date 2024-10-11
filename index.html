@@ -7,27 +7,42 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 100%;
             margin: 0 auto;
             padding: 20px;
+            box-sizing: border-box;
+        }
+        h1, h2, h3 {
+            text-align: center;
         }
         button {
-            margin: 10px;
-            padding: 5px 10px;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
         }
         #zutat {
             font-size: 24px;
             margin: 20px 0;
+            text-align: center;
         }
         #zutatBild, #rezeptBild {
-            max-width: 200px;
-            max-height: 200px;
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
         }
         #liked, #disliked {
             margin: 10px 0;
-        }
-        #rezepte {
-            margin-top: 20px;
         }
         #rezepte ul {
             list-style-type: none;
@@ -37,10 +52,19 @@
             margin-bottom: 20px;
             border: 1px solid #ddd;
             padding: 10px;
+            border-radius: 5px;
             cursor: pointer;
         }
         .hidden {
             display: none;
+        }
+        .navigation {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .navigation button {
+            width: 48%;
         }
     </style>
 </head>
@@ -65,6 +89,10 @@
         <div id="disliked">Dislikes: <span id="disliked-list"></span></div>
         <h2>Passende Rezepte</h2>
         <div id="rezepte"></div>
+        <div class="navigation">
+            <button id="backToMealSelection">Zurück zur Mahlzeitenauswahl</button>
+            <button id="restartGame">Neustart</button>
+        </div>
     </div>
     <div id="rezeptDetail" class="hidden">
         <h2 id="rezeptName"></h2>
@@ -74,9 +102,14 @@
         <p id="rezeptHerkunft"></p>
         <h3>Zutaten:</h3>
         <ul id="rezeptZutaten"></ul>
+        <h3>Gelikete Zutaten in diesem Rezept:</h3>
+        <ul id="geliketeZutaten"></ul>
         <h3>Anleitung:</h3>
         <ol id="rezeptAnleitung"></ol>
-        <button id="backToGame">Zurück zum Dishdaten</button>
+        <div class="navigation">
+            <button id="backToGame">Zurück zum Dishdaten</button>
+            <button id="showMoreRecipes">Weitere Rezepte anzeigen</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
