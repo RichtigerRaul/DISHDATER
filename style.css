@@ -1,19 +1,27 @@
 body {
     font-family: Arial, sans-serif;
-    max-width: 800px;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 h1, h2, h3 {
     text-align: center;
+    color: #333;
 }
 
 button {
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     margin: 10px 0;
     font-size: 16px;
     background-color: #4CAF50;
@@ -21,6 +29,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 button:hover {
@@ -31,6 +40,7 @@ button:hover {
     font-size: 24px;
     margin: 20px 0;
     text-align: center;
+    color: #333;
 }
 
 #zutatBild, #rezeptBild {
@@ -38,10 +48,13 @@ button:hover {
     max-width: 100%;
     height: auto;
     margin: 0 auto;
+    border-radius: 5px;
 }
 
 #liked, #disliked {
     margin: 10px 0;
+    font-size: 14px;
+    color: #666;
 }
 
 #rezepte ul {
@@ -52,9 +65,14 @@ button:hover {
 #rezepte li {
     margin-bottom: 20px;
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 15px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#rezepte li:hover {
+    background-color: #f9f9f9;
 }
 
 .hidden {
@@ -91,4 +109,18 @@ hr {
 
 #navigationButtons button {
     width: 48%;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    button {
+        padding: 12px;
+    }
+
+    #zutat {
+        font-size: 20px;
+    }
 }
