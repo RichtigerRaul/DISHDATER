@@ -6,9 +6,11 @@ Dishdater ist eine Web-Anwendung, die es Benutzern ermöglicht, Zutaten zu bewer
 
 Besuchen Sie einfach die GitHub Pages URL dieses Repositories, um die Anwendung zu nutzen. Keine Installation erforderlich!
 
-https://t.me/wasessen
+[Link zum Dishdater Channel](https://t.me/wasessen)
 
-https://t.me/DishdaterBot
+
+[Link zum Dishdater Bot](https://t.me/DishdaterBot)
+
 
 [Link zur Dishdater App](https://richtigerraul.github.io/DISHDATER/)
 
