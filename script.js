@@ -69,7 +69,7 @@ function showNextZutat() {
     console.log('Ausgewählte Zutat:', zutat);
     document.getElementById('zutat').textContent = zutat.name;
     document.getElementById('zutat').dataset.id = zutat.id;
-    document.getElementById('zutatBild').src = `https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/${zutat.img}`;
+    document.getElementById('zutatBild').src = `https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main${zutat.img}`;
 }
 
 function bewerten(like) {
@@ -146,7 +146,7 @@ function showRezeptDetail(id) {
     document.getElementById('rezeptDetail').classList.remove('hidden');
 
     document.getElementById('rezeptName').textContent = rezept.name;
-    document.getElementById('rezeptBild').src = `https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/${rezept.img}`;
+    document.getElementById('rezeptBild').src = `https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main${rezept.img}`;
     document.getElementById('rezeptBeschreibung').textContent = rezept.beschreibung;
     document.getElementById('rezeptZubereitungsDauer').textContent = `Zubereitungsdauer: ${rezept.zubereitungsDauer} Minuten`;
     document.getElementById('rezeptHerkunft').textContent = `Herkunft: ${rezept.herkunft}`;
