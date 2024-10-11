@@ -1,7 +1,6 @@
 // URLs für die JSON-Dateien
-// Korrekte URLs für die JSON-Dateien
-const ZUTATEN_URL = "https://github.com/RichtigerRaul/DISHDATER/blob/main/z.json";
-const REZEPTE_URL = "https://github.com/RichtigerRaul/DISHDATER/blob/main/r.json";
+const ZUTATEN_URL = "https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/z.json";
+const REZEPTE_URL = "https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/r.json";
 
 let zutaten = {};
 let rezepte = [];
@@ -35,8 +34,11 @@ async function loadData() {
         const zutatenResponse = await fetch(ZUTATEN_URL);
         const rezepteResponse = await fetch(REZEPTE_URL);
 
-        if (!zutatenResponse.ok || !rezepteResponse.ok) {
-            throw new Error(`HTTP error! status: ${zutatenResponse.status} ${rezepteResponse.status}`);
+        if (!zutatenResponse.ok) {
+            throw new Error(`HTTP error beim Laden der Zutaten! status: ${zutatenResponse.status}`);
+        }
+        if (!rezepteResponse.ok) {
+            throw new Error(`HTTP error beim Laden der Rezepte! status: ${rezepteResponse.status}`);
         }
 
         const zutatenData = await zutatenResponse.json();
@@ -47,14 +49,17 @@ async function loadData() {
         rezepte = rezepteData.rezepte;
         console.log('Rezepte geladen:', rezepte);
 
-        if (!zutaten || !rezepte) {
-            throw new Error('Zutaten oder Rezepte konnten nicht geladen werden.');
+        if (!zutaten || !zutaten.Kategorien || !zutaten.Mahlzeiten) {
+            throw new Error('Zutaten-Daten sind nicht in der erwarteten Struktur.');
+        }
+        if (!rezepte || !Array.isArray(rezepte)) {
+            throw new Error('Rezepte-Daten sind nicht in der erwarteten Struktur.');
         }
 
         showNextZutat();
     } catch (error) {
         console.error('Fehler beim Laden der Daten:', error);
-        document.getElementById('zutat').textContent = 'Fehler beim Laden der Daten. Bitte versuchen Sie es später erneut.';
+        document.getElementById('zutat').textContent = `Fehler beim Laden der Daten: ${error.message}`;
     }
 }
 
@@ -94,7 +99,6 @@ function showNextZutat() {
     document.getElementById('zutat').dataset.id = zutat.id;
     document.getElementById('zutatBild').src = `https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main${zutat.img}`;
 }
-
 
 function bewerten(like) {
     const zutatElement = document.getElementById('zutat');
@@ -163,8 +167,26 @@ function showBestMatchingRecipe() {
 }
 
 function showRezeptDetail(id) {
-    localStorage.setItem('selectedRecipeId', id);
-    window.location.href = 'recipe-detail.html';
+    const rezept = rezepte.find(r => r.id === id);
+    if (!rezept) return;
+
+    const rezeptDetailHTML = `
+        <h2>${rezept.name}</h2>
+        <img src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main${rezept.img}" alt="${rezept.name}">
+        <p>${rezept.beschreibung}</p>
+        <p>Zubereitungsdauer: ${rezept.zubereitungsDauer} Minuten</p>
+        <p>Herkunft: ${rezept.herkunft}</p>
+        <h3>Zutaten:</h3>
+        <ul>${rezept.zutaten.map(id => `<li>${getZutatById(id).name}</li>`).join('')}</ul>
+        <h3>Anleitung:</h3>
+        <ol>${rezept.anleitung.map(step => `<li>${step}</li>`).join('')}</ol>
+        <h3>Tags:</h3>
+        <p>${rezept.tags.join(', ')}</p>
+    `;
+
+    document.getElementById('rezeptDetail').innerHTML = rezeptDetailHTML;
+    document.getElementById('gameArea').style.display = 'none';
+    document.getElementById('rezeptDetail').style.display = 'block';
 }
 
 function backToMealSelection() {
@@ -179,6 +201,9 @@ function resetGame() {
     bewertungsCount = 0;
     updateLists();
     showNextZutat();
+    document.getElementById('rezepte').innerHTML = '';
+    document.getElementById('rezeptDetail').style.display = 'none';
+    document.getElementById('gameArea').style.display = 'block';
 }
 
 // Globale Funktion für den Zugriff aus dem HTML
