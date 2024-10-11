@@ -163,9 +163,6 @@ function showRezeptDetail(id) {
 function backToGame() {
     document.getElementById('rezeptDetail').classList.add('hidden');
     document.getElementById('gameArea').classList.remove('hidden');
-    if (bewertungsCount >= 15) {
-        resetGame();
-    }
 }
 
 function resetGame() {
@@ -202,3 +199,15 @@ document.getElementById('restartGame').addEventListener('click', resetGame);
 document.getElementById('showMoreRecipes').addEventListener('click', showMoreRecipes);
 
 console.log('Script geladen. Warte auf Start-Button-Klick...');
+
+// Funktion zum Initialisieren der App
+function initApp() {
+    // Verstecke alle Bereiche außer dem Start-Bereich
+    document.getElementById('mealSelection').classList.add('hidden');
+    document.getElementById('gameArea').classList.add('hidden');
+    document.getElementById('rezeptDetail').classList.add('hidden');
+    document.getElementById('startArea').classList.remove('hidden');
+}
+
+// Aufruf der Initialisierungsfunktion beim Laden der Seite
+window.onload = initApp;
