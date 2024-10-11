@@ -1,4 +1,5 @@
 // URLs für die JSON-Dateien
+// Korrekte URLs für die JSON-Dateien
 const ZUTATEN_URL = "https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/z.json";
 const REZEPTE_URL = "https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/r.json";
 
@@ -46,6 +47,10 @@ async function loadData() {
         rezepte = rezepteData.rezepte;
         console.log('Rezepte geladen:', rezepte);
 
+        if (!zutaten || !rezepte) {
+            throw new Error('Zutaten oder Rezepte konnten nicht geladen werden.');
+        }
+
         showNextZutat();
     } catch (error) {
         console.error('Fehler beim Laden der Daten:', error);
@@ -57,6 +62,10 @@ function getRandomZutat() {
     console.log('Getting random Zutat for:', ausgewaehlteMahlzeit);
     const mahlzeitZutaten = zutaten.Mahlzeiten[ausgewaehlteMahlzeit];
     console.log('Mahlzeit Zutaten:', mahlzeitZutaten);
+    if (!mahlzeitZutaten) {
+        console.error('Keine Zutaten für die ausgewählte Mahlzeit gefunden');
+        return null;
+    }
     const unbewerteteZutaten = mahlzeitZutaten.filter(id => !bewertetZutaten.includes(id));
     console.log('Unbewertete Zutaten:', unbewerteteZutaten);
     if (unbewerteteZutaten.length === 0) return null;
@@ -85,6 +94,7 @@ function showNextZutat() {
     document.getElementById('zutat').dataset.id = zutat.id;
     document.getElementById('zutatBild').src = `https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main${zutat.img}`;
 }
+
 
 function bewerten(like) {
     const zutatElement = document.getElementById('zutat');
