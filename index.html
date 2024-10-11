@@ -19,6 +19,10 @@
             font-size: 24px;
             margin: 20px 0;
         }
+        #zutatBild {
+            max-width: 200px;
+            max-height: 200px;
+        }
         #liked, #disliked {
             margin: 10px 0;
         }
@@ -33,6 +37,7 @@
             margin-bottom: 20px;
             border: 1px solid #ddd;
             padding: 10px;
+            cursor: pointer;
         }
         .hidden {
             display: none;
@@ -41,15 +46,37 @@
 </head>
 <body>
     <h1>Dishdater</h1>
-    <button id="startButton">Start</button>
+    <div id="startArea">
+        <button id="startButton">Start</button>
+    </div>
+    <div id="mealSelection" class="hidden">
+        <h2>Wähle eine Mahlzeit:</h2>
+        <button id="fruehstueck">Frühstück</button>
+        <button id="mittagessen">Mittagessen</button>
+        <button id="abendessen">Abendessen</button>
+        <button id="snacks">Snacks</button>
+    </div>
     <div id="gameArea" class="hidden">
         <div id="zutat"></div>
+        <img id="zutatBild" src="" alt="Zutat">
         <button id="likeButton">Like</button>
         <button id="dislikeButton">Dislike</button>
         <div id="liked">Likes: <span id="liked-list"></span></div>
         <div id="disliked">Dislikes: <span id="disliked-list"></span></div>
         <h2>Passende Rezepte</h2>
         <div id="rezepte"></div>
+    </div>
+    <div id="rezeptDetail" class="hidden">
+        <h2 id="rezeptName"></h2>
+        <img id="rezeptBild" src="" alt="Rezept">
+        <p id="rezeptBeschreibung"></p>
+        <p id="rezeptZubereitungsDauer"></p>
+        <p id="rezeptHerkunft"></p>
+        <h3>Zutaten:</h3>
+        <ul id="rezeptZutaten"></ul>
+        <h3>Anleitung:</h3>
+        <ol id="rezeptAnleitung"></ol>
+        <button id="backToGame">Zurück zum Dishdaten</button>
     </div>
     <script src="script.js"></script>
 </body>
