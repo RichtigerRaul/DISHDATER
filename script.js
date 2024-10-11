@@ -1,5 +1,9 @@
-let zutaten = [];
-let rezepte = {};
+// URLs für die JSON-Dateien
+const ZUTATEN_URL = "https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/z.json";
+const REZEPTE_URL = "https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/r.json";
+
+let zutaten = {};
+let rezepte = [];
 let likedZutaten = [];
 let dislikedZutaten = [];
 let bewertetZutaten = [];
@@ -7,18 +11,19 @@ let bewertetZutaten = [];
 async function loadData() {
     try {
         console.log('Starte Datenladen...');
-        const zutatenResponse = await fetch('https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/z.json');
-        if (!zutatenResponse.ok) {
-            throw new Error(`HTTP error! status: ${zutatenResponse.status}`);
+        const zutatenResponse = await fetch(ZUTATEN_URL);
+        const rezepteResponse = await fetch(REZEPTE_URL);
+
+        if (!zutatenResponse.ok || !rezepteResponse.ok) {
+            throw new Error(`HTTP error! status: ${zutatenResponse.status} ${rezepteResponse.status}`);
         }
-        zutaten = await zutatenResponse.json();
+
+        const zutatenData = await zutatenResponse.json();
+        zutaten = zutatenData.z.Kategorien;
         console.log('Zutaten geladen:', zutaten);
 
-        const rezepteResponse = await fetch('https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/r.json');
-        if (!rezepteResponse.ok) {
-            throw new Error(`HTTP error! status: ${rezepteResponse.status}`);
-        }
-        rezepte = await rezepteResponse.json();
+        const rezepteData = await rezepteResponse.json();
+        rezepte = rezepteData.rezepte;
         console.log('Rezepte geladen:', rezepte);
 
         showNextZutat();
@@ -28,36 +33,54 @@ async function loadData() {
     }
 }
 
+function getRandomZutat() {
+    const alleZutaten = Object.values(zutaten).flat();
+    const unbewerteteZutaten = alleZutaten.filter(z => !bewertetZutaten.includes(z.id));
+    return unbewerteteZutaten[Math.floor(Math.random() * unbewerteteZutaten.length)];
+}
+
 function showNextZutat() {
     console.log('Zeige nächste Zutat...');
-    const unbewerteteZutaten = zutaten.filter(z => !bewertetZutaten.includes(z));
-    console.log('Unbewertete Zutaten:', unbewerteteZutaten);
-    if (unbewerteteZutaten.length === 0) {
+    const zutat = getRandomZutat();
+    if (!zutat) {
         document.getElementById('zutat').textContent = 'Alle Zutaten bewertet!';
         return;
     }
-    const randomZutat = unbewerteteZutaten[Math.floor(Math.random() * unbewerteteZutaten.length)];
-    console.log('Ausgewählte Zutat:', randomZutat);
-    document.getElementById('zutat').textContent = randomZutat;
+    console.log('Ausgewählte Zutat:', zutat);
+    document.getElementById('zutat').textContent = zutat.name;
+    document.getElementById('zutat').dataset.id = zutat.id;
 }
 
 function bewerten(like) {
-    const zutat = document.getElementById('zutat').textContent;
-    console.log('Bewerte Zutat:', zutat, 'Like:', like);
+    const zutatElement = document.getElementById('zutat');
+    const zutatId = parseInt(zutatElement.dataset.id);
+    const zutatName = zutatElement.textContent;
+    console.log('Bewerte Zutat:', zutatName, 'ID:', zutatId, 'Like:', like);
+
     if (like) {
-        likedZutaten.push(zutat);
+        likedZutaten.push(zutatId);
     } else {
-        dislikedZutaten.push(zutat);
+        dislikedZutaten.push(zutatId);
     }
-    bewertetZutaten.push(zutat);
+    bewertetZutaten.push(zutatId);
+
     updateLists();
+    showPassendeRezepte();
     showNextZutat();
 }
 
 function updateLists() {
     console.log('Aktualisiere Listen...');
-    document.getElementById('liked-list').textContent = likedZutaten.join(', ');
-    document.getElementById('disliked-list').textContent = dislikedZutaten.join(', ');
+    document.getElementById('liked-list').textContent = likedZutaten.map(id => getZutatNameById(id)).join(', ');
+    document.getElementById('disliked-list').textContent = dislikedZutaten.map(id => getZutatNameById(id)).join(', ');
+}
+
+function getZutatNameById(id) {
+    for (const kategorie of Object.values(zutaten)) {
+        const zutat = kategorie.find(z => z.id === id);
+        if (zutat) return zutat.name;
+    }
+    return 'Unbekannt';
 }
 
 function berechneRezeptScore(rezeptZutaten) {
@@ -67,21 +90,29 @@ function berechneRezeptScore(rezeptZutaten) {
     return total > 0 ? Math.max(((likes - dislikes) / total) * 100, 0) : 0;
 }
 
-function showRezepte() {
-    console.log('Zeige Rezepte...');
-    const rezepteMitScore = Object.entries(rezepte).map(([name, zutaten]) => ({
-        name,
-        score: berechneRezeptScore(zutaten)
+function showPassendeRezepte() {
+    console.log('Zeige passende Rezepte...');
+    const rezepteMitScore = rezepte.map(rezept => ({
+        ...rezept,
+        score: berechneRezeptScore(rezept.zutaten)
     }));
     rezepteMitScore.sort((a, b) => b.score - a.score);
-    
-    const rezepteHTML = rezepteMitScore.map(r => `<li>${r.name} (${r.score.toFixed(2)}% passend)</li>`).join('');
+
+    const top5Rezepte = rezepteMitScore.slice(0, 5);
+    const rezepteHTML = top5Rezepte.map(r => `
+        <li>
+            <h3>${r.name} (${r.score.toFixed(2)}% passend)</h3>
+            <p>${r.beschreibung}</p>
+            <p>Zubereitungsdauer: ${r.zubereitungsDauer} Minuten</p>
+            <p>Herkunft: ${r.herkunft}</p>
+        </li>
+    `).join('');
+
     document.getElementById('rezepte').innerHTML = `<ul>${rezepteHTML}</ul>`;
 }
 
 document.getElementById('likeButton').addEventListener('click', () => bewerten(true));
 document.getElementById('dislikeButton').addEventListener('click', () => bewerten(false));
-document.getElementById('showRecipesButton').addEventListener('click', showRezepte);
 
 console.log('Script geladen. Starte Datenladen...');
 loadData();
