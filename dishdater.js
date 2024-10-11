@@ -131,8 +131,10 @@ function updateLists() {
 function showPassendeRezepte() {
     const rezepteContainer = document.getElementById('rezepte');
     rezepteContainer.innerHTML = '';
-    const passendeRezepte = rezepte.filter(rezept => 
-        rezept.zutaten.every(z => likedZutaten.includes(z))
+    
+    // Suche nach passenden Rezepten, die alle gemocht Zutaten enthalten
+    const passendeRezepte = rezepte.filter(rezept =>
+        rezept.zutaten.every(zutatId => likedZutaten.includes(zutatId))
     );
 
     if (passendeRezepte.length === 0) {
@@ -142,9 +144,37 @@ function showPassendeRezepte() {
 
     passendeRezepte.forEach(rezept => {
         const rezeptElement = document.createElement('div');
-        rezeptElement.textContent = rezept.name;
+        rezeptElement.classList.add('rezept');
+        rezeptElement.innerHTML = `
+            <h3>${rezept.name}</h3>
+            <img src="${rezept.img}" alt="${rezept.name}">
+            <p>${rezept.beschreibung}</p>
+            <p><strong>Zubereitungsdauer:</strong> ${rezept.zubereitungsDauer} Minuten</p>
+            <button onclick="zeigeRezeptDetails(${rezept.id})">Details anzeigen</button>
+        `;
         rezepteContainer.appendChild(rezeptElement);
     });
+}
+
+// Funktion zur Anzeige der Rezeptdetails
+function zeigeRezeptDetails(rezeptId) {
+    const rezept = rezepte.find(r => r.id === rezeptId);
+    if (rezept) {
+        const details = `
+            <h2>${rezept.name}</h2>
+            <img src="${rezept.img}" alt="${rezept.name}">
+            <p>${rezept.beschreibung}</p>
+            <p><strong>Zubereitungsdauer:</strong> ${rezept.zubereitungsDauer} Minuten</p>
+            <h3>Anleitung:</h3>
+            <ol>
+                ${rezept.anleitung.map(schritt => `<li>${schritt}</li>`).join('')}
+            </ol>
+            <p><strong>Tags:</strong> ${rezept.tags.join(', ')}</p>
+            <p><strong>Herkunft:</strong> ${rezept.herkunft}</p>
+        `;
+        const detailsContainer = document.getElementById('rezepte');
+        detailsContainer.innerHTML = details;
+    }
 }
 
 function showBestMatchingRecipe() {
