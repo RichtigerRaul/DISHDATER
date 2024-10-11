@@ -4,7 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dishdater</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 5px 10px;
+        }
+        #zutat {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        #liked, #disliked {
+            margin: 10px 0;
+        }
+        #rezepte {
+            margin-top: 20px;
+        }
+        #rezepte ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #rezepte li {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Dishdater</h1>
@@ -13,7 +43,7 @@
     <button id="dislikeButton">Dislike</button>
     <div id="liked">Likes: <span id="liked-list"></span></div>
     <div id="disliked">Dislikes: <span id="disliked-list"></span></div>
-    <button id="showRecipesButton">Rezepte anzeigen</button>
+    <h2>Passende Rezepte</h2>
     <div id="rezepte"></div>
     <script src="script.js"></script>
 </body>
