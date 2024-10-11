@@ -40,7 +40,7 @@ function selectMeal(meal) {
     ausgewaehlteMahlzeit = meal;
     document.getElementById('mealSelection').classList.add('hidden');
     document.getElementById('gameArea').classList.remove('hidden');
-    showNextZutat();
+    resetGame();
 }
 
 function getRandomZutat() {
@@ -154,6 +154,9 @@ function showRezeptDetail(id) {
     const zutatenListe = rezept.zutaten.map(id => getZutatById(id).name);
     document.getElementById('rezeptZutaten').innerHTML = zutatenListe.map(z => `<li>${z}</li>`).join('');
 
+    const geliketeZutatenListe = rezept.zutaten.filter(id => likedZutaten.includes(id)).map(id => getZutatById(id).name);
+    document.getElementById('geliketeZutaten').innerHTML = geliketeZutatenListe.map(z => `<li>${z}</li>`).join('');
+
     document.getElementById('rezeptAnleitung').innerHTML = rezept.anleitung.map(step => `<li>${step}</li>`).join('');
 }
 
@@ -174,6 +177,18 @@ function resetGame() {
     showNextZutat();
 }
 
+function backToMealSelection() {
+    document.getElementById('gameArea').classList.add('hidden');
+    document.getElementById('mealSelection').classList.remove('hidden');
+    resetGame();
+}
+
+function showMoreRecipes() {
+    document.getElementById('rezeptDetail').classList.add('hidden');
+    document.getElementById('gameArea').classList.remove('hidden');
+    showPassendeRezepte();
+}
+
 document.getElementById('startButton').addEventListener('click', loadData);
 document.getElementById('fruehstueck').addEventListener('click', () => selectMeal('Frühstück'));
 document.getElementById('mittagessen').addEventListener('click', () => selectMeal('Mittagessen'));
@@ -182,5 +197,8 @@ document.getElementById('snacks').addEventListener('click', () => selectMeal('Sn
 document.getElementById('likeButton').addEventListener('click', () => bewerten(true));
 document.getElementById('dislikeButton').addEventListener('click', () => bewerten(false));
 document.getElementById('backToGame').addEventListener('click', backToGame);
+document.getElementById('backToMealSelection').addEventListener('click', backToMealSelection);
+document.getElementById('restartGame').addEventListener('click', resetGame);
+document.getElementById('showMoreRecipes').addEventListener('click', showMoreRecipes);
 
 console.log('Script geladen. Warte auf Start-Button-Klick...');
