@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dishdater - Spielen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="controlArea">
+            <div id="zutat"></div>
+            <img id="zutatBild" src="" alt="Zutat">
+            <div id="buttons">
+                <button id="likeButton">Like</button>
+                <button id="dislikeButton">Dislike</button>
+            </div>
+            <hr>
+            <div id="navigationButtons">
+                <button id="backToMealSelection">Zurück zur Mahlzeitenauswahl</button>
+                <button id="restartGame">Neustart</button>
+            </div>
+        </div>
+        <div id="liked">Likes: <span id="liked-list"></span></div>
+        <div id="disliked">Dislikes: <span id="disliked-list"></span></div>
+        <h2>Passende Rezepte</h2>
+        <div id="rezepte"></div>
+    </div>
+    <script src="dishdater.js"></script>
+</body>
+</html>
