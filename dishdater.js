@@ -1,7 +1,7 @@
 // URLs für die JSON-Dateien
 // Korrekte URLs für die JSON-Dateien
-const ZUTATEN_URL = "https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/z.json";
-const REZEPTE_URL = "https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/r.json";
+const ZUTATEN_URL = "https://github.com/RichtigerRaul/DISHDATER/blob/main/z.json";
+const REZEPTE_URL = "https://github.com/RichtigerRaul/DISHDATER/blob/main/r.json";
 
 let zutaten = {};
 let rezepte = [];
