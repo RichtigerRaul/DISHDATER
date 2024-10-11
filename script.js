@@ -26,6 +26,8 @@ async function loadData() {
         rezepte = rezepteData.rezepte;
         console.log('Rezepte geladen:', rezepte);
 
+        document.getElementById('gameArea').classList.remove('hidden');
+        document.getElementById('startButton').classList.add('hidden');
         showNextZutat();
     } catch (error) {
         console.error('Fehler beim Laden der Daten:', error);
@@ -35,7 +37,9 @@ async function loadData() {
 
 function getRandomZutat() {
     const alleZutaten = Object.values(zutaten).flat();
+    console.log('Alle Zutaten:', alleZutaten);
     const unbewerteteZutaten = alleZutaten.filter(z => !bewertetZutaten.includes(z.id));
+    console.log('Unbewertete Zutaten:', unbewerteteZutaten);
     return unbewerteteZutaten[Math.floor(Math.random() * unbewerteteZutaten.length)];
 }
 
@@ -111,8 +115,8 @@ function showPassendeRezepte() {
     document.getElementById('rezepte').innerHTML = `<ul>${rezepteHTML}</ul>`;
 }
 
+document.getElementById('startButton').addEventListener('click', loadData);
 document.getElementById('likeButton').addEventListener('click', () => bewerten(true));
 document.getElementById('dislikeButton').addEventListener('click', () => bewerten(false));
 
-console.log('Script geladen. Starte Datenladen...');
-loadData();
+console.log('Script geladen. Warte auf Start-Button-Klick...');
