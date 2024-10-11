@@ -124,73 +124,38 @@ function bewerten(like) {
 }
 
 function updateLists() {
-    console.log('Aktualisiere Listen...');
-    document.getElementById('liked-list').textContent = likedZutaten.map(id => getZutatById(id).name).join(', ');
-    document.getElementById('disliked-list').textContent = dislikedZutaten.map(id => getZutatById(id).name).join(', ');
-}
-
-function berechneRezeptScore(rezeptZutaten) {
-    const likes = rezeptZutaten.filter(z => likedZutaten.includes(z)).length;
-    const dislikes = rezeptZutaten.filter(z => dislikedZutaten.includes(z)).length;
-    const total = rezeptZutaten.length;
-    return total > 0 ? Math.max(((likes - dislikes) / total) * 100, 0) : 0;
+    document.getElementById('liked-list').textContent = likedZutaten.join(', ');
+    document.getElementById('disliked-list').textContent = dislikedZutaten.join(', ');
 }
 
 function showPassendeRezepte() {
-    console.log('Zeige passende Rezepte...');
-    const rezepteMitScore = rezepte.map(rezept => ({
-        ...rezept,
-        score: berechneRezeptScore(rezept.zutaten)
-    }));
-    rezepteMitScore.sort((a, b) => b.score - a.score);
+    const rezepteContainer = document.getElementById('rezepte');
+    rezepteContainer.innerHTML = '';
+    const passendeRezepte = rezepte.filter(rezept => 
+        rezept.zutaten.every(z => likedZutaten.includes(z))
+    );
 
-    const top5Rezepte = rezepteMitScore.slice(0, 5);
-    const rezepteHTML = top5Rezepte.map(r => `
-        <li onclick="showRezeptDetail(${r.id})">
-            <h3>${r.name} (${r.score.toFixed(2)}% passend)</h3>
-            <p>${r.beschreibung}</p>
-            <p>Zubereitungsdauer: ${r.zubereitungsDauer} Minuten</p>
-            <p>Herkunft: ${r.herkunft}</p>
-        </li>
-    `).join('');
+    if (passendeRezepte.length === 0) {
+        rezepteContainer.textContent = 'Keine passenden Rezepte gefunden.';
+        return;
+    }
 
-    document.getElementById('rezepte').innerHTML = `<ul>${rezepteHTML}</ul>`;
+    passendeRezepte.forEach(rezept => {
+        const rezeptElement = document.createElement('div');
+        rezeptElement.textContent = rezept.name;
+        rezepteContainer.appendChild(rezeptElement);
+    });
 }
 
 function showBestMatchingRecipe() {
-    const bestRecipe = rezepte.reduce((best, current) => {
-        const currentScore = berechneRezeptScore(current.zutaten);
-        return currentScore > best.score ? {id: current.id, score: currentScore} : best;
-    }, {id: null, score: -1});
-
-    showRezeptDetail(bestRecipe.id);
-}
-
-function showRezeptDetail(id) {
-    const rezept = rezepte.find(r => r.id === id);
-    if (!rezept) return;
-
-    const rezeptDetailHTML = `
-        <h2>${rezept.name}</h2>
-        <img src="https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main${rezept.img}" alt="${rezept.name}">
-        <p>${rezept.beschreibung}</p>
-        <p>Zubereitungsdauer: ${rezept.zubereitungsDauer} Minuten</p>
-        <p>Herkunft: ${rezept.herkunft}</p>
-        <h3>Zutaten:</h3>
-        <ul>${rezept.zutaten.map(id => `<li>${getZutatById(id).name}</li>`).join('')}</ul>
-        <h3>Anleitung:</h3>
-        <ol>${rezept.anleitung.map(step => `<li>${step}</li>`).join('')}</ol>
-        <h3>Tags:</h3>
-        <p>${rezept.tags.join(', ')}</p>
-    `;
-
-    document.getElementById('rezeptDetail').innerHTML = rezeptDetailHTML;
-    document.getElementById('gameArea').style.display = 'none';
-    document.getElementById('rezeptDetail').style.display = 'block';
+    alert('Danke für deine Bewertungen! Hier sind die besten Rezepte für dich:');
+    const rezepteContainer = document.getElementById('rezepte');
+    rezepteContainer.innerHTML = 'Hier sind deine besten Rezepte:';
+    // Du kannst hier auch eine Logik implementieren, um die besten Rezepte zu ermitteln.
 }
 
 function backToMealSelection() {
-    console.log('Zurück zur Mahlzeitenauswahl');
+    localStorage.removeItem('selectedMeal');
     window.location.href = 'meal-selection.html';
 }
 
@@ -199,12 +164,7 @@ function resetGame() {
     dislikedZutaten = [];
     bewertetZutaten = [];
     bewertungsCount = 0;
-    updateLists();
     showNextZutat();
+    updateLists();
     document.getElementById('rezepte').innerHTML = '';
-    document.getElementById('rezeptDetail').style.display = 'none';
-    document.getElementById('gameArea').style.display = 'block';
 }
-
-// Globale Funktion für den Zugriff aus dem HTML
-window.showRezeptDetail = showRezeptDetail;
