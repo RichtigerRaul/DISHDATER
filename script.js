@@ -5,27 +5,45 @@ let dislikedZutaten = [];
 let bewertetZutaten = [];
 
 async function loadData() {
-    const zutatenResponse = await fetch('https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/z.json');
-    zutaten = await zutatenResponse.json();
-    
-    const rezepteResponse = await fetch('https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/r.json');
-    rezepte = await rezepteResponse.json();
-    
-    showNextZutat();
+    try {
+        console.log('Starte Datenladen...');
+        const zutatenResponse = await fetch('https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/z.json');
+        if (!zutatenResponse.ok) {
+            throw new Error(`HTTP error! status: ${zutatenResponse.status}`);
+        }
+        zutaten = await zutatenResponse.json();
+        console.log('Zutaten geladen:', zutaten);
+
+        const rezepteResponse = await fetch('https://raw.githubusercontent.com/RichtigerRaul/DISHDATER/main/json/r.json');
+        if (!rezepteResponse.ok) {
+            throw new Error(`HTTP error! status: ${rezepteResponse.status}`);
+        }
+        rezepte = await rezepteResponse.json();
+        console.log('Rezepte geladen:', rezepte);
+
+        showNextZutat();
+    } catch (error) {
+        console.error('Fehler beim Laden der Daten:', error);
+        document.getElementById('zutat').textContent = 'Fehler beim Laden der Daten. Bitte versuchen Sie es später erneut.';
+    }
 }
 
 function showNextZutat() {
+    console.log('Zeige nächste Zutat...');
     const unbewerteteZutaten = zutaten.filter(z => !bewertetZutaten.includes(z));
+    console.log('Unbewertete Zutaten:', unbewerteteZutaten);
     if (unbewerteteZutaten.length === 0) {
         document.getElementById('zutat').textContent = 'Alle Zutaten bewertet!';
         return;
     }
     const randomZutat = unbewerteteZutaten[Math.floor(Math.random() * unbewerteteZutaten.length)];
+    console.log('Ausgewählte Zutat:', randomZutat);
     document.getElementById('zutat').textContent = randomZutat;
 }
 
 function bewerten(like) {
     const zutat = document.getElementById('zutat').textContent;
+    console.log('Bewerte Zutat:', zutat, 'Like:', like);
     if (like) {
         likedZutaten.push(zutat);
     } else {
@@ -37,6 +55,7 @@ function bewerten(like) {
 }
 
 function updateLists() {
+    console.log('Aktualisiere Listen...');
     document.getElementById('liked-list').textContent = likedZutaten.join(', ');
     document.getElementById('disliked-list').textContent = dislikedZutaten.join(', ');
 }
@@ -49,6 +68,7 @@ function berechneRezeptScore(rezeptZutaten) {
 }
 
 function showRezepte() {
+    console.log('Zeige Rezepte...');
     const rezepteMitScore = Object.entries(rezepte).map(([name, zutaten]) => ({
         name,
         score: berechneRezeptScore(zutaten)
@@ -63,4 +83,5 @@ document.getElementById('likeButton').addEventListener('click', () => bewerten(t
 document.getElementById('dislikeButton').addEventListener('click', () => bewerten(false));
 document.getElementById('showRecipesButton').addEventListener('click', showRezepte);
 
+console.log('Script geladen. Starte Datenladen...');
 loadData();
