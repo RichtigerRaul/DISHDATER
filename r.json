@@ -1,0 +1,1127 @@
+{
+    "rezepte": [
+        {
+            "id": 1,
+            "name": "Klassisches Müsli",
+            "zutaten": [
+                44,
+                22,
+                23,
+                28,
+                37,
+                38
+            ],
+            "zubereitungsDauer": 5,
+            "beschreibung": "Ein schnelles und nahrhaftes Frühstück mit Haferflocken und frischem Obst.",
+            "anleitung": [
+                "Haferflocken in eine Schüssel geben.",
+                "Äpfel und Bananen in kleine Stücke schneiden und hinzufügen.",
+                "Mit Milch oder einer pflanzlichen Alternative übergießen.",
+                "Nach Belieben mit Honig süßen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan (mit pflanzlicher Milch)",
+                "Frühstück",
+                "schnell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Frühstück",
+            "herkunft": "Deutschland 🇩🇪"
+        },
+        {
+            "id": 2,
+            "name": "Mediterraner Brotsalat",
+            "zutaten": [
+                43,
+                4,
+                5,
+                19,
+                56,
+                70
+            ],
+            "zubereitungsDauer": 15,
+            "beschreibung": "Ein erfrischender Salat mit knusprigem Brot und frischem Gemüse.",
+            "anleitung": [
+                "Brot in Würfel schneiden und rösten.",
+                "Tomaten, Paprika und Gurke in Stücke schneiden.",
+                "Alles in einer Schüssel mischen.",
+                "Mit Olivenöl und Essig anmachen, mit Salz und Pfeffer würzen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan",
+                "Salat",
+                "mediterran"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "Italien 🇮🇹"
+        },
+        {
+            "id": 3,
+            "name": "Schnelles Rührei mit Tomaten",
+            "zutaten": [
+                47,
+                4,
+                56
+            ],
+            "zubereitungsDauer": 10,
+            "beschreibung": "Ein einfaches und proteinreiches Frühstück oder schnelles Abendessen.",
+            "anleitung": [
+                "Eier in einer Schüssel verquirlen.",
+                "Tomaten würfeln.",
+                "Olivenöl in einer Pfanne erhitzen und Eier hineingeben.",
+                "Tomaten hinzufügen und unter Rühren stocken lassen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "proteinreich",
+                "schnell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Frühstück",
+            "herkunft": "Frankreich 🇫🇷"
+        },
+        {
+            "id": 4,
+            "name": "Kartoffel-Brokkoli-Auflauf",
+            "zutaten": [
+                1,
+                7,
+                30,
+                31
+            ],
+            "zubereitungsDauer": 45,
+            "beschreibung": "Ein herzhafter Auflauf, der die ganze Familie satt macht.",
+            "anleitung": [
+                "Kartoffeln und Brokkoli waschen und in Stücke schneiden.",
+                "Kartoffeln vorkochen, Brokkoli blanchieren.",
+                "Gemüse in eine Auflaufform schichten, mit geriebenem Käse bestreuen.",
+                "Joghurt darüber gießen.",
+                "Bei 180°C für 30 Minuten backen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Auflauf",
+                "familienfreundlich"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Deutschland 🇩🇪"
+        },
+        {
+            "id": 5,
+            "name": "Griechischer Bauernsalat",
+            "zutaten": [
+                4,
+                19,
+                5,
+                2,
+                30,
+                56,
+                70
+            ],
+            "zubereitungsDauer": 15,
+            "beschreibung": "Ein erfrischender Salat mit knackigem Gemüse und Feta-Käse.",
+            "anleitung": [
+                "Tomaten, Gurken, Paprika und Zwiebeln in grobe Stücke schneiden.",
+                "Feta-Käse würfeln.",
+                "Alles in einer Schüssel mischen.",
+                "Mit Olivenöl und Essig anmachen, mit Oregano würzen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Salat",
+                "mediterran"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "Griechenland 🇬🇷"
+        },
+        {
+            "id": 6,
+            "name": "Schnelle Tomatensuppe",
+            "zutaten": [
+                4,
+                2,
+                3,
+                56,
+                31
+            ],
+            "zubereitungsDauer": 20,
+            "beschreibung": "Eine cremige Tomatensuppe, perfekt für kalte Tage.",
+            "anleitung": [
+                "Zwiebeln und Knoblauch fein hacken und in Olivenöl anschwitzen.",
+                "Tomaten hinzufügen und kurz mitkochen.",
+                "Mit Brühe aufgießen und 10 Minuten köcheln lassen.",
+                "Suppe pürieren und mit Joghurt verfeinern."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Suppe",
+                "schnell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Italien 🇮🇹"
+        },
+        {
+            "id": 7,
+            "name": "Hausgemachtes Bircher Müsli",
+            "zutaten": [
+                44,
+                28,
+                37,
+                38,
+                22,
+                23,
+                39
+            ],
+            "zubereitungsDauer": 10,
+            "beschreibung": "Ein klassisches Schweizer Frühstück, das über Nacht zubereitet wird.",
+            "anleitung": [
+                "Haferflocken mit Milch oder einer pflanzlichen Alternative übergießen und über Nacht quellen lassen.",
+                "Am nächsten Morgen Äpfel reiben und Bananen in Scheiben schneiden.",
+                "Obst und Chiasamen unter die Haferflocken mischen.",
+                "Nach Belieben mit Honig süßen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan (mit pflanzlicher Milch)",
+                "Frühstück"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Frühstück",
+            "herkunft": "Schweiz 🇨🇭"
+        },
+        {
+            "id": 8,
+            "name": "Vegetarische Gemüsepfanne",
+            "zutaten": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                56
+            ],
+            "zubereitungsDauer": 25,
+            "beschreibung": "Eine bunte Gemüsepfanne, reich an Vitaminen und Ballaststoffen.",
+            "anleitung": [
+                "Alle Gemüse waschen und in mundgerechte Stücke schneiden.",
+                "Olivenöl in einer großen Pfanne erhitzen.",
+                "Gemüse der Reihe nach anbraten, mit Salz und Pfeffer würzen.",
+                "Mit frischen Kräutern garnieren und servieren."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan",
+                "gesund"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "Spanien 🇪🇸"
+        },
+        {
+            "id": 9,
+            "name": "Einfacher Nudelsalat",
+            "zutaten": [
+                40,
+                4,
+                5,
+                19,
+                30,
+                68,
+                69
+            ],
+            "zubereitungsDauer": 20,
+            "beschreibung": "Ein erfrischender Salat, perfekt für Picknicks oder als leichtes Abendessen.",
+            "anleitung": [
+                "Nudeln nach Packungsanweisung kochen und abkühlen lassen.",
+                "Tomaten, Paprika und Gurke in kleine Würfel schneiden.",
+                "Käse würfeln und alles mit den Nudeln vermischen.",
+                "Ein Dressing aus Senf, Ketchup und Olivenöl herstellen und untermischen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Salat",
+                "kalt"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Deutschland 🇩🇪"
+        },
+        {
+            "id": 10,
+            "name": "Avocado-Toast",
+            "zutaten": [
+                21,
+                43,
+                56,
+                70
+            ],
+            "zubereitungsDauer": 10,
+            "beschreibung": "Ein trendiges und nahrhaftes Frühstück oder Snack.",
+            "anleitung": [
+                "Brotscheiben toasten.",
+                "Avocado halbieren, entkernen und das Fruchtfleisch zerdrücken.",
+                "Avocado auf dem Toast verteilen und mit Salz und Pfeffer würzen.",
+                "Mit einem Spritzer Zitronensaft und Olivenöl verfeinern."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan",
+                "Frühstück",
+                "Snack"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Frühstück",
+            "herkunft": "Australien 🇦🇺"
+        },
+        {
+            "id": 11,
+            "name": "Spinat-Quiche",
+            "zutaten": [
+                9,
+                47,
+                30,
+                31,
+                43
+            ],
+            "zubereitungsDauer": 45,
+            "beschreibung": "Eine herzhafte Quiche mit Spinat und Käse, perfekt für Brunch oder Abendessen.",
+            "anleitung": [
+                "Spinat in einer Pfanne zusammenfallen lassen.",
+                "Eier mit Joghurt und geriebenem Käse verquirlen.",
+                "Spinat untermischen und in eine mit Brotscheiben ausgelegte Form gießen.",
+                "Bei 180°C für 30-35 Minuten backen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Brunch",
+                "Abendessen"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Frankreich 🇫🇷"
+        },
+        {
+            "id": 12,
+            "name": "Schnelle Gemüsesuppe",
+            "zutaten": [
+                1,
+                6,
+                7,
+                2,
+                3,
+                58
+            ],
+            "zubereitungsDauer": 20,
+            "beschreibung": "Eine wärmende Suppe, ideal für kalte Tage oder wenn man sich nicht fit fühlt.",
+            "anleitung": [
+                "Gemüse waschen und in kleine Stücke schneiden.",
+                "In einem großen Topf alle Zutaten mit der Tütensuppe mischen.",
+                "Mit Wasser auffüllen und zum Kochen bringen.",
+                "15 Minuten köcheln lassen und servieren."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan",
+                "Suppe",
+                "schnell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "Deutschland 🇩🇪"
+        },
+        {
+            "id": 13,
+            "name": "Caprese-Salat",
+            "zutaten": [
+                4,
+                30,
+                56,
+                70
+            ],
+            "zubereitungsDauer": 10,
+            "beschreibung": "Ein klassischer italienischer Salat, einfach und lecker.",
+            "anleitung": [
+                "Tomaten und Mozzarella in Scheiben schneiden.",
+                "Abwechselnd Tomaten- und Mozzarellascheiben auf einem Teller anrichten.",
+                "Mit Olivenöl beträufeln und mit Salz und Pfeffer würzen.",
+                "Mit frischem Basilikum garnieren."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Salat",
+                "italienisch"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Vorspeise",
+            "herkunft": "Italien 🇮🇹"
+        },
+        {
+            "id": 14,
+            "name": "Kartoffelpuffer",
+            "zutaten": [
+                1,
+                47,
+                2,
+                57
+            ],
+            "zubereitungsDauer": 30,
+            "beschreibung": "Knusprige Kartoffelpuffer, ein beliebter deutscher Klassiker.",
+            "anleitung": [
+                "Kartoffeln und Zwiebeln reiben.",
+                "Überschüssige Flüssigkeit ausdrücken und mit Eiern vermischen.",
+                "Mit Salz und Pfeffer würzen.",
+                "In einer Pfanne mit Öl von beiden Seiten goldbraun braten."
+            ],
+            "tags": [
+                "vegetarisch",
+                "deutsch",
+                "traditionell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Deutschland 🇩🇪"
+        },
+        {
+            "id": 15,
+            "name": "Griechischer Joghurt mit Honig und Nüssen",
+            "zutaten": [
+                31,
+                62,
+                39
+            ],
+            "zubereitungsDauer": 5,
+            "beschreibung": "Ein einfaches, aber leckeres Frühstück oder Dessert.",
+            "anleitung": [
+                "Griechischen Joghurt in eine Schüssel geben.",
+                "Mit Honig beträufeln.",
+                "Chiasamen darüber streuen.",
+                "Nach Belieben mit gehackten Nüssen garnieren."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Frühstück",
+                "Dessert",
+                "schnell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Frühstück",
+            "herkunft": "Griechenland 🇬🇷"
+        },
+        {
+            "id": 16,
+            "name": "Tomaten-Mozzarella-Sandwich",
+            "zutaten": [
+                42,
+                4,
+                30,
+                56,
+                68
+            ],
+            "zubereitungsDauer": 10,
+            "beschreibung": "Ein schnelles und leckeres Sandwich, perfekt für unterwegs.",
+            "anleitung": [
+                "Toastbrot leicht anrösten.",
+                "Tomaten in Scheiben schneiden und Mozzarella in Scheiben schneiden.",
+                "Toastbrot mit Senf bestreichen.",
+                "Tomaten und Mozzarella darauf schichten.",
+                "Mit Olivenöl beträufeln und mit Salz und Pfeffer würzen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Sandwich",
+                "schnell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "Italien 🇮🇹"
+        },
+        {
+            "id": 17,
+            "name": "Sommerlicher Gurkensalat",
+            "zutaten": [
+                19,
+                2,
+                31,
+                70
+            ],
+            "zubereitungsDauer": 15,
+            "beschreibung": "Ein erfrischender Salat für heiße Sommertage.",
+            "anleitung": [
+                "Gurken in dünne Scheiben schneiden.",
+                "Zwiebeln fein hacken.",
+                "Gurken und Zwiebeln in einer Schüssel mischen.",
+                "Joghurt mit Essig und Dill verrühren und über den Salat geben.",
+                "Mit Salz und Pfeffer abschmecken und kalt servieren."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Salat",
+                "sommerlich",
+                "kalt"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Beilage",
+            "herkunft": "Deutschland 🇩🇪"
+        },
+        {
+            "id": 18,
+            "name": "Vegane Bohnen-Burritos",
+            "zutaten": [
+                14,
+                41,
+                4,
+                5,
+                68,
+                69
+            ],
+            "zubereitungsDauer": 25,
+            "beschreibung": "Leckere und sättigende vegane Burritos mit Bohnen und Reis.",
+            "anleitung": [
+                "Reis nach Packungsanweisung kochen.",
+                "Bohnen erhitzen und mit Gewürzen abschmecken.",
+                "Tomaten und Paprika in kleine Würfel schneiden.",
+                "Alle Zutaten in Tortillas einrollen.",
+                "Mit Senf und Ketchup servieren."
+            ],
+            "tags": [
+                "vegan",
+                "mexikanisch",
+                "sättigend"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Mexiko 🇲🇽"
+        },
+        {
+            "id": 19,
+            "name": "Pilz-Risotto",
+            "zutaten": [
+                11,
+                41,
+                2,
+                3,
+                56,
+                30
+            ],
+            "zubereitungsDauer": 30,
+            "beschreibung": "Ein cremiges Risotto mit würzigen Pilzen.",
+            "anleitung": [
+                "Zwiebeln und Knoblauch fein hacken und in Olivenöl anschwitzen.",
+                "Reis hinzufügen und kurz mitrösten.",
+                "Nach und nach heiße Brühe zugießen und ständig rühren.",
+                "Pilze putzen, in Scheiben schneiden und separat anbraten.",
+                "Zum Schluss Pilze und geriebenen Parmesan unterrühren."
+            ],
+            "tags": [
+                "vegetarisch",
+                "italienisch",
+                "Hauptgericht"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Italien 🇮🇹"
+        },
+        {
+            "id": 20,
+            "name": "Griechischer Bauernsalat",
+            "zutaten": [
+                4,
+                19,
+                5,
+                2,
+                30,
+                56,
+                70
+            ],
+            "zubereitungsDauer": 15,
+            "beschreibung": "Ein klassischer griechischer Salat mit frischem Gemüse und Feta.",
+            "anleitung": [
+                "Tomaten, Gurken und Paprika in grobe Stücke schneiden.",
+                "Zwiebeln in Ringe schneiden.",
+                "Feta-Käse würfeln.",
+                "Alle Zutaten in einer Schüssel mischen.",
+                "Mit Olivenöl, Essig, Oregano, Salz und Pfeffer anmachen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "griechisch",
+                "Salat"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Vorspeise",
+            "herkunft": "Griechenland 🇬🇷"
+        },
+        {
+            "id": 21,
+            "name": "Schnelle Gemüsepfanne mit Tofu",
+            "zutaten": [
+                55,
+                5,
+                6,
+                7,
+                56,
+                68
+            ],
+            "zubereitungsDauer": 20,
+            "beschreibung": "Eine gesunde und proteinreiche Gemüsepfanne mit knusprigem Tofu.",
+            "anleitung": [
+                "Tofu in Würfel schneiden und in Olivenöl knusprig braten.",
+                "Gemüse waschen und in Stücke schneiden.",
+                "Gemüse zum Tofu geben und kurz mitbraten.",
+                "Mit Senf und Gewürzen abschmecken."
+            ],
+            "tags": [
+                "vegan",
+                "proteinreich",
+                "schnell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "International 🌍"
+        },
+        {
+            "id": 22,
+            "name": "Kartoffel-Lauch-Suppe",
+            "zutaten": [
+                1,
+                2,
+                31,
+                56
+            ],
+            "zubereitungsDauer": 35,
+            "beschreibung": "Eine cremige und wärmende Suppe für kalte Tage.",
+            "anleitung": [
+                "Kartoffeln schälen und in Würfel schneiden.",
+                "Lauch waschen und in Ringe schneiden.",
+                "Gemüse in Olivenöl anschwitzen.",
+                "Mit Brühe aufgießen und weich kochen.",
+                "Pürieren und mit Joghurt verfeinern."
+            ],
+            "tags": [
+                "vegetarisch",
+                "Suppe",
+                "winterlich"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Deutschland 🇩🇪"
+        },
+        {
+            "id": 23,
+            "name": "Gefüllte Paprika mit Quinoa",
+            "zutaten": [
+                5,
+                41,
+                4,
+                2,
+                30
+            ],
+            "zubereitungsDauer": 40,
+            "beschreibung": "Bunte Paprika gefüllt mit einer würzigen Quinoa-Mischung.",
+            "anleitung": [
+                "Quinoa nach Packungsanweisung kochen.",
+                "Paprika halbieren und entkernen.",
+                "Quinoa mit gewürfelten Tomaten, Zwiebeln und Käse mischen.",
+                "Paprikahälften füllen und im Ofen backen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "gefüllt",
+                "Ofengericht"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "International 🌍"
+        },
+        {
+            "id": 24,
+            "name": "Schnelles Tomaten-Basilikum-Pasta",
+            "zutaten": [
+                40,
+                4,
+                3,
+                56
+            ],
+            "zubereitungsDauer": 20,
+            "beschreibung": "Eine einfache und schnelle Pasta mit frischen Tomaten und Basilikum.",
+            "anleitung": [
+                "Nudeln nach Packungsanweisung kochen.",
+                "Tomaten würfeln und Knoblauch fein hacken.",
+                "Tomaten und Knoblauch in Olivenöl kurz anbraten.",
+                "Nudeln untermischen und mit frischem Basilikum garnieren."
+            ],
+            "tags": [
+                "vegetarisch",
+                "italienisch",
+                "schnell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "Italien 🇮🇹"
+        },
+        {
+            "id": 25,
+            "name": "Bunter Couscous-Salat",
+            "zutaten": [
+                41,
+                5,
+                19,
+                24,
+                56,
+                70
+            ],
+            "zubereitungsDauer": 20,
+            "beschreibung": "Ein frischer und farbenfroher Salat mit Couscous und knackigem Gemüse.",
+            "anleitung": [
+                "Couscous mit kochendem Wasser übergießen und quellen lassen.",
+                "Paprika, Gurke und Erdbeeren in kleine Stücke schneiden.",
+                "Alles mit Couscous mischen.",
+                "Mit Olivenöl, Zitronensaft, Salz und Pfeffer abschmecken."
+            ],
+            "tags": [
+                "vegan",
+                "Salat",
+                "sommerlich"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Beilage",
+            "herkunft": "Marokko 🇲🇦"
+        },
+        {
+            "id": 26,
+            "name": "Mediterrane Quinoa-Bowl",
+            "zutaten": [
+                41,
+                4,
+                19,
+                30,
+                15,
+                56
+            ],
+            "zubereitungsDauer": 25,
+            "beschreibung": "Eine gesunde und proteinreiche Bowl mit mediterranem Flair.",
+            "anleitung": [
+                "Quinoa nach Packungsanweisung kochen.",
+                "Tomaten und Gurken in Würfel schneiden.",
+                "Kichererbsen abspülen und abtropfen lassen.",
+                "Alle Zutaten in einer Schüssel mischen.",
+                "Mit Olivenöl, Zitronensaft, Salz und Pfeffer abschmecken."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan",
+                "proteinreich",
+                "mediterran"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "Griechenland 🇬🇷"
+        },
+        {
+            "id": 27,
+            "name": "Spinat-Feta-Quiche ohne Boden",
+            "zutaten": [
+                9,
+                30,
+                47,
+                31
+            ],
+            "zubereitungsDauer": 40,
+            "beschreibung": "Eine leichte Quiche ohne Teigboden, perfekt für eine kohlenhydratarme Ernährung.",
+            "anleitung": [
+                "Spinat auftauen und ausdrücken.",
+                "Eier mit Joghurt und zerbröckeltem Feta verquirlen.",
+                "Spinat untermischen und würzen.",
+                "In eine gefettete Auflaufform gießen und bei 180°C für 30 Minuten backen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "low carb",
+                "proteinreich"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Frankreich 🇫🇷"
+        },
+        {
+            "id": 28,
+            "name": "Bunte Gemüsepfanne mit Reis",
+            "zutaten": [
+                41,
+                5,
+                6,
+                7,
+                2,
+                56
+            ],
+            "zubereitungsDauer": 30,
+            "beschreibung": "Eine farbenfrohe und nährstoffreiche Gemüsepfanne mit Reis.",
+            "anleitung": [
+                "Reis nach Packungsanweisung kochen.",
+                "Gemüse waschen und in Stücke schneiden.",
+                "Gemüse in Olivenöl anbraten, mit Salz und Pfeffer würzen.",
+                "Gekochten Reis untermischen und kurz mitbraten."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan",
+                "bunt",
+                "vitaminreich"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "International 🌍"
+        },
+        {
+            "id": 29,
+            "name": "Schnelle Tomaten-Mozzarella-Pasta",
+            "zutaten": [
+                40,
+                4,
+                30,
+                3,
+                56
+            ],
+            "zubereitungsDauer": 20,
+            "beschreibung": "Eine einfache und schnelle Pasta-Variation des klassischen Caprese-Salats.",
+            "anleitung": [
+                "Nudeln nach Packungsanweisung kochen.",
+                "Tomaten würfeln und Mozzarella in kleine Stücke schneiden.",
+                "Knoblauch fein hacken und in Olivenöl anschwitzen.",
+                "Nudeln, Tomaten und Mozzarella untermischen.",
+                "Mit Basilikum, Salz und Pfeffer abschmecken."
+            ],
+            "tags": [
+                "vegetarisch",
+                "italienisch",
+                "schnell"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Italien 🇮🇹"
+        },
+        {
+            "id": 30,
+            "name": "Kartoffel-Lauch-Suppe",
+            "zutaten": [
+                1,
+                2,
+                31,
+                56
+            ],
+            "zubereitungsDauer": 35,
+            "beschreibung": "Eine cremige und wärmende Suppe für kalte Tage.",
+            "anleitung": [
+                "Kartoffeln schälen und würfeln, Lauch in Ringe schneiden.",
+                "Gemüse in Olivenöl anschwitzen.",
+                "Mit Brühe aufgießen und weich kochen.",
+                "Pürieren und mit Joghurt verfeinern.",
+                "Mit Salz und Pfeffer abschmecken."
+            ],
+            "tags": [
+                "vegetarisch",
+                "suppe",
+                "winterlich"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Deutschland 🇩🇪"
+        },
+        {
+            "id": 31,
+            "name": "Griechischer Bauernsalat",
+            "zutaten": [
+                4,
+                19,
+                5,
+                2,
+                30,
+                56,
+                70
+            ],
+            "zubereitungsDauer": 15,
+            "beschreibung": "Ein erfrischender Salat mit knackigem Gemüse und Feta-Käse.",
+            "anleitung": [
+                "Tomaten, Gurken und Paprika in grobe Stücke schneiden.",
+                "Zwiebeln in Ringe schneiden.",
+                "Feta-Käse würfeln.",
+                "Alles in einer Schüssel mischen.",
+                "Mit Olivenöl, Essig, Oregano, Salz und Pfeffer anmachen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "salat",
+                "mediterran"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Beilage",
+            "herkunft": "Griechenland 🇬🇷"
+        },
+        {
+            "id": 32,
+            "name": "Vegane Linsenbolo",
+            "zutaten": [
+                40,
+                4,
+                2,
+                3,
+                6,
+                15
+            ],
+            "zubereitungsDauer": 40,
+            "beschreibung": "Eine proteinreiche, vegane Version der klassischen Bolognese-Sauce.",
+            "anleitung": [
+                "Linsen nach Packungsanweisung kochen.",
+                "Zwiebeln, Knoblauch und Karotten fein würfeln und anbraten.",
+                "Tomaten und gekochte Linsen hinzufügen und köcheln lassen.",
+                "Mit italienischen Kräutern, Salz und Pfeffer würzen.",
+                "Mit gekochten Nudeln servieren."
+            ],
+            "tags": [
+                "vegan",
+                "proteinreich",
+                "italienisch"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Italien 🇮🇹"
+        },
+        {
+            "id": 33,
+            "name": "Sommerlicher Wassermelonen-Feta-Salat",
+            "zutaten": [
+                30,
+                19,
+                56
+            ],
+            "zubereitungsDauer": 15,
+            "beschreibung": "Ein erfrischender Sommersalat mit der perfekten Balance von süß und salzig.",
+            "anleitung": [
+                "Wassermelone in Würfel schneiden.",
+                "Feta-Käse würfeln.",
+                "Gurke in dünne Scheiben schneiden.",
+                "Alle Zutaten vorsichtig mischen.",
+                "Mit Olivenöl beträufeln und mit frischer Minze garnieren."
+            ],
+            "tags": [
+                "vegetarisch",
+                "salat",
+                "sommerlich",
+                "fruchtig"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Vorspeise",
+            "herkunft": "Griechenland 🇬🇷"
+        },
+        {
+            "id": 34,
+            "name": "Knuspriges Ofengemüse",
+            "zutaten": [
+                1,
+                6,
+                7,
+                5,
+                56
+            ],
+            "zubereitungsDauer": 35,
+            "beschreibung": "Buntes, knuspriges Ofengemüse als Beilage oder leichte Hauptmahlzeit.",
+            "anleitung": [
+                "Gemüse waschen und in gleichmäßige Stücke schneiden.",
+                "Mit Olivenöl, Salz, Pfeffer und Kräutern mischen.",
+                "Auf einem Backblech verteilen.",
+                "Bei 200°C für 25-30 Minuten backen, zwischendurch wenden."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan",
+                "ofengericht",
+                "beilage"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Beilage",
+            "herkunft": "International 🌍"
+        },
+        {
+            "id": 35,
+            "name": "Cremige Blumenkohlsuppe",
+            "zutaten": [
+                8,
+                1,
+                2,
+                31,
+                56
+            ],
+            "zubereitungsDauer": 30,
+            "beschreibung": "Eine samtige, cremige Suppe aus Blumenkohl und Kartoffeln.",
+            "anleitung": [
+                "Blumenkohl und Kartoffeln in Stücke schneiden.",
+                "Zwiebeln fein hacken und in Olivenöl anschwitzen.",
+                "Gemüse hinzufügen und mit Brühe aufgießen.",
+                "Weich kochen und pürieren.",
+                "Mit Joghurt verfeinern und mit Salz und Pfeffer abschmecken."
+            ],
+            "tags": [
+                "vegetarisch",
+                "suppe",
+                "cremig"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Vorspeise",
+            "herkunft": "Frankreich 🇫🇷"
+        },
+        {
+            "id": 36,
+            "name": "Bunter Bohnensalat",
+            "zutaten": [
+                14,
+                4,
+                5,
+                2,
+                56,
+                70
+            ],
+            "zubereitungsDauer": 20,
+            "beschreibung": "Ein proteinreicher Salat mit verschiedenen Bohnensorten und frischem Gemüse.",
+            "anleitung": [
+                "Bohnen abspülen und abtropfen lassen.",
+                "Tomaten, Paprika und Zwiebeln in kleine Würfel schneiden.",
+                "Alles in einer Schüssel mischen.",
+                "Mit Olivenöl, Essig, Salz und Pfeffer anmachen.",
+                "Vor dem Servieren ziehen lassen."
+            ],
+            "tags": [
+                "vegetarisch",
+                "vegan",
+                "salat",
+                "proteinreich"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Beilage",
+            "herkunft": "Mexiko 🇲🇽"
+        },
+        {
+            "id": 37,
+            "name": "Veganer Bananen-Haferbrei",
+            "zutaten": [
+                44,
+                23,
+                37,
+                62
+            ],
+            "zubereitungsDauer": 10,
+            "beschreibung": "Ein nahrhaftes, veganes Frühstück mit Haferflocken und Banane.",
+            "anleitung": [
+                "Haferflocken mit Wasser oder pflanzlicher Milch in einem Topf erhitzen.",
+                "Unter Rühren aufkochen lassen bis die gewünschte Konsistenz erreicht ist.",
+                "Eine reife Banane zerdrücken und unterrühren.",
+                "In eine Schüssel geben und mit Honig süßen."
+            ],
+            "tags": [
+                "vegan",
+                "frühstück",
+                "schnell",
+                "gesund"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Frühstück",
+            "herkunft": "International 🌍"
+        },
+        {
+            "id": 38,
+            "name": "Mediterraner Kichererbsen-Spinat-Eintopf",
+            "zutaten": [
+                15,
+                9,
+                4,
+                2,
+                3,
+                56
+            ],
+            "zubereitungsDauer": 25,
+            "beschreibung": "Ein herzhafter, veganer Eintopf mit mediterranem Flair.",
+            "anleitung": [
+                "Zwiebeln und Knoblauch fein hacken und in Olivenöl anschwitzen.",
+                "Kichererbsen und gewürfelte Tomaten hinzufügen.",
+                "Mit Brühe aufgießen und 10 Minuten köcheln lassen.",
+                "Spinat hinzufügen und zusammenfallen lassen.",
+                "Mit mediterranen Kräutern, Salz und Pfeffer abschmecken."
+            ],
+            "tags": [
+                "vegan",
+                "eintopf",
+                "mediterran",
+                "proteinreich"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Mittagessen",
+            "herkunft": "Spanien 🇪🇸"
+        },
+        {
+            "id": 39,
+            "name": "Knuspriges Tofu-Gemüse-Curry",
+            "zutaten": [
+                55,
+                6,
+                7,
+                5,
+                41,
+                56
+            ],
+            "zubereitungsDauer": 35,
+            "beschreibung": "Ein würziges Curry mit knusprigem Tofu und buntem Gemüse.",
+            "anleitung": [
+                "Tofu in Würfel schneiden und in Olivenöl knusprig braten.",
+                "Gemüse in Stücke schneiden und separat anbraten.",
+                "Currypaste hinzufügen und kurz mitrösten.",
+                "Mit Kokosmilch ablöschen und köcheln lassen.",
+                "Tofu hinzufügen und mit Reis servieren."
+            ],
+            "tags": [
+                "vegan",
+                "curry",
+                "asiatisch",
+                "scharf"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Abendessen",
+            "herkunft": "Thailand 🇹🇭"
+        },
+        {
+            "id": 40,
+            "name": "Röstkartoffeln mit Quark-Dip",
+            "zutaten": [
+                1,
+                32,
+                3,
+                56,
+                70
+            ],
+            "zubereitungsDauer": 40,
+            "beschreibung": "Knusprige Röstkartoffeln mit einem cremigen Kräuter-Quark-Dip.",
+            "anleitung": [
+                "Kartoffeln waschen und in Spalten schneiden.",
+                "Mit Olivenöl, Salz und Rosmarin mischen.",
+                "Bei 200°C für 30-35 Minuten im Ofen rösten.",
+                "Für den Dip Quark mit fein gehacktem Knoblauch, Salz, Pfeffer und etwas Essig verrühren.",
+                "Kräuter fein hacken und unter den Quark mischen.",
+                "Röstkartoffeln mit dem Kräuter-Quark-Dip servieren."
+            ],
+            "tags": [
+                "vegetarisch",
+                "ofengericht",
+                "beilage",
+                "deutsche Küche"
+            ],
+            "img":"/img/r/1.png",
+            "mahlzeitenKategorie": "Beilage",
+            "herkunft": "Deutschland 🇩🇪"
+        }
+    ]
+}
