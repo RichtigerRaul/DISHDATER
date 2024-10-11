@@ -4,69 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dishdater</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        h1, h2, h3 {
-            text-align: center;
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #zutat {
-            font-size: 24px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        #zutatBild, #rezeptBild {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            margin: 0 auto;
-        }
-        #liked, #disliked {
-            margin: 10px 0;
-        }
-        #rezepte ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        #rezepte li {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .hidden {
-            display: none;
-        }
-        .navigation {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .navigation button {
-            width: 48%;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Dishdater</h1>
@@ -81,18 +19,23 @@
         <button id="snacks">Snacks</button>
     </div>
     <div id="gameArea" class="hidden">
-        <div id="zutat"></div>
-        <img id="zutatBild" src="" alt="Zutat">
-        <button id="likeButton">Like</button>
-        <button id="dislikeButton">Dislike</button>
+        <div id="controlArea">
+            <div id="zutat"></div>
+            <img id="zutatBild" src="" alt="Zutat">
+            <div id="buttons">
+                <button id="likeButton">Like</button>
+                <button id="dislikeButton">Dislike</button>
+            </div>
+            <hr>
+            <div id="navigationButtons">
+                <button id="backToMealSelection">Zurück zur Mahlzeitenauswahl</button>
+                <button id="restartGame">Neustart</button>
+            </div>
+        </div>
         <div id="liked">Likes: <span id="liked-list"></span></div>
         <div id="disliked">Dislikes: <span id="disliked-list"></span></div>
         <h2>Passende Rezepte</h2>
         <div id="rezepte"></div>
-        <div class="navigation">
-            <button id="backToMealSelection">Zurück zur Mahlzeitenauswahl</button>
-            <button id="restartGame">Neustart</button>
-        </div>
     </div>
     <div id="rezeptDetail" class="hidden">
         <h2 id="rezeptName"></h2>
@@ -106,10 +49,8 @@
         <ul id="geliketeZutaten"></ul>
         <h3>Anleitung:</h3>
         <ol id="rezeptAnleitung"></ol>
-        <div class="navigation">
-            <button id="backToGame">Zurück zum Dishdaten</button>
-            <button id="showMoreRecipes">Weitere Rezepte anzeigen</button>
-        </div>
+        <button id="backToGame">Zurück zum Dishdaten</button>
+        <button id="showMoreRecipes">Weitere Rezepte anzeigen</button>
     </div>
     <script src="script.js"></script>
 </body>
